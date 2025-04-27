@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.3
@@ -22,6 +23,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/svg/
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -33,4 +35,4 @@ flutter_assets:
   assets_path: assets/svg/
   output_path: lib/core/utils
   filename: app_assets.dart
-  field_prefix:
+  field_prefix: null

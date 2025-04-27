@@ -2,13 +2,5 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
-    # https://dart.dev/tools/linter-rules#prefer-const-constructors
     prefer_const_constructors: true
-    # https://dart.dev/tools/linter-rules#prefer-const-literals
     prefer_const_literals_to_create_immutables: true
-    # https://dart.dev/tools/linter-rules#prefer-final-parameters
-    prefer_final_parameters: false
-    # https://dart.dev/tools/linter-rules#unnecessary-new
-    unnecessary_new: false
-    # https://dart.dev/tools/linter-rules#unnecessary-this
-    unnecessary_this: false
