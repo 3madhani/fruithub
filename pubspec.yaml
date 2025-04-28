@@ -7,6 +7,8 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+  flutter_localizations:
+    sdk: flutter
   flutter:
     sdk: flutter
   flutter_svg: ^2.1.0
@@ -25,6 +27,16 @@ flutter:
     - assets/icons/
     - assets/svg/
 
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cairo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+          weight: 600
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
@@ -36,3 +48,5 @@ flutter_assets:
   output_path: lib/core/utils
   filename: app_assets.dart
   field_prefix: null
+flutter_intl:
+  enabled: true

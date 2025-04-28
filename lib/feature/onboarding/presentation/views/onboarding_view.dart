@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruithub/feature/onboarding/presentation/views/widgets/on_boarding_view_body.dart';
 
 class OnBoardingView extends StatelessWidget {
   static const String routeName = 'onboarding';
@@ -7,6 +8,8 @@ class OnBoardingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const Scaffold(
+      body: OnboardingViewBody(),
+    );
   }
 }
