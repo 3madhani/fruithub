@@ -7,9 +7,10 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
-  flutter_localizations:
-    sdk: flutter
+  dots_indicator: ^4.0.1
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.1.0
 
