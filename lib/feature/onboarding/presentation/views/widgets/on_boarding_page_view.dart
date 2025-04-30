@@ -1,43 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:fruithub/core/utils/app_assets.dart';
+import 'package:fruithub/core/utils/app_colors.dart';
+import 'package:fruithub/core/utils/app_text_styles.dart';
 import 'package:fruithub/feature/onboarding/presentation/views/widgets/page_view_item.dart';
 
 class OnBoardingPageView extends StatelessWidget {
-  const OnBoardingPageView({super.key});
+  final PageController pageController;
+  const OnBoardingPageView({super.key, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
     return PageView(
-      children: const [
+      controller: pageController,
+      children: [
         PageViewItem(
+          isLastPage:
+              (pageController.hasClients
+                  ? pageController.page!.round() == 0
+                  : true),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'مرحبًا بك في',
-                style: TextStyle(
-                  fontSize: 23,
-                  color: Color(0xff0C0D0D),
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+              const Text('مرحبًا بك في', style: AppTextStyles.bold23),
               Text(
                 ' HUB',
-                style: TextStyle(
-                  fontSize: 23,
-                  color: Color(0xffF4A91F),
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w700,
+                style: AppTextStyles.bold23.copyWith(
+                  color: const Color(0xffF4A91F),
                 ),
               ),
               Text(
                 'Fruit',
-                style: TextStyle(
-                  fontSize: 23,
-                  color: Color(0xff1B5E37),
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w700,
+                style: AppTextStyles.bold23.copyWith(
+                  color: AppColors.primaryColor,
                 ),
               ),
             ],
@@ -48,7 +42,10 @@ class OnBoardingPageView extends StatelessWidget {
           image: Assets.svgImage1,
         ),
         PageViewItem(
-          title: Text(
+          isLastPage:
+              (pageController.hasClients ? pageController.page!.round() : 0) ==
+              0,
+          title: const Text(
             "ابحث وتسوق",
             style: TextStyle(
               fontSize: 23,

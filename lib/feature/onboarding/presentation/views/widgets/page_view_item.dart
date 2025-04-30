@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fruithub/core/utils/app_text_styles.dart';
 
 class PageViewItem extends StatelessWidget {
   final String subTitle, backgroundImage, image;
   final Widget title;
+  final bool isLastPage;
   const PageViewItem({
     super.key,
     required this.title,
     required this.subTitle,
     required this.backgroundImage,
     required this.image,
+    required this.isLastPage,
   });
 
   @override
@@ -30,15 +33,15 @@ class PageViewItem extends StatelessWidget {
                 right: 0,
                 child: SvgPicture.asset(image),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 40, right: 24),
-                child: Text(
-                  'تخط',
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Color(0xff949D9E),
-                    fontFamily: 'Cairo',
-                    fontWeight: FontWeight.w400,
+              Visibility(
+                visible: isLastPage,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 40, right: 24),
+                  child: Text(
+                    'تخط',
+                    style: AppTextStyles.regular13.copyWith(
+                      color: const Color(0xff949D9E),
+                    ),
                   ),
                 ),
               ),
@@ -53,11 +56,8 @@ class PageViewItem extends StatelessWidget {
           child: Text(
             subTitle,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              fontSize: 13,
-              color: const Color(0xff0C0D0D),
-              fontFamily: 'Cairo',
-              fontWeight: FontWeight.w600,
+            style: AppTextStyles.semiBold13.copyWith(
+              color: const Color(0xff4E5556),
             ),
           ),
         ),
