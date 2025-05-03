@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruithub/feature/splash/presentation/view/widgets/splash_view_body.dart';
+import 'package:fruithub/feature/splash/presentation/views/widgets/splash_view_body.dart';
 
 class SplashView extends StatelessWidget {
   static const String routeName = 'splash';

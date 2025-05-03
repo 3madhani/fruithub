@@ -5,6 +5,8 @@ import 'package:fruithub/core/constants/app_sizes.dart';
 import 'package:fruithub/core/utils/app_colors.dart';
 import 'package:fruithub/feature/onboarding/presentation/views/widgets/on_boarding_page_view.dart';
 
+import '../../../../auth/presentation/views/login_view.dart';
+
 class OnboardingViewBody extends StatefulWidget {
   const OnboardingViewBody({super.key});
 
@@ -47,6 +49,7 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
               title: 'ابدأ الان',
               onPressed: () {
                 // Navigate to the next screen
+                Navigator.of(context).pushReplacementNamed(LoginView.routeName);
               },
             ),
           ),
