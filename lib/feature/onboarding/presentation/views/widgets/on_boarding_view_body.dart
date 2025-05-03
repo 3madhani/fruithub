@@ -1,7 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fruithub/core/common/custom_button.dart';
-import 'package:fruithub/core/constants/app_sizes.dart';
+import 'package:fruithub/core/constants/app_const.dart';
+import 'package:fruithub/core/services/shared_preferences_singleton.dart';
 import 'package:fruithub/core/utils/app_colors.dart';
 import 'package:fruithub/feature/onboarding/presentation/views/widgets/on_boarding_page_view.dart';
 
@@ -43,11 +44,16 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
           visible: _currentPage == 1,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSizes.horizontalPadding,
+              horizontal: AppConst.horizontalPadding,
             ),
             child: CustomButton(
               title: 'ابدأ الان',
               onPressed: () {
+                // Save the onboarding view seen status
+                Prefs.setBool(
+                  AppConst.isOnboardingViewSeenKey,
+                  true,
+                );
                 // Navigate to the next screen
                 Navigator.of(context).pushReplacementNamed(LoginView.routeName);
               },

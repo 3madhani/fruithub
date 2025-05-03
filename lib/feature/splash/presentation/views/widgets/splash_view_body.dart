@@ -3,6 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fruithub/core/utils/app_assets.dart';
 import 'package:fruithub/feature/onboarding/presentation/views/onboarding_view.dart';
 
+import '../../../../../core/constants/app_const.dart';
+import '../../../../../core/services/shared_preferences_singleton.dart';
+import '../../../../auth/presentation/views/login_view.dart';
+
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
 
@@ -19,7 +23,8 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [SvgPicture.asset(Assets.svgPlant)]),
+          children: [SvgPicture.asset(Assets.svgPlant)],
+        ),
         SvgPicture.asset(Assets.svgLogo),
         SvgPicture.asset(fit: BoxFit.fill, Assets.svgSplashBottom),
       ],
@@ -27,9 +32,20 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   }
 
   void excuteNavigation() {
+    // Check if the onboarding view has been seen
+    bool isOnboardingViewSeen = Prefs.getBool(AppConst.isOnboardingViewSeenKey);
+
+    // If the onboarding view has been seen, navigate to the login view
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-        Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+        if (isOnboardingViewSeen) {
+          // If the onboarding view has been seen, navigate to the login view
+          Navigator.pushReplacementNamed(context, LoginView.routeName);
+        } else {
+          // If the onboarding view has not been seen, navigate to the onboarding view
+          // Save the onboarding view seen status
+          Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+        }
       }
     });
   }
