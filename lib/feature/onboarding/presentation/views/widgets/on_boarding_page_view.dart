@@ -15,9 +15,7 @@ class OnBoardingPageView extends StatelessWidget {
       children: [
         PageViewItem(
           isLastPage:
-              (pageController.hasClients
-                  ? pageController.page!.round() == 0
-                  : true),
+              true,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -43,8 +41,7 @@ class OnBoardingPageView extends StatelessWidget {
         ),
         PageViewItem(
           isLastPage:
-              (pageController.hasClients ? pageController.page!.round() : 0) ==
-              0,
+              false,
           title: const Text(
             "ابحث وتسوق",
             style: TextStyle(
