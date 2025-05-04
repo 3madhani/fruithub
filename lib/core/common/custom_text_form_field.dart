@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: keyboardType,
+      obscureText: isPasswordField,
       style: AppTextStyles.semiBold16.copyWith(color: const Color(0xff1F2326)),
       decoration: InputDecoration(
         suffixIcon: isPasswordField ? suffixIcon : null,
