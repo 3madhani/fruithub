@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruithub/core/utils/app_colors.dart';
+import 'package:fruithub/core/utils/app_text_styles.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;
@@ -22,12 +23,7 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           title,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Colors.white,
-            fontFamily: 'Cairo',
-            fontWeight: FontWeight.w700,
-          ),
+          style: AppTextStyles.bold16.copyWith(color: Colors.white),
         ),
       ),
     );

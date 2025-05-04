@@ -118,6 +118,11 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.bold,
   );
 
+  static const TextStyle bold13 = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.bold,
+  );
+
   static const TextStyle bold14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
