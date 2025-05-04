@@ -46,14 +46,11 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
             padding: const EdgeInsets.symmetric(
               horizontal: AppConst.horizontalPadding,
             ),
-            child: CustomButton(
+            child: CustomPrimaryButton(
               title: 'ابدأ الان',
               onPressed: () {
                 // Save the onboarding view seen status
-                Prefs.setBool(
-                  AppConst.isOnboardingViewSeenKey,
-                  true,
-                );
+                Prefs.setBool(AppConst.isOnboardingViewSeenKey, true);
                 // Navigate to the next screen
                 Navigator.of(context).pushReplacementNamed(LoginView.routeName);
               },

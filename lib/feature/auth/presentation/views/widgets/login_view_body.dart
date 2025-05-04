@@ -5,6 +5,7 @@ import 'package:fruithub/core/constants/app_const.dart';
 import 'package:fruithub/core/utils/app_assets.dart';
 import 'package:fruithub/core/utils/app_colors.dart';
 import 'package:fruithub/core/utils/app_text_styles.dart';
+import 'package:fruithub/feature/auth/presentation/views/sign_up_view.dart';
 import 'package:fruithub/feature/auth/presentation/views/widgets/or_divider_widget.dart';
 import 'package:fruithub/feature/auth/presentation/views/widgets/social_login_button.dart';
 
@@ -57,10 +58,16 @@ class LoginViewBody extends StatelessWidget {
               ),
               const SizedBox(height: 33),
 
-              CustomButton(title: 'تسجيل دخول', onPressed: () {}),
+              CustomPrimaryButton(title: 'تسجيل دخول', onPressed: () {}),
               const SizedBox(height: 33),
 
-              const CreateAccountText(),
+              AccountCreationText(
+                titleText: 'ليس لديك حساب؟',
+                subTitleText: ' قم بانشاء حساب',
+                onTap: () {
+                  Navigator.pushNamed(context, SignUpView.routeName);
+                },
+              ),
               const SizedBox(height: 33),
 
               const OrDividerWidget(),

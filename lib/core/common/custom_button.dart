@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:fruithub/core/utils/app_colors.dart';
 import 'package:fruithub/core/utils/app_text_styles.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomPrimaryButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
-  const CustomButton({super.key, required this.title, required this.onPressed});
+  const CustomPrimaryButton({
+    super.key,
+    required this.title,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
