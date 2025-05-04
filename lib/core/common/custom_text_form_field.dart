@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: keyboardType,
+      style: AppTextStyles.semiBold16.copyWith(color: const Color(0xff1F2326)),
       decoration: InputDecoration(
         suffixIcon: isPasswordField ? suffixIcon : null,
         hintText: hintText,
@@ -29,7 +30,7 @@ class CustomTextFormField extends StatelessWidget {
         filled: true,
         fillColor: const Color(0xffF9FAFA),
         border: buildBorder(),
-        focusedBorder: buildBorder(AppColors.primaryColor),
+        focusedBorder: buildBorder(AppColors.primaryLightColor),
         enabledBorder: buildBorder(),
       ),
     );
