@@ -7,6 +7,7 @@ import 'package:fruithub/feature/splash/presentation/views/splash_view.dart';
 import 'package:fruithub/generated/l10n.dart';
 
 import 'core/helper/on_generate_routes.dart';
+import 'core/services/get_it_services.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -14,6 +15,8 @@ void main() async {
   // Initialize shared preferences
   await Prefs.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // Initialize GetIt
+  setupGetIt();
   runApp(const FruitHub());
 }
 

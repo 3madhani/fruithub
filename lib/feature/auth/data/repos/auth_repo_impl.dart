@@ -25,7 +25,7 @@ class AuthRepoImpl extends AuthRepo {
     } on CustomException catch (e) {
       return left(ServerFailure(e.message));
     } catch (e) {
-      return left(const ServerFailure('An unknown error occurred. Please try again.'));
+      return left(const ServerFailure('حدث خطا غير متوقع يرجى المحاولة لاحقا'));
     }
   }
 
