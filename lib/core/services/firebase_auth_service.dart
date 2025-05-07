@@ -2,9 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruithub/core/errors/exception.dart';
 
 class FirebaseAuthService {
-  static final FirebaseAuthService _instance = FirebaseAuthService._internal();
-  factory FirebaseAuthService() => _instance;
-  FirebaseAuthService._internal();
 
   Future<User> createUserWithEmailAndPassword({
     required String email,
