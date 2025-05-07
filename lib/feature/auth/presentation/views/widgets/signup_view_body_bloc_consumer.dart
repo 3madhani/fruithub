@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruithub/core/common/build_error_snack_bar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../cubit/cubit/signup_cubit.dart';
@@ -13,9 +14,7 @@ class SignupViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state is SignupFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.error), backgroundColor: Colors.red),
-          );
+          buildErrorSnackBar(context, state.error);
         } else if (state is SignupSuccess) {
           // Navigator.pop(context);
         }
@@ -23,7 +22,6 @@ class SignupViewBodyBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return ModalProgressHUD(
           inAsyncCall: state is SignupLoading ? true : false,
-
           child: const SignUpViewBody(),
         );
       },
