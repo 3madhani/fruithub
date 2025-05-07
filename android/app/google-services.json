@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "999919126471",
+    "project_id": "quiet-canto-426011-q6",
+    "storage_bucket": "quiet-canto-426011-q6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999919126471:android:a109e5d8951438dafbfbe2",
+        "android_client_info": {
+          "package_name": "com.example.fruithub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZp5e40uCIbI_ef8AYBcP5_m6OlxDCuMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
