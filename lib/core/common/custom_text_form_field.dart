@@ -15,7 +15,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.keyboardType,
     this.suffixIcon,
-    required this.isPasswordField,
+     this.isPasswordField =false,
     this.onSaved,
   });
 

@@ -5,6 +5,7 @@ import 'package:fruithub/core/common/custom_text_form_field.dart';
 import 'package:fruithub/core/constants/app_const.dart';
 import 'package:fruithub/feature/auth/presentation/views/widgets/create_account_text.dart';
 
+import '../../../../../core/common/password_form_field.dart';
 import '../../cubit/cubit/signup_cubit.dart';
 import 'terms_and_conditions.dart';
 
@@ -50,24 +51,12 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
                 hintText: 'البريد الالكتروني',
                 keyboardType: TextInputType.emailAddress,
-                isPasswordField: false,
               ),
               const SizedBox(height: 16),
-              CustomTextFormField(
+              PasswordFormField(
                 onSaved: (value) {
                   _passwordController.text = value!;
                 },
-                hintText: "كلمة المرور",
-                keyboardType: TextInputType.visiblePassword,
-                isPasswordField: true,
-                suffixIcon: const Padding(
-                  padding: EdgeInsets.only(left: 26.0),
-                  child: Icon(
-                    Icons.remove_red_eye,
-                    size: 24,
-                    color: Color(0xffC9CECF),
-                  ),
-                ),
               ),
               const SizedBox(height: 16),
               const TermsAndConditions(),
@@ -113,3 +102,4 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
     super.dispose();
   }
 }
+

@@ -26,7 +26,6 @@ class LoginViewBody extends StatelessWidget {
             children: [
               const SizedBox(height: 24),
               const CustomTextFormField(
-                isPasswordField: false,
                 keyboardType: TextInputType.emailAddress,
                 hintText: 'البريد الالكتروني',
               ),
