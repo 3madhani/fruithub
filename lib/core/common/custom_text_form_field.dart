@@ -15,7 +15,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.keyboardType,
     this.suffixIcon,
-     this.isPasswordField =false,
+    this.isPasswordField = false,
     this.onSaved,
   });
 
@@ -44,7 +44,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: isPasswordField,
       style: AppTextStyles.semiBold16.copyWith(color: const Color(0xff1F2326)),
       decoration: InputDecoration(
-        suffixIcon: isPasswordField ? suffixIcon : null,
+        suffixIcon: suffixIcon,
         hintText: hintText,
         hintStyle: AppTextStyles.bold13.copyWith(
           color: const Color(0xff949D9E),

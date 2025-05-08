@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruithub/core/common/build_error_snack_bar.dart';
 import 'package:fruithub/core/common/custom_button.dart';
 import 'package:fruithub/core/common/custom_text_form_field.dart';
 import 'package:fruithub/core/constants/app_const.dart';
@@ -21,6 +22,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  late bool isTermdAndConditionsAccepted = false;
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
 
   @override
@@ -59,7 +61,11 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 },
               ),
               const SizedBox(height: 16),
-              const TermsAndConditions(),
+              TermsAndConditions(
+                onChanged: (value) {
+                  isTermdAndConditionsAccepted = value;
+                },
+              ),
               const SizedBox(height: 30),
               CustomPrimaryButton(
                 title: 'إنشاء حساب جديد',
@@ -67,11 +73,17 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     // Call the signup function from the cubit or bloc here
-                    context.read<SignupCubit>().createUserWithEmailAndPassword(
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                      name: _nameController.text,
-                    );
+                    if (isTermdAndConditionsAccepted) {
+                      context
+                          .read<SignupCubit>()
+                          .createUserWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                            name: _nameController.text,
+                          );
+                    } else {
+                      buildErrorSnackBar(context, 'يرجى قبول الشروط والاحكام');
+                    }
                   } else {
                     setState(() {
                       _autovalidateMode = AutovalidateMode.always;
@@ -102,4 +114,3 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
     super.dispose();
   }
 }
-
