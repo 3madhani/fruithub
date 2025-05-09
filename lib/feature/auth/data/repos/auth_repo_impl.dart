@@ -39,12 +39,22 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<void> signInWithEmailAndPassword({
+  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
     required String email,
     required String password,
-  }) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
+  }) async {
+    try {
+      var user = await firebaseAuthService.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return Right(UserModel.fromFirebaseUser(user));
+    } on CustomException catch (e) {
+      return left(ServerFailure(e.message));
+    } catch (e) {
+      log("Error in signInWithEmailAndPassword: ${e.toString()}");
+      return left(const ServerFailure('حدث خطا غير متوقع يرجى المحاولة لاحقا'));
+    }
   }
 
   @override

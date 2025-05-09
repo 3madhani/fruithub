@@ -12,7 +12,7 @@ abstract class AuthRepo {
 
   Future<void> sendPasswordResetEmail({required String email});
 
-  Future<void> signInWithEmailAndPassword({
+  Future<Either<Failure,UserEntity>> signInWithEmailAndPassword({
     required String email,
     required String password,
   });

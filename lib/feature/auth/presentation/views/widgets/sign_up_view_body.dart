@@ -7,7 +7,7 @@ import 'package:fruithub/core/constants/app_const.dart';
 import 'package:fruithub/feature/auth/presentation/views/widgets/create_account_text.dart';
 
 import '../../../../../core/common/password_form_field.dart';
-import '../../cubit/cubit/signup_cubit.dart';
+import '../../cubit/signup_cubit/signup_cubit.dart';
 import 'terms_and_conditions.dart';
 
 class SignUpViewBody extends StatefulWidget {
