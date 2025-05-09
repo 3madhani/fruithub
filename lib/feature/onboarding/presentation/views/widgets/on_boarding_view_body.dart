@@ -6,7 +6,7 @@ import 'package:fruithub/core/services/shared_preferences_singleton.dart';
 import 'package:fruithub/core/utils/app_colors.dart';
 import 'package:fruithub/feature/onboarding/presentation/views/widgets/on_boarding_page_view.dart';
 
-import '../../../../auth/presentation/views/login_view.dart';
+import '../../../../auth/presentation/views/sign_in_view.dart';
 
 class OnboardingViewBody extends StatefulWidget {
   const OnboardingViewBody({super.key});
@@ -52,7 +52,7 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
                 // Save the onboarding view seen status
                 Prefs.setBool(AppConst.isOnboardingViewSeenKey, true);
                 // Navigate to the next screen
-                Navigator.of(context).pushReplacementNamed(LoginView.routeName);
+                Navigator.of(context).pushReplacementNamed(SignInView.routeName);
               },
             ),
           ),

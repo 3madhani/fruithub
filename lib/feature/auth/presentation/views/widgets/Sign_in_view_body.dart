@@ -7,12 +7,12 @@ import 'package:fruithub/core/utils/app_colors.dart';
 import 'package:fruithub/core/utils/app_text_styles.dart';
 import 'package:fruithub/feature/auth/presentation/views/sign_up_view.dart';
 import 'package:fruithub/feature/auth/presentation/views/widgets/or_divider_widget.dart';
-import 'package:fruithub/feature/auth/presentation/views/widgets/social_login_button.dart';
+import 'package:fruithub/feature/auth/presentation/views/widgets/social_sign_in_button.dart';
 
 import 'create_account_text.dart';
 
-class LoginViewBody extends StatelessWidget {
-  const LoginViewBody({super.key});
+class SignInViewBody extends StatelessWidget {
+  const SignInViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,19 +71,19 @@ class LoginViewBody extends StatelessWidget {
 
               const OrDividerWidget(),
               const SizedBox(height: 16),
-              SocialLoginButton(
+              SocialSignInButton(
                 title: 'تسجيل بواسطة جوجل',
                 onPressed: () {},
                 iconPath: Assets.svgGoogleIcons,
               ),
               const SizedBox(height: 16),
-              SocialLoginButton(
+              SocialSignInButton(
                 title: 'تسجيل بواسطة أبل',
                 onPressed: () {},
                 iconPath: Assets.svgAppleIcons,
               ),
               const SizedBox(height: 16),
-              SocialLoginButton(
+              SocialSignInButton(
                 title: 'تسجيل بواسطة فيسبوك',
                 onPressed: () {},
                 iconPath: Assets.svgFacebookIcons,
