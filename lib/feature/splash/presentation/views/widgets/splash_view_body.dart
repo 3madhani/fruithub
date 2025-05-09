@@ -5,7 +5,7 @@ import 'package:fruithub/feature/onboarding/presentation/views/onboarding_view.d
 
 import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/services/shared_preferences_singleton.dart';
-import '../../../../auth/presentation/views/sign_in_view.dart';
+import '../../../../auth/presentation/views/signin_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});

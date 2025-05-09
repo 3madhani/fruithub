@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruithub/core/utils/app_text_styles.dart';
 
-class SocialSignInButton extends StatelessWidget {
+class SigninSocialButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
   final String iconPath;
-  const SocialSignInButton({
+  const SigninSocialButton({
     super.key,
     required this.title,
     required this.onPressed,

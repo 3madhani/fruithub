@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruithub/core/utils/app_text_styles.dart';
-import 'package:fruithub/feature/auth/presentation/views/sign_in_view.dart';
+import 'package:fruithub/feature/auth/presentation/views/signin_view.dart';
 
 import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/services/shared_preferences_singleton.dart';
