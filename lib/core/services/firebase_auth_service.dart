@@ -49,8 +49,10 @@ class FirebaseAuthService {
     required String password,
   }) async {
     try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       return credential.user!;
     } on FirebaseAuthException catch (e) {
       log(
@@ -58,8 +60,10 @@ class FirebaseAuthService {
       );
       if (e.code == 'user-not-found') {
         throw CustomException(message: 'البريد الالكتروني غير موجود.');
-      } else if (e.code == 'wrong-password') {
-        throw CustomException(message: "البريد الالكتروني او كلمة المرور غير صحيحة.");
+      } else if (e.code == 'invalid-credential') {
+        throw CustomException(
+          message: "البريد الالكتروني او كلمة المرور غير صحيحة.",
+        );
       } else if (e.code == 'invalid-email') {
         throw CustomException(message: 'البريد الالكتروني غير صالح.');
       } else if (e.code == 'network-request-failed') {

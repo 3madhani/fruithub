@@ -39,6 +39,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
             children: [
               const SizedBox(height: 24),
               CustomTextFormField(
+                controller: _nameController,
                 onSaved: (value) {
                   _nameController.text = value!;
                 },
@@ -48,6 +49,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               ),
               const SizedBox(height: 16),
               CustomTextFormField(
+                controller: _emailController,
                 onSaved: (value) {
                   _emailController.text = value!;
                 },
@@ -56,6 +58,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               ),
               const SizedBox(height: 16),
               PasswordFormField(
+                controller: _passwordController,
+                isSignInField: false,
                 onSaved: (value) {
                   _passwordController.text = value!;
                 },

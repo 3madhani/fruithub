@@ -7,8 +7,9 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
   final Widget? suffixIcon;
-  final bool isPasswordField;
+  final bool isPasswordField, isSignInField;
   final void Function(String?)? onSaved;
+  final TextEditingController controller;
 
   const CustomTextFormField({
     super.key,
@@ -17,18 +18,24 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.isPasswordField = false,
     this.onSaved,
+    this.isSignInField = false, required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       onSaved: onSaved,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'الرجاء إدخال $hintText';
         }
         if (isPasswordField) {
-          if (!DetectEmailAndPassword.isValidPassword(value)) {
+          if (isSignInField) {
+            if (value.isEmpty) {
+              return 'الرجاء إدخال $hintText';
+            }
+          } else if (!DetectEmailAndPassword.isValidPassword(value)) {
             return 'كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل، بما في ذلك حرف كبير ورقم ورمز خاص';
           }
         } else if (keyboardType == TextInputType.emailAddress) {
