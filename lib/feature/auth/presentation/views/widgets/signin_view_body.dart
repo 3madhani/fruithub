@@ -102,7 +102,9 @@ class _SigninViewBodyState extends State<SigninViewBody> {
               const SizedBox(height: 16),
               SigninSocialButton(
                 title: 'تسجيل بواسطة جوجل',
-                onPressed: () {},
+                onPressed: () {
+                  context.read<SigninCubit>().signInWithGoogle();
+                },
                 iconPath: Assets.svgGoogleIcons,
               ),
               const SizedBox(height: 16),
@@ -114,7 +116,9 @@ class _SigninViewBodyState extends State<SigninViewBody> {
               const SizedBox(height: 16),
               SigninSocialButton(
                 title: 'تسجيل بواسطة فيسبوك',
-                onPressed: () {},
+                onPressed: () {
+                  context.read<SigninCubit>().signInWithFacebook();
+                },
                 iconPath: Assets.svgFacebookIcons,
               ),
             ],

@@ -34,7 +34,6 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<void> sendPasswordResetEmail({required String email}) {
-    // TODO: implement sendPasswordResetEmail
     throw UnimplementedError();
   }
 
@@ -58,6 +57,17 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
+  Future<Either<Failure, UserEntity>> signInWithFacebook() async {
+    try {
+      var user = await firebaseAuthService.signInWithFacebook();
+      return Right(UserModel.fromFirebaseUser(user));
+    } catch (e) {
+      log("Error in signInWithFacebook: ${e.toString()}");
+      return left(const ServerFailure('حدث خطا غير متوقع يرجى المحاولة لاحقا'));
+    }
+  }
+
+  @override
   Future<Either<Failure, UserEntity>> signInWithGoogle() async {
     try {
       var user = await firebaseAuthService.signInWithGoogle();
@@ -70,13 +80,11 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<void> signOut() {
-    // TODO: implement signOut
     throw UnimplementedError();
   }
 
   @override
   Future<void> verifyEmail() {
-    // TODO: implement verifyEmail
     throw UnimplementedError();
   }
 }
