@@ -5,7 +5,7 @@ import 'package:fruithub/feature/auth/domain/repos/auth_repo.dart';
 
 import '../../../../core/common/custom_app_bar.dart';
 import '../cubits/signin_cubit/signin_cubit.dart';
-import 'widgets/signin_view_body.dart';
+import 'widgets/signin_view_body_bloc_consumer.dart';
 
 class SignInView extends StatelessWidget {
   static const String routeName = 'signInView';
@@ -18,7 +18,7 @@ class SignInView extends StatelessWidget {
       create: (context) => SigninCubit(getIt.get<AuthRepo>()),
       child: Scaffold(
         appBar: buildAppBar(context: context, title: 'تسجيل الدخول'),
-        body: const SigninViewBody(),
+        body: const SigninViewBodyBlocConsumer(),
       ),
     );
   }
