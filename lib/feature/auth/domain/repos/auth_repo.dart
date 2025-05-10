@@ -17,6 +17,8 @@ abstract class AuthRepo {
     required String password,
   });
 
+  Future<Either<Failure,UserEntity>> signInWithGoogle();
+
   Future<void> signOut();
 
   Future<void> verifyEmail();
