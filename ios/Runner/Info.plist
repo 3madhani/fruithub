@@ -45,5 +45,46 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<key>GIDClientID</key>
+	<string>999919126471-r920kkh06jaricbmhp83al5n3dervobc.apps.googleusercontent.com</string>
+
+	<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
+	<!-- Google Sign-in Section -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- TODO Replace this value: -->
+				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+				<string>com.googleusercontent.apps.999919126471-r920kkh06jaricbmhp83al5n3dervobc</string>
+			</array>
+		</dict>
+	</array>
+	<!-- End of the Google Sign-in Section -->
+
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb725224893268044</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>725224893268044</string>
+	<key>FacebookClientToken</key>
+	<string>8271878ed97b00a7aa80490a435434b5</string>
+	<key>FacebookDisplayName</key>
+	<string>{your-app-name}</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
 </dict>
 </plist>
