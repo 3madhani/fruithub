@@ -9,4 +9,9 @@ abstract class DatabaseServices {
     required Map<String, dynamic> data,
     String? documentId,
   });
+
+  Future <bool> checkIfDocumentExists({
+    required String path,
+    required String documentId,
+  });
 }

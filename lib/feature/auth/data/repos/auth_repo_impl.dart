@@ -61,6 +61,15 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
+  Future<UserEntity> getUserData({required String uId}) async {
+    var data = await databaseServices.getData(
+      path: BackendEndpoints.getUserData,
+      documentId: uId,
+    );
+    return UserModel.fromJson(data);
+  }
+
+  @override
   Future<void> sendPasswordResetEmail({required String email}) {
     throw UnimplementedError();
   }
@@ -71,7 +80,15 @@ class AuthRepoImpl extends AuthRepo {
     try {
       user = await firebaseAuthService.signInWithApple();
       var userEntity = UserModel.fromFirebaseUser(user);
-      await addUserData(userEntity: userEntity);
+      var isUserExist = await databaseServices.checkIfDocumentExists(
+        path: BackendEndpoints.getUserData,
+        documentId: user.uid,
+      );
+      if (isUserExist) {
+        await getUserData(uId: user.uid);
+      } else {
+        await addUserData(userEntity: userEntity);
+      }
       return Right(UserModel.fromFirebaseUser(user));
     } catch (e) {
       await deleteUser(user);
@@ -107,7 +124,15 @@ class AuthRepoImpl extends AuthRepo {
     try {
       user = await firebaseAuthService.signInWithFacebook();
       var userEntity = UserModel.fromFirebaseUser(user);
-      await addUserData(userEntity: userEntity);
+      var isUserExist = await databaseServices.checkIfDocumentExists(
+        path: BackendEndpoints.getUserData,
+        documentId: user.uid,
+      );
+      if (isUserExist) {
+        await getUserData(uId: user.uid);
+      } else {
+        await addUserData(userEntity: userEntity);
+      }
       return Right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -122,7 +147,15 @@ class AuthRepoImpl extends AuthRepo {
     try {
       user = await firebaseAuthService.signInWithGoogle();
       var userEntity = UserModel.fromFirebaseUser(user);
-      await addUserData(userEntity: userEntity);
+      var isUserExist = await databaseServices.checkIfDocumentExists(
+        path: BackendEndpoints.getUserData,
+        documentId: user.uid,
+      );
+      if (isUserExist) {
+        await getUserData(uId: user.uid);
+      } else {
+        await addUserData(userEntity: userEntity);
+      }
       return Right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -139,14 +172,5 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<void> verifyEmail() {
     throw UnimplementedError();
-  }
-  
-  @override
-  Future<UserEntity> getUserData({required String uId}) async {
-    var data = await databaseServices.getData(
-      path: BackendEndpoints.getUserData,
-      documentId: uId,
-    );
-    return UserModel.fromJson(data);
   }
 }

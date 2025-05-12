@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruithub/core/common/build_error_snack_bar.dart';
+import 'package:fruithub/core/common/build_snack_bar.dart';
 import 'package:fruithub/core/common/custom_button.dart';
 import 'package:fruithub/core/common/custom_text_form_field.dart';
 import 'package:fruithub/core/constants/app_const.dart';
@@ -86,7 +86,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                             name: _nameController.text,
                           );
                     } else {
-                      buildErrorSnackBar(context, 'يرجى قبول الشروط والاحكام');
+                      BuildSnackBar.buildErrorSnackBar(
+                        context,
+                        'يرجى قبول الشروط والاحكام',
+                      );
                     }
                   } else {
                     setState(() {

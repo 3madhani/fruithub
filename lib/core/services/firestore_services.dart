@@ -5,6 +5,15 @@ import 'database_services.dart';
 class FireStoreServices implements DatabaseServices {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   @override
+  Future<bool> checkIfDocumentExists({
+    required String path,
+    required String documentId,
+  }) async {
+    var doc = await firestore.collection(path).doc(documentId).get();
+    return doc.exists;
+  }
+
+  @override
   Future<Map<String, dynamic>> getData({
     required String path,
     required String documentId,
@@ -21,7 +30,7 @@ class FireStoreServices implements DatabaseServices {
   }) async {
     if (documentId != null) {
       await firestore.collection(path).doc(documentId).set(data);
-    }else {
+    } else {
       await firestore.collection(path).add(data);
     }
   }
