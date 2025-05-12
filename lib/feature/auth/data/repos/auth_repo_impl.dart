@@ -38,6 +38,17 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
+  Future<Either<Failure, UserEntity>> signInWithApple() async {
+    try {
+      var user = await firebaseAuthService.signInWithApple();
+      return Right(UserModel.fromFirebaseUser(user));
+    } catch (e) {
+      log("Error in signInWithApple: ${e.toString()}");
+      return left(const ServerFailure('حدث خطا غير متوقع يرجى المحاولة لاحقا'));
+    }
+  }
+
+  @override
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
     required String email,
     required String password,
@@ -57,7 +68,7 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signInWithFacebook()async {
+  Future<Either<Failure, UserEntity>> signInWithFacebook() async {
     try {
       var user = await firebaseAuthService.signInWithFacebook();
       return Right(UserModel.fromFirebaseUser(user));
@@ -82,21 +93,15 @@ class AuthRepoImpl extends AuthRepo {
   Future<void> signOut() {
     throw UnimplementedError();
   }
-  
+
   @override
   Future<void> verifyEmail() {
     throw UnimplementedError();
   }
   
   @override
-  Future<Either<Failure, UserEntity>> signInWithApple() async {
-    try {
-      var user = await firebaseAuthService.signInWithApple();
-      return Right(UserModel.fromFirebaseUser(user));
-    } catch (e) {
-      log("Error in signInWithApple: ${e.toString()}");
-      return left(const ServerFailure('حدث خطا غير متوقع يرجى المحاولة لاحقا'));
-    }
-    
+  Future addUserData({required UserEntity userEntity}) {
+    // TODO: implement addUserData
+    throw UnimplementedError();
   }
 }
