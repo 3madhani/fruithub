@@ -18,12 +18,16 @@ class SignupViewBodyBlocConsumer extends StatelessWidget {
         } else if (state is SignupSuccess) {
           BuildSnackBar.buildSuccessSnackBar(
             context,
-            '${state.userEntity.name} تم التسجيل بنجاح',
+            '${state.userEntity.name} تم التسجيل بنجاح قم بتسجيل الدخول',
           );
+
+          // Save navigator before async gap
+          final navigator = Navigator.of(context);
+
           // Navigate back after snackbar duration
-          // Future.delayed(const Duration(seconds: 2), () {
-          // Navigator.of(context).pop();
-          // });
+          Future.delayed(const Duration(seconds: 2, milliseconds: 500), () {
+            navigator.pop();
+          });
         }
       },
       builder: (context, state) {

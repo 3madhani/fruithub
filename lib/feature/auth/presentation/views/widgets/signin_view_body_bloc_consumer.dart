@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruithub/core/common/build_snack_bar.dart';
+import 'package:fruithub/feature/home/presentation/views/home_view.dart';
 
 import '../../../../../core/common/custom_progress_hud.dart';
 import '../../cubits/signin_cubit/signin_cubit.dart';
@@ -15,7 +16,9 @@ class SigninViewBodyBlocConsumer extends StatelessWidget {
       listener: (context, state) {
         if (state is SigninFailure) {
           BuildSnackBar.buildErrorSnackBar(context, state.error);
-        } else if (state is SigninSuccess) {}
+        } else if (state is SigninSuccess) {
+          Navigator.pushNamed(context, HomeView.routeName);
+        }
       },
       builder: (context, state) {
         return CustomProgressHUD(
