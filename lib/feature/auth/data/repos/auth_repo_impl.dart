@@ -1,8 +1,11 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruithub/core/errors/exception.dart';
 import 'package:fruithub/core/errors/failure.dart';
+import 'package:fruithub/core/services/database_services.dart';
+import 'package:fruithub/core/utils/backend_endpoints.dart';
 import 'package:fruithub/feature/auth/data/models/user_model.dart';
 import 'package:fruithub/feature/auth/domain/entities/user_entity.dart';
 
@@ -11,22 +14,44 @@ import '../../domain/repos/auth_repo.dart';
 
 class AuthRepoImpl extends AuthRepo {
   final FirebaseAuthService firebaseAuthService;
-  AuthRepoImpl({required this.firebaseAuthService});
+  final DatabaseServices databaseServices;
+
+  AuthRepoImpl({
+    required this.firebaseAuthService,
+    required this.databaseServices,
+  });
+  @override
+  Future addUserData({required UserEntity userEntity}) async {
+    await databaseServices.setData(
+      path: BackendEndpoints.addUserData,
+      data: userEntity.toMap(),
+    );
+  }
+
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword({
     required String email,
     required String password,
     required String name,
   }) async {
+    User? user;
     try {
-      var user = await firebaseAuthService.createUserWithEmailAndPassword(
+      user = await firebaseAuthService.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return Right(UserModel.fromFirebaseUser(user));
+      var userEntity = UserModel.fromFirebaseUser(user);
+      await addUserData(userEntity: userEntity);
+      return Right(userEntity);
     } on CustomException catch (e) {
+      if (user != null) {
+        await firebaseAuthService.deleteUser();
+      }
       return left(ServerFailure(e.message));
     } catch (e) {
+      if (user != null) {
+        await firebaseAuthService.deleteUser();
+      }
       log("Error in createUserWithEmailAndPassword: ${e.toString()}");
       return left(const ServerFailure('حدث خطا غير متوقع يرجى المحاولة لاحقا'));
     }
@@ -96,12 +121,6 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<void> verifyEmail() {
-    throw UnimplementedError();
-  }
-  
-  @override
-  Future addUserData({required UserEntity userEntity}) {
-    // TODO: implement addUserData
     throw UnimplementedError();
   }
 }
