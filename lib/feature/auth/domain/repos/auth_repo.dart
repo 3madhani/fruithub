@@ -25,6 +25,8 @@ abstract class AuthRepo {
 
   Future<Either<Failure, UserEntity>> signInWithGoogle();
 
+  Future<UserEntity> getUserData({required String uId});
+
   Future<void> signOut();
 
   Future<void> verifyEmail();

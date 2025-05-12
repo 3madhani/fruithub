@@ -89,7 +89,9 @@ class AuthRepoImpl extends AuthRepo {
         email: email,
         password: password,
       );
-      return Right(UserModel.fromFirebaseUser(user));
+
+      var userEntity = await getUserData(uId: user.uid);
+      return Right(userEntity);
     } on CustomException catch (e) {
       return left(ServerFailure(e.message));
     } catch (e) {
@@ -136,5 +138,14 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<void> verifyEmail() {
     throw UnimplementedError();
+  }
+  
+  @override
+  Future<UserEntity> getUserData({required String uId}) async {
+    var data = await databaseServices.getData(
+      path: BackendEndpoints.getUserData,
+      documentId: uId,
+    );
+    return UserModel.fromJson(data);
   }
 }
