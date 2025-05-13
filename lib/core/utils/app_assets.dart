@@ -2,6 +2,10 @@
 class Assets {
   Assets._();
   
+  /// Assets for imagesProfileImage
+  /// assets/images/profile_image.png
+  static const String imagesProfileImage = "assets/images/profile_image.png";
+
   /// Assets for svgAppleIcons
   /// assets/svg/apple_Icons.svg
   static const String svgAppleIcons = "assets/svg/apple_Icons.svg";
@@ -37,6 +41,10 @@ class Assets {
   /// Assets for svgLogo
   /// assets/svg/logo.svg
   static const String svgLogo = "assets/svg/logo.svg";
+
+  /// Assets for svgNotification
+  /// assets/svg/notification.svg
+  static const String svgNotification = "assets/svg/notification.svg";
 
   /// Assets for svgPlant
   /// assets/svg/plant.svg

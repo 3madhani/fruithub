@@ -60,9 +60,13 @@ flutter_launcher_icons:
   min_sdk_android: 21 # android min sdk min:16, default 21
 
 flutter_assets:
-  assets_path: assets/svg/
+  assets_path:
+    - assets/svg/
+    - assets/images/
   output_path: lib/core/utils
   filename: app_assets.dart
   field_prefix: null
+
+
 flutter_intl:
   enabled: true
