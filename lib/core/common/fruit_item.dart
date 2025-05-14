@@ -10,8 +10,6 @@ class FruitItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 170,
-      height: 214,
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         color: const Color(0xFFF3F5F7),
@@ -19,46 +17,36 @@ class FruitItem extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Image.asset(Assets.imagesStrawberryTest, fit: BoxFit.fill),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("فراولة", style: AppTextStyles.semiBold13),
-
-                          Text.rich(
-                            TextSpan(
-                              text: "30جنية",
-                              style: AppTextStyles.bold13.copyWith(
-                                color: AppColors.secondaryColor,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: " / الكيلو",
-                                  style: AppTextStyles.semiBold13.copyWith(
-                                    color: AppColors.secondaryLightColor,
-                                  ),
-                                ),
-                              ],
-                            ),
+            child: Column(
+              children: [
+                const SizedBox(height: 24),
+                Image.asset(Assets.imagesStrawberryTest),
+                const SizedBox(height: 24),
+                ListTile(
+                  title: const Text("فراولة", style: AppTextStyles.semiBold13),
+                  subtitle: Text.rich(
+                    TextSpan(
+                      text: "30جنية",
+                      style: AppTextStyles.bold13.copyWith(
+                        color: AppColors.secondaryColor,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: " / الكيلو",
+                          style: AppTextStyles.semiBold13.copyWith(
+                            color: AppColors.secondaryLightColor,
                           ),
-                        ],
-                      ),
-                      const CircleAvatar(
-                        backgroundColor: AppColors.primaryColor,
-                        child: Icon(Icons.add, color: Colors.white),
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
+
+                  trailing: const CircleAvatar(
+                    backgroundColor: AppColors.primaryColor,
+                    child: Icon(Icons.add, color: Colors.white),
+                  ),
+                ),
+              ],
             ),
           ),
           Positioned(
