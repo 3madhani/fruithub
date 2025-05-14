@@ -4,13 +4,12 @@ import 'package:fruithub/core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
 class FeaturedItemButton extends StatelessWidget {
-  const FeaturedItemButton({super.key, this.onPressed});
   final void Function()? onPressed;
+  const FeaturedItemButton({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 116,
       height: 32,
       child: TextButton(
         style: TextButton.styleFrom(
@@ -19,9 +18,16 @@ class FeaturedItemButton extends StatelessWidget {
           padding: const EdgeInsets.all(3),
         ),
         onPressed: onPressed,
-        child: Text(
-          "تسوق الان",
-          style: AppTextStyles.bold13.copyWith(color: AppColors.primaryColor),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: FittedBox(
+            child: Text(
+              "تسوق الان",
+              style: AppTextStyles.bold13.copyWith(
+                color: AppColors.primaryColor,
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -30,6 +30,10 @@ class Assets {
   /// assets/svg/facebook_Icons.svg
   static const String svgFacebookIcons = "assets/svg/facebook_Icons.svg";
 
+  /// Assets for svgFeaturedItemBackground
+  /// assets/svg/featured_item_background.svg
+  static const String svgFeaturedItemBackground = "assets/svg/featured_item_background.svg";
+
   /// Assets for svgFilter
   /// assets/svg/filter.svg
   static const String svgFilter = "assets/svg/filter.svg";
