@@ -20,30 +20,48 @@ class FruitItem extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 24),
-                Image.asset(Assets.imagesStrawberryTest),
+                Image.asset(Assets.imagesStrawberryTest, fit: BoxFit.fill),
                 const SizedBox(height: 24),
-                ListTile(
-                  title: const Text("فراولة", style: AppTextStyles.semiBold13),
-                  subtitle: Text.rich(
-                    TextSpan(
-                      text: "30جنية",
-                      style: AppTextStyles.bold13.copyWith(
-                        color: AppColors.secondaryColor,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: " / الكيلو",
-                          style: AppTextStyles.semiBold13.copyWith(
-                            color: AppColors.secondaryLightColor,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("فراولة", style: AppTextStyles.bold13),
+                          const SizedBox(height: 6),
+                          Text.rich(
+                            TextSpan(
+                              text: "30جنية",
+                              style: AppTextStyles.bold13.copyWith(
+                                color: AppColors.secondaryColor,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: " / الكيلو",
+                                  style: AppTextStyles.semiBold13.copyWith(
+                                    color: AppColors.secondaryLightColor,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  trailing: const CircleAvatar(
-                    backgroundColor: AppColors.primaryColor,
-                    child: Icon(Icons.add, color: Colors.white),
+                        ],
+                      ),
+                      const Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SizedBox(height: 12),
+                          CircleAvatar(
+                            radius: 20,
+                            backgroundColor: AppColors.primaryColor,
+                            child: Icon(Icons.add, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],
