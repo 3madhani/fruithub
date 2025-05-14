@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruithub/core/common/fruit_item.dart';
 import 'package:fruithub/core/common/search_text_field.dart';
 import 'package:fruithub/feature/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:fruithub/feature/home/presentation/views/widgets/featured_list.dart';
@@ -40,6 +41,9 @@ class HomeViewBody extends StatelessWidget {
                 ),
                 child: BestSellerHeader(onTap: () {}),
               ),
+              const SizedBox(height: 12),
+
+              const FruitItem(),
             ],
           ),
         ),
