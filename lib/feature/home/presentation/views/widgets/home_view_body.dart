@@ -4,34 +4,42 @@ import 'package:fruithub/feature/home/presentation/views/widgets/custom_home_app
 import 'package:fruithub/feature/home/presentation/views/widgets/featured_list.dart';
 
 import '../../../../../core/constants/app_const.dart';
+import 'best_seller_header.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
+    return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
           child: Column(
             children: [
-              SizedBox(height: AppConst.verticalPadding),
-              Padding(
+              const SizedBox(height: AppConst.verticalPadding),
+              const Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: AppConst.horizontalPadding,
                 ),
 
                 child: CustomHomeAppBar(),
               ),
-              SizedBox(height: AppConst.verticalPadding),
-              Padding(
+              const SizedBox(height: AppConst.verticalPadding),
+              const Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: AppConst.horizontalPadding,
                 ),
                 child: SearchTextField(),
               ),
-              SizedBox(height: 12),
-              FeaturedList(),
+              const SizedBox(height: 12),
+              const FeaturedList(),
+              const SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppConst.horizontalPadding,
+                ),
+                child: BestSellerHeader(onTap: () {}),
+              ),
             ],
           ),
         ),
