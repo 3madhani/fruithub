@@ -3,6 +3,17 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/utils/app_assets.dart';
 
+class ActiveIcon extends StatelessWidget {
+  final String activeIconPath;
+
+  const ActiveIcon({super.key, required this.activeIconPath});
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(activeIconPath);
+  }
+}
+
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key});
 
@@ -27,18 +38,30 @@ class CustomBottomNavigationBar extends StatelessWidget {
           ),
         ],
       ),
-      child: const InActiveIcon(iconPath: Assets.svgInactiveHome),
+      child: const NavigationBarIcon(isActive: true),
     );
   }
 }
 
 class InActiveIcon extends StatelessWidget {
-  final String iconPath;
+  final String inactiveIconPath;
 
-  const InActiveIcon({super.key, required this.iconPath});
+  const InActiveIcon({super.key, required this.inactiveIconPath});
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(iconPath);
+    return SvgPicture.asset(inactiveIconPath);
+  }
+}
+
+class NavigationBarIcon extends StatelessWidget {
+  final bool isActive;
+  const NavigationBarIcon({super.key, required this.isActive});
+
+  @override
+  Widget build(BuildContext context) {
+    return isActive
+        ? const ActiveIcon(activeIconPath: Assets.svgActiveHome)
+        : const InActiveIcon(inactiveIconPath: Assets.svgInactiveHome);
   }
 }
