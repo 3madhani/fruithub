@@ -9,22 +9,38 @@ class CustomHomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Image.asset(Assets.imagesProfileImage, width: 48, height: 48),
-      title: Text(
-        "صباح الخير !..",
-        textAlign: TextAlign.right,
-        style: AppTextStyles.regular16.copyWith(color: const Color(0xff949D9E)),
-      ),
-      subtitle: const Text("أحمد مصطفي", style: AppTextStyles.bold16),
-      trailing: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: const ShapeDecoration(
-          color: Color(0xffEEF8ED),
-          shape: OvalBorder(),
+    return Row(
+      children: [
+        Image.asset(Assets.imagesProfileImage, width: 44, height: 44),
+        const SizedBox(width: 11),
+        Column(
+          children: [
+            Text(
+              "صباح الخير !..",
+              textAlign: TextAlign.right,
+              style: AppTextStyles.regular16.copyWith(
+                color: const Color(0xff949D9E),
+              ),
+            ),
+            const Text("أحمد مصطفي", style: AppTextStyles.bold16),
+          ],
         ),
-        child: SvgPicture.asset(Assets.svgNotification, fit: BoxFit.contain),
-      ),
+        const Spacer(),
+        Container(
+          width: 34,
+          height: 34,
+          decoration: const ShapeDecoration(
+            color: Color(0xffEEF8ED),
+            shape: OvalBorder(),
+          ),
+          child: SvgPicture.asset(
+            Assets.svgNotification,
+            height: 20,
+            width: 20,
+            fit: BoxFit.scaleDown,
+          ),
+        ),
+      ],
     );
   }
 }
