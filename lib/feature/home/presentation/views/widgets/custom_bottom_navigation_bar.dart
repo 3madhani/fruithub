@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../../../core/utils/app_assets.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key});
@@ -24,6 +27,18 @@ class CustomBottomNavigationBar extends StatelessWidget {
           ),
         ],
       ),
+      child: const InActiveIcon(iconPath: Assets.svgInactiveHome),
     );
+  }
+}
+
+class InActiveIcon extends StatelessWidget {
+  final String iconPath;
+
+  const InActiveIcon({super.key, required this.iconPath});
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(iconPath);
   }
 }
