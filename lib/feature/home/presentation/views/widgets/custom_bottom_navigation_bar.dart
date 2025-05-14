@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../../../../../core/utils/app_assets.dart';
+import '../../../domain/entities/bottom_navigation_bar_entity.dart';
+import 'navigation_bar_icon.dart';
 
-class ActiveIcon extends StatelessWidget {
-  final String activeIconPath;
-
-  const ActiveIcon({super.key, required this.activeIconPath});
+class CustomBottomNavigationBar extends StatefulWidget {
+  const CustomBottomNavigationBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(activeIconPath);
-  }
+  State<CustomBottomNavigationBar> createState() =>
+      _CustomBottomNavigationBarState();
 }
 
-class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({super.key});
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  int activeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -38,30 +35,25 @@ class CustomBottomNavigationBar extends StatelessWidget {
           ),
         ],
       ),
-      child: const NavigationBarIcon(isActive: true),
+      child: Row(
+        children:
+            bottomNavigationBarItems
+                .asMap()
+                .entries
+                .map(
+                  (e) => Expanded(
+                    flex: activeIndex == e.key ? 3 : 2,
+                    child: GestureDetector(
+                      onTap: () => setState(() => activeIndex = e.key),
+                      child: NavigationBarIcon(
+                        isActive: activeIndex == e.key,
+                        bottomNavigationBarEntity: e.value,
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+      ),
     );
-  }
-}
-
-class InActiveIcon extends StatelessWidget {
-  final String inactiveIconPath;
-
-  const InActiveIcon({super.key, required this.inactiveIconPath});
-
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(inactiveIconPath);
-  }
-}
-
-class NavigationBarIcon extends StatelessWidget {
-  final bool isActive;
-  const NavigationBarIcon({super.key, required this.isActive});
-
-  @override
-  Widget build(BuildContext context) {
-    return isActive
-        ? const ActiveIcon(activeIconPath: Assets.svgActiveHome)
-        : const InActiveIcon(inactiveIconPath: Assets.svgInactiveHome);
   }
 }

@@ -1,5 +1,28 @@
 import 'package:fruithub/core/utils/app_assets.dart';
 
+List<BottomNavigationBarEntity> get bottomNavigationBarItems => [
+  const BottomNavigationBarEntity(
+    title: "الرئيسية",
+    inActiveIconPath: Assets.svgInactiveHome,
+    activeIconPath: Assets.svgActiveHome,
+  ),
+  const BottomNavigationBarEntity(
+    title: "المنتجات",
+    inActiveIconPath: Assets.svgInactiveProducts,
+    activeIconPath: Assets.svgActiveProducts,
+  ),
+  const BottomNavigationBarEntity(
+    title: "سلة التسوق",
+    inActiveIconPath: Assets.svgInactiveShoppingCart,
+    activeIconPath: Assets.svgActiveShoppingCart,
+  ),
+  const BottomNavigationBarEntity(
+    title: "حسابي",
+    inActiveIconPath: Assets.svgInactiveUser,
+    activeIconPath: Assets.svgActiveUser,
+  ),
+];
+
 class BottomNavigationBarEntity {
   final String title;
   final String inActiveIconPath;
@@ -10,27 +33,4 @@ class BottomNavigationBarEntity {
     required this.inActiveIconPath,
     required this.activeIconPath,
   });
-
-  List<BottomNavigationBarEntity> get bottomNavigationBarItems => [
-    const BottomNavigationBarEntity(
-      title: "الرئيسية",
-      inActiveIconPath: Assets.svgInactiveHome,
-      activeIconPath: Assets.svgActiveHome,
-    ),
-    const BottomNavigationBarEntity(
-      title: "المنتجات",
-      inActiveIconPath: Assets.svgInactiveProducts,
-      activeIconPath: Assets.svgActiveProducts,
-    ),
-    const BottomNavigationBarEntity(
-      title: "سلة التسوق",
-      inActiveIconPath: Assets.svgInactiveShoppingCart,
-      activeIconPath: Assets.svgActiveShoppingCart,
-    ),
-    const BottomNavigationBarEntity(
-      title: "حسابي",
-      inActiveIconPath: Assets.svgInactiveUser,
-      activeIconPath: Assets.svgActiveUser,
-    ),
-  ];
 }
