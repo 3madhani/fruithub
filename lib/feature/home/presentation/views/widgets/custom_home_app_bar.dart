@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruithub/core/utils/app_text_styles.dart';
 
+import '../../../../../core/common/notification_widget.dart';
 import '../../../../../core/utils/app_assets.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
@@ -26,20 +26,7 @@ class CustomHomeAppBar extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        Container(
-          width: 34,
-          height: 34,
-          decoration: const ShapeDecoration(
-            color: Color(0xffEEF8ED),
-            shape: OvalBorder(),
-          ),
-          child: SvgPicture.asset(
-            Assets.svgNotification,
-            height: 20,
-            width: 20,
-            fit: BoxFit.scaleDown,
-          ),
-        ),
+        const NotificationWidget(),
       ],
     );
   }

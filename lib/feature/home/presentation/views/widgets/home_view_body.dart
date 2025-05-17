@@ -12,40 +12,40 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
           child: Column(
             children: [
-              const SizedBox(height: AppConst.verticalPadding),
-              const Padding(
+              SizedBox(height: AppConst.verticalPadding),
+              Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: AppConst.horizontalPadding,
                 ),
 
                 child: CustomHomeAppBar(),
               ),
-              const SizedBox(height: AppConst.verticalPadding),
-              const Padding(
+              SizedBox(height: AppConst.verticalPadding),
+              Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: AppConst.horizontalPadding,
                 ),
                 child: SearchTextField(),
               ),
-              const SizedBox(height: 12),
-              const FeaturedList(),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
+              FeaturedList(),
+              SizedBox(height: 12),
               Padding(
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: AppConst.horizontalPadding,
                 ),
-                child: BestSellerHeader(onTap: () {}),
+                child: BestSellerHeader(),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
             ],
           ),
         ),
-        const BestSellerGridView(),
+        BestSellerGridView(),
       ],
     );
   }
