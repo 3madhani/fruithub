@@ -204,4 +204,7 @@ class FirebaseAuthService {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
   }
+
+  // isLoggedin
+  bool isLoggedIn() => FirebaseAuth.instance.currentUser != null;
 }

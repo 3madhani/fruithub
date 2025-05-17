@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fruithub/core/services/firebase_auth_service.dart';
 import 'package:fruithub/core/utils/app_assets.dart';
 import 'package:fruithub/feature/onboarding/presentation/views/onboarding_view.dart';
 
 import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/services/shared_preferences_singleton.dart';
 import '../../../../auth/presentation/views/signin_view.dart';
+import '../../../../home/presentation/views/home_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -40,7 +42,11 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       if (mounted) {
         if (isOnboardingViewSeen) {
           // If the onboarding view has been seen, navigate to the login view
-          Navigator.pushReplacementNamed(context, SignInView.routeName);
+          if (FirebaseAuthService().isLoggedIn()) {
+            Navigator.pushReplacementNamed(context, HomeView.routeName);
+          } else {
+            Navigator.pushReplacementNamed(context, SignInView.routeName);
+          }
         } else {
           // If the onboarding view has not been seen, navigate to the onboarding view
           // Save the onboarding view seen status
