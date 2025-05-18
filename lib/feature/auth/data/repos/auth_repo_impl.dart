@@ -1,10 +1,13 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fruithub/core/constants/app_const.dart';
 import 'package:fruithub/core/errors/exception.dart';
 import 'package:fruithub/core/errors/failure.dart';
 import 'package:fruithub/core/services/database_services.dart';
+import 'package:fruithub/core/services/shared_preferences_singleton.dart';
 import 'package:fruithub/core/utils/backend_endpoints.dart';
 import 'package:fruithub/feature/auth/data/models/user_model.dart';
 import 'package:fruithub/feature/auth/domain/entities/user_entity.dart';
@@ -24,7 +27,7 @@ class AuthRepoImpl extends AuthRepo {
   Future addUserData({required UserEntity userEntity}) async {
     await databaseServices.setData(
       path: BackendEndpoints.addUserData,
-      data: userEntity.toMap(),
+      data: UserModel.fromEntity(userEntity).toMap(),
       documentId: userEntity.uId,
     );
   }
@@ -172,5 +175,11 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<void> verifyEmail() {
     throw UnimplementedError();
+  }
+  
+  @override
+  Future saveUserData({required UserEntity userEntity}) async {
+    var jsonData = jsonEncode(UserModel.fromEntity(userEntity).toMap());
+    await Prefs.setString(AppConst.userData, jsonData);
   }
 }

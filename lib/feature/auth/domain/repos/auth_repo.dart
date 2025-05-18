@@ -6,6 +6,8 @@ import '../entities/user_entity.dart';
 abstract class AuthRepo {
   Future addUserData({required UserEntity userEntity});
 
+  Future saveUserData({required UserEntity userEntity});
+
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword({
     required String email,
     required String password,
