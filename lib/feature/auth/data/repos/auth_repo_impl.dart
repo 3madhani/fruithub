@@ -88,7 +88,8 @@ class AuthRepoImpl extends AuthRepo {
         documentId: user.uid,
       );
       if (isUserExist) {
-        await getUserData(uId: user.uid);
+        var userEntity = await getUserData(uId: user.uid);
+        await saveUserData(userEntity: userEntity);
       } else {
         await addUserData(userEntity: userEntity);
       }
@@ -112,6 +113,7 @@ class AuthRepoImpl extends AuthRepo {
       );
 
       var userEntity = await getUserData(uId: user.uid);
+      await saveUserData(userEntity: userEntity);
       return Right(userEntity);
     } on CustomException catch (e) {
       return left(ServerFailure(e.message));
@@ -132,7 +134,8 @@ class AuthRepoImpl extends AuthRepo {
         documentId: user.uid,
       );
       if (isUserExist) {
-        await getUserData(uId: user.uid);
+        var userEntity = await getUserData(uId: user.uid);
+        await saveUserData(userEntity: userEntity);
       } else {
         await addUserData(userEntity: userEntity);
       }
@@ -155,7 +158,8 @@ class AuthRepoImpl extends AuthRepo {
         documentId: user.uid,
       );
       if (isUserExist) {
-        await getUserData(uId: user.uid);
+        var userEntity = await getUserData(uId: user.uid);
+        await saveUserData(userEntity: userEntity);
       } else {
         await addUserData(userEntity: userEntity);
       }

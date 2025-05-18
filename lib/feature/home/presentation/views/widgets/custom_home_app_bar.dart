@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruithub/core/helper/get_user_entity_function.dart';
 import 'package:fruithub/core/utils/app_text_styles.dart';
 
 import '../../../../../core/common/notification_widget.dart';
@@ -22,7 +23,7 @@ class CustomHomeAppBar extends StatelessWidget {
                 color: const Color(0xff949D9E),
               ),
             ),
-            const Text("أحمد مصطفي", style: AppTextStyles.bold16),
+            Text(getUserEntity().name, style: AppTextStyles.bold16),
           ],
         ),
         const Spacer(),
