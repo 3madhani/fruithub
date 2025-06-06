@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:fruithub/core/entities/product_entity.dart';
+
 import 'review_model.dart';
 
 class ProductModel {
@@ -48,8 +50,28 @@ class ProductModel {
     unitAmount: json['unitAmount'] as int,
     isOrganic: json['isOrganic'] as bool,
     sellingCount: json['sellingCount'] as num,
-    reviews: (json['reviews'] as List).map((review) => ReviewModel.fromJson(review)).toList(),
+    reviews:
+        (json['reviews'] as List)
+            .map((review) => ReviewModel.fromJson(review))
+            .toList(),
   );
+
+  ProductEntity toEntity() {
+    return ProductEntity(
+      title: title,
+      description: description,
+      price: price,
+      image: image,
+      code: code,
+      isFeatured: isFeatured,
+      imageUrl: imageUrl,
+      expirationMonth: expirationMonth,
+      numberOfCalories: numberOfCalories,
+      unitAmount: unitAmount,
+      isOrganic: isOrganic,
+      reviews: reviews.map((review) => review.toEntity()).toList(),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     'title': title,
