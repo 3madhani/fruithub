@@ -1,7 +1,6 @@
+import 'package:fruithub/core/models/review_model.dart';
 
-import '../entities/review_entity.dart';
-
-double getAverageRating(List<ReviewEntity> reviews) {
+double getAverageRating(List<ReviewModel> reviews) {
   if (reviews.isEmpty) {
     return 0.0; // Return 0 if there are no reviews
   }

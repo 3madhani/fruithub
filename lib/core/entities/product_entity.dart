@@ -11,7 +11,7 @@ class ProductEntity {
   final bool isOrganic;
   final int numberOfCalories;
   final int unitAmount;
-  final num averageRating = 0.0;
+  final num averageRating= 0.0;
   final num numberOfReviews = 0;
   final List<ReviewEntity> reviews;
 

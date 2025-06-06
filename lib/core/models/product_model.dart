@@ -16,7 +16,6 @@ class ProductModel {
   final int numberOfCalories;
   final int unitAmount;
   final num averageRating;
-  final num numberOfReviews = 0;
   final List<ReviewModel> reviews;
 
   ProductModel({
@@ -36,7 +35,13 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-    averageRating: getAverageRating(json['reviews']),
+    averageRating: getAverageRating(
+      json['reviews'] != null
+          ? (json['reviews'] as List)
+              .map((review) => ReviewModel.fromJson(review))
+              .toList()
+          : <ReviewModel>[],
+    ),
     title: json['title'] as String,
     description: json['description'] as String,
     price: json['price'] as num,
@@ -49,13 +54,16 @@ class ProductModel {
     isOrganic: json['isOrganic'] as bool,
     sellingCount: json['sellingCount'] as num,
     reviews:
-        (json['reviews'] as List)
-            .map((review) => ReviewModel.fromJson(review))
-            .toList(),
+        json['reviews'] != null
+            ? (json['reviews'] as List)
+                .map((review) => ReviewModel.fromJson(review))
+                .toList()
+            : <ReviewModel>[],
   );
 
   ProductEntity toEntity() {
     return ProductEntity(
+      // averageRating: averageRating,
       title: title,
       description: description,
       price: price,

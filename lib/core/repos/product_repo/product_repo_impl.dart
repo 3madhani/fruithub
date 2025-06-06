@@ -14,13 +14,14 @@ class ProductRepoImpl implements ProductRepo {
   Future<Either<Failure, List<ProductEntity>>> getBestSellProducts() async {
     try {
       var data =
-          await databaseServices.getData(path: BackendEndpoints.getProducts,
-          queryParameters: {
-            "orderBy": "sellingCount",
-            "limit": 10,
-            "descending": true
-          }
-          )
+          await databaseServices.getData(
+                path: BackendEndpoints.getProducts,
+                queryParameters: {
+                  "orderBy": "sellingCount",
+                  "limit": 10,
+                  "descending": true,
+                },
+              )
               as List<Map<String, dynamic>>;
 
       List<ProductEntity> products =
@@ -28,7 +29,9 @@ class ProductRepoImpl implements ProductRepo {
 
       return Right(products);
     } catch (e) {
-      return const Left(ServerFailure("Failed to fetch products"));
+      return Left(
+        ServerFailure("Failed to fetch best selling products: ${e.toString()}"),
+      );
     }
   }
 
