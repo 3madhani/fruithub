@@ -7,7 +7,7 @@ import 'package:fruithub/feature/onboarding/presentation/views/onboarding_view.d
 import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/services/shared_preferences_singleton.dart';
 import '../../../../auth/presentation/views/signin_view.dart';
-import '../../../../home/presentation/views/home_view.dart';
+import '../../../../home/presentation/views/main_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -43,7 +43,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         if (isOnboardingViewSeen) {
           // If the onboarding view has been seen, navigate to the login view
           if (FirebaseAuthService().isLoggedIn()) {
-            Navigator.pushReplacementNamed(context, HomeView.routeName);
+            Navigator.pushReplacementNamed(context, MainView.routeName);
           } else {
             Navigator.pushReplacementNamed(context, SignInView.routeName);
           }

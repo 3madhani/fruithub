@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:fruithub/core/common/search_text_field.dart';
-import 'package:fruithub/feature/home/presentation/views/widgets/best_seller_grid_view.dart';
-import 'package:fruithub/feature/home/presentation/views/widgets/custom_home_app_bar.dart';
-import 'package:fruithub/feature/home/presentation/views/widgets/featured_list.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/common/search_text_field.dart';
 import '../../../../../core/constants/app_const.dart';
+import '../../../../../core/cubits/products_cubit/products_cubit.dart';
+import 'best_seller_grid_view.dart';
 import 'best_seller_header.dart';
+import 'custom_home_app_bar.dart';
+import 'featured_list.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
 
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+
+  @override
+  void initState() {
+    context.read<ProductsCubit>().getBestSellProducts();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return const CustomScrollView(
