@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/common/search_text_field.dart';
 import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/cubits/products_cubit/products_cubit.dart';
-import 'best_seller_grid_view.dart';
+import 'best_seller_grid_view_bloc_builder.dart';
 import 'best_seller_header.dart';
 import 'custom_home_app_bar.dart';
 import 'featured_list.dart';
@@ -17,12 +17,6 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-
-  @override
-  void initState() {
-    context.read<ProductsCubit>().getBestSellProducts();
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     return const CustomScrollView(
@@ -58,8 +52,14 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             ],
           ),
         ),
-        BestSellerGridView(),
+        BestSellerGridViewBlocBuilder(),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    context.read<ProductsCubit>().getBestSellProducts();
+    super.initState();
   }
 }

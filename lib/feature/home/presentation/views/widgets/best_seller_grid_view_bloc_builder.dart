@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruithub/core/common/custom_error_widget.dart';
+import 'package:fruithub/core/helper/get_dummy_products.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../../../../core/cubits/products_cubit/products_cubit.dart';
+import 'best_seller_grid_view.dart';
+
+class BestSellerGridViewBlocBuilder extends StatelessWidget {
+  const BestSellerGridViewBlocBuilder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProductsCubit, ProductsState>(
+      builder: (context, state) {
+        if (state is ProductsSuccess) {
+          return BestSellerGridView(products: state.products);
+        } else if (state is ProductsFailure) {
+          return SliverToBoxAdapter(
+            child: CustomErrorWidget(errorMessage: state.message),
+          );
+        } else {
+          return Skeletonizer.sliver(
+            enabled: true,
+            child: BestSellerGridView(
+              products: getDummyProducts(), // Empty list for skeleton view
+            ),
+          );
+        }
+      },
+    );
+  }
+}

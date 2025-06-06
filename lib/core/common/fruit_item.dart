@@ -68,8 +68,8 @@ class FruitItem extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 0,
-            right: 0,
+            top: 4,
+            right: 6,
             child: IconButton(
               onPressed: () {},
               icon: const Icon(Icons.favorite_border),
