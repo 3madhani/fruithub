@@ -4,7 +4,11 @@ abstract class DatabaseServices {
     required String documentId,
   });
 
-  Future<dynamic> getData({required String path, String? documentId});
+  Future<dynamic> getData({
+    required String path,
+    String? documentId,
+    Map<String, dynamic>? queryParameters,
+  });
 
   Future<void> setData({
     required String path,
