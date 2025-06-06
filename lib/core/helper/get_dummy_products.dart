@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:fruithub/core/entities/product_entity.dart';
 
 import '../entities/review_entity.dart';
@@ -9,7 +7,6 @@ List<ProductEntity> getDummyProducts() {
     title: 'Organic Apple',
     description: 'Fresh organic apples from local farms.',
     price: 12.99,
-    image: File('path/to/image.jpg'), // Replace with actual path
     code: 'APL123',
     isFeatured: true,
     imageUrl: '',

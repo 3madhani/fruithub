@@ -1,14 +1,12 @@
-import 'dart:io';
-
 import 'package:fruithub/core/entities/product_entity.dart';
 
+import '../helper/get_average_rating.dart';
 import 'review_model.dart';
 
 class ProductModel {
   final String title;
   final String description;
   final num price;
-  final File image;
   final String code;
   final bool isFeatured;
   String? imageUrl;
@@ -17,18 +15,18 @@ class ProductModel {
   final num sellingCount;
   final int numberOfCalories;
   final int unitAmount;
-  final num averageRating = 0.0;
+  final num averageRating;
   final num numberOfReviews = 0;
   final List<ReviewModel> reviews;
 
   ProductModel({
+    required this.averageRating,
     required this.sellingCount,
     required this.reviews,
     this.isOrganic = false,
     required this.title,
     required this.description,
     required this.price,
-    required this.image,
     required this.code,
     required this.isFeatured,
     this.imageUrl,
@@ -38,10 +36,10 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+    averageRating: getAverageRating(json['reviews']),
     title: json['title'] as String,
     description: json['description'] as String,
     price: json['price'] as num,
-    image: File(json['image'] as String),
     code: json['code'] as String,
     isFeatured: json['isFeatured'] as bool,
     imageUrl: json['imageUrl'] as String?,
@@ -61,7 +59,6 @@ class ProductModel {
       title: title,
       description: description,
       price: price,
-      image: image,
       code: code,
       isFeatured: isFeatured,
       imageUrl: imageUrl,

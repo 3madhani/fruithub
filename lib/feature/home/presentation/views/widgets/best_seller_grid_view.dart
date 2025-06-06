@@ -17,7 +17,7 @@ class BestSellerGridView extends StatelessWidget {
         crossAxisSpacing: 16,
         mainAxisSpacing: 8,
       ),
-      itemCount: 20,
+      itemCount: products.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: EdgeInsets.only(
@@ -25,7 +25,9 @@ class BestSellerGridView extends StatelessWidget {
             left: index % 2 == 0 ? 0 : AppConst.horizontalPadding,
           ),
 
-          child: const FruitItem(),
+          child:  FruitItem(
+            product: products[index],
+          ),
         );
       },
     );
