@@ -4,9 +4,9 @@ import 'package:fruithub/core/entities/product_entity.dart';
 
 import '../../../../../core/constants/app_const.dart';
 
-class BestSellerGridView extends StatelessWidget {
-  const BestSellerGridView({super.key, required this.products});
+class ProductsGridView extends StatelessWidget {
   final List<ProductEntity> products;
+  const ProductsGridView({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,7 @@ class BestSellerGridView extends StatelessWidget {
             left: index % 2 == 0 ? 0 : AppConst.horizontalPadding,
           ),
 
-          child:  FruitItem(
-            product: products[index],
-          ),
+          child: FruitItem(product: products[index]),
         );
       },
     );

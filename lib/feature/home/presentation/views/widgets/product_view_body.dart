@@ -5,7 +5,7 @@ import 'package:fruithub/feature/home/presentation/views/widgets/products_view_h
 
 import '../../../../../core/common/search_text_field.dart';
 import '../../../../../core/constants/app_const.dart';
-import 'best_seller_grid_view_bloc_builder.dart';
+import 'products_grid_view_bloc_builder.dart';
 import 'custom_home_app_bar.dart';
 
 class ProductViewBody extends StatelessWidget {

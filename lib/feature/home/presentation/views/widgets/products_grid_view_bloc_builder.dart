@@ -5,7 +5,7 @@ import 'package:fruithub/core/helper/get_dummy_products.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/cubits/products_cubit/products_cubit.dart';
-import 'best_seller_grid_view.dart';
+import 'products_grid_view.dart';
 
 class ProductsGridViewBlocBuilder extends StatelessWidget {
   const ProductsGridViewBlocBuilder({super.key});
@@ -15,7 +15,7 @@ class ProductsGridViewBlocBuilder extends StatelessWidget {
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state is ProductsSuccess) {
-          return BestSellerGridView(products: state.products);
+          return ProductsGridView(products: state.products);
         } else if (state is ProductsFailure) {
           return SliverToBoxAdapter(
             child: CustomErrorWidget(errorMessage: state.message),
@@ -23,7 +23,7 @@ class ProductsGridViewBlocBuilder extends StatelessWidget {
         } else {
           return Skeletonizer.sliver(
             enabled: true,
-            child: BestSellerGridView(
+            child: ProductsGridView(
               products: getDummyProducts(), // Empty list for skeleton view
             ),
           );
