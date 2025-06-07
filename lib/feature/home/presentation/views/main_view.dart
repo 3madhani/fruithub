@@ -3,7 +3,7 @@ import 'package:fruithub/feature/home/presentation/views/home_view.dart';
 import 'package:fruithub/feature/home/presentation/views/product_view.dart';
 import 'package:fruithub/feature/home/presentation/views/widgets/custom_bottom_navigation_bar.dart';
 
-import 'cart_shopping_view.dart';
+import 'cart_view.dart';
 
 class MainView extends StatefulWidget {
   static const String routeName = 'main_view';
@@ -17,11 +17,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   int _currentViewIndex = 0;
 
-  final List<Widget> _views = const [
-    HomeView(),
-    ProductView(),
-    CartShoppingView(),
-  ];
+  final List<Widget> _views = const [HomeView(), ProductView(), CartView()];
 
   @override
   Widget build(BuildContext context) {
