@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruithub/core/utils/app_colors.dart';
+import 'package:fruithub/feature/home/domain/entities/cart_item_entity.dart';
+import 'package:fruithub/feature/home/presentation/views/widgets/cart_item_action_buttons.dart';
 
 import '../../../../../core/common/custom_network_image.dart';
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key});
+  const CartItem({super.key, required this.cartItemEntity});
+
+  final CartItemEntity cartItemEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +33,33 @@ class CartItem extends StatelessWidget {
           const SizedBox(width: 17),
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      const Text("بطيخ", style: AppTextStyles.bold13),
-                      const Spacer(),
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.asset(Assets.svgTrash),
-                      ),
-                    ],
+                Row(
+                  children: [
+                    const Text("بطيخ", style: AppTextStyles.bold13),
+                    const Spacer(),
+                    GestureDetector(child: SvgPicture.asset(Assets.svgTrash)),
+                  ],
+                ),
+                Text(
+                  "3 كم",
+                  style: AppTextStyles.regular13.copyWith(
+                    color: AppColors.secondaryColor,
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const CartItemActionButtons(),
+                    Text(
+                      "60 جنيه ",
+                      style: AppTextStyles.bold16.copyWith(
+                        color: AppColors.secondaryColor,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -48,7 +48,10 @@ class PageViewItem extends StatelessWidget {
                     ).pushReplacementNamed(SignInView.routeName);
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 40, right: 24),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 40,
+                      horizontal: 24,
+                    ),
                     child: Text(
                       'تخط',
                       style: AppTextStyles.regular13.copyWith(

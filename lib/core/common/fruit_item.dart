@@ -32,7 +32,7 @@ class FruitItem extends StatelessWidget {
                   : CustomNetworkImage(imageUrl: product.imageUrl!),
               const SizedBox(height: 24),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -62,7 +62,6 @@ class FruitItem extends StatelessWidget {
                     const Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        SizedBox(height: 12),
                         CircleAvatar(
                           radius: 18,
                           backgroundColor: AppColors.primaryColor,

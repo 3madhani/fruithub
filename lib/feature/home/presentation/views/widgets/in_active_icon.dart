@@ -9,11 +9,15 @@ class InActiveIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      inactiveIconPath,
-      height: 20,
-      width: 20,
-      color: AppColors.primaryColor,
+    return Container(
+      padding: const EdgeInsets.all(6),
+      color: Colors.transparent,
+      child: SvgPicture.asset(
+        inactiveIconPath,
+        height: 20,
+        width: 20,
+        color: AppColors.primaryColor,
+      ),
     );
   }
 }

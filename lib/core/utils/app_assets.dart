@@ -1,14 +1,13 @@
 // ignore_for_file: prefer_single_quotes
 class Assets {
-  Assets._();
-  
   /// Assets for imagesProfileImage
   /// assets/images/profile_image.png
   static const String imagesProfileImage = "assets/images/profile_image.png";
 
   /// Assets for imagesStrawberryTest
   /// assets/images/Strawberry_test.png
-  static const String imagesStrawberryTest = "assets/images/Strawberry_test.png";
+  static const String imagesStrawberryTest =
+      "assets/images/Strawberry_test.png";
 
   /// Assets for svgActiveHome
   /// assets/svg/active-home.svg
@@ -20,7 +19,8 @@ class Assets {
 
   /// Assets for svgActiveShoppingCart
   /// assets/svg/active-shopping-cart.svg
-  static const String svgActiveShoppingCart = "assets/svg/active-shopping-cart.svg";
+  static const String svgActiveShoppingCart =
+      "assets/svg/active-shopping-cart.svg";
 
   /// Assets for svgActiveUser
   /// assets/svg/active_user.svg
@@ -32,7 +32,8 @@ class Assets {
 
   /// Assets for svgArrowSwapHorizontal
   /// assets/svg/arrow-swap-horizontal.svg
-  static const String svgArrowSwapHorizontal = "assets/svg/arrow-swap-horizontal.svg";
+  static const String svgArrowSwapHorizontal =
+      "assets/svg/arrow-swap-horizontal.svg";
 
   /// Assets for svgBackground1
   /// assets/svg/background_1.svg
@@ -52,7 +53,8 @@ class Assets {
 
   /// Assets for svgFeaturedItemBackground
   /// assets/svg/featured_item_background.svg
-  static const String svgFeaturedItemBackground = "assets/svg/featured_item_background.svg";
+  static const String svgFeaturedItemBackground =
+      "assets/svg/featured_item_background.svg";
 
   /// Assets for svgFilter
   /// assets/svg/filter.svg
@@ -80,7 +82,8 @@ class Assets {
 
   /// Assets for svgInactiveShoppingCart
   /// assets/svg/inactive-shopping-cart.svg
-  static const String svgInactiveShoppingCart = "assets/svg/inactive-shopping-cart.svg";
+  static const String svgInactiveShoppingCart =
+      "assets/svg/inactive-shopping-cart.svg";
 
   /// Assets for svgInactiveUser
   /// assets/svg/inactive-user.svg
@@ -109,5 +112,7 @@ class Assets {
   /// Assets for svgTrash
   /// assets/svg/trash.svg
   static const String svgTrash = "assets/svg/trash.svg";
-}
 
+// This class is not meant to be instantiated or extended; it is a utility class.
+  Assets._();
+}
