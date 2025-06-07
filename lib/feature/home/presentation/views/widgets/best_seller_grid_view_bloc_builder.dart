@@ -7,8 +7,8 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../../core/cubits/products_cubit/products_cubit.dart';
 import 'best_seller_grid_view.dart';
 
-class BestSellerGridViewBlocBuilder extends StatelessWidget {
-  const BestSellerGridViewBlocBuilder({super.key});
+class ProductsGridViewBlocBuilder extends StatelessWidget {
+  const ProductsGridViewBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {

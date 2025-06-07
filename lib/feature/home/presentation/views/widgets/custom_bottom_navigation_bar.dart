@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/bottom_navigation_bar_entity.dart';
 import 'navigation_bar_icon.dart';
 
-class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key});
+class CustomBottomNavigationBar extends StatelessWidget {
+  final int activeIndex;
+  final ValueChanged<int> onTap;
 
-  @override
-  State<CustomBottomNavigationBar> createState() =>
-      _CustomBottomNavigationBarState();
-}
-
-class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  int activeIndex = 0;
+  const CustomBottomNavigationBar({
+    super.key,
+    required this.activeIndex,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                   (e) => Expanded(
                     flex: activeIndex == e.key ? 3 : 2,
                     child: GestureDetector(
-                      onTap: () => setState(() => activeIndex = e.key),
+                      onTap: () => onTap(e.key),
                       child: NavigationBarIcon(
                         isActive: activeIndex == e.key,
                         bottomNavigationBarEntity: e.value,
