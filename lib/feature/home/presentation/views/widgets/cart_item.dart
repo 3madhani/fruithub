@@ -28,18 +28,18 @@ class CartItem extends StatelessWidget {
           const SizedBox(width: 17),
           Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("بطيخ", style: AppTextStyles.bold13),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: SvgPicture.asset(Assets.svgTrash),
-                    ),
-                  ],
+                Expanded(
+                  child: Row(
+                    children: [
+                      const Text("بطيخ", style: AppTextStyles.bold13),
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(Assets.svgTrash),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
