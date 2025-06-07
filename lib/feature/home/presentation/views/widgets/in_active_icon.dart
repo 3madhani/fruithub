@@ -11,8 +11,8 @@ class InActiveIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       inactiveIconPath,
-      height: 18,
-      width: 18,
+      height: 20,
+      width: 20,
       color: AppColors.primaryColor,
     );
   }
