@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruithub/core/common/custom_button.dart';
 import 'package:fruithub/feature/home/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:fruithub/feature/home/presentation/views/widgets/cart_header.dart';
 import 'package:fruithub/feature/home/presentation/views/widgets/cart_items_list.dart';
@@ -8,6 +7,7 @@ import 'package:fruithub/feature/home/presentation/views/widgets/custom_divider.
 
 import '../../../../../core/common/custom_app_bar.dart';
 import '../../../../../core/constants/app_const.dart';
+import 'cutom_cart_button.dart';
 
 class CartViewBody extends StatelessWidget {
   const CartViewBody({super.key});
@@ -41,7 +41,7 @@ class CartViewBody extends StatelessWidget {
                       : const CustomDivider(),
             ),
             CartItemsList(
-              cartItems: context.read<CartCubit>().cartEntity.cartItems,
+              cartItems: context.watch<CartCubit>().cartEntity.cartItems,
             ),
             SliverToBoxAdapter(
               child:
@@ -55,13 +55,7 @@ class CartViewBody extends StatelessWidget {
           bottom: MediaQuery.of(context).size.height * 0.07,
           left: 16,
           right: 16,
-          child: CustomPrimaryButton(
-            title:
-                "الدفع  ${context.watch<CartCubit>().cartEntity.totalPrice} جنيه",
-            onPressed: () {
-              // Add your payment logic here
-            },
-          ),
+          child: const CustomCartButton(),
         ),
       ],
     );
