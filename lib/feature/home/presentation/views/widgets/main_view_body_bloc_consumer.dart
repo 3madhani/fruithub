@@ -16,12 +16,12 @@ class MainViewBodyBlocConsumer extends StatelessWidget {
         if (state is CartProductAdded) {
           BuildSnackBar.buildSuccessSnackBar(
             context,
-            'المنتج أضيف إلى السلة بنجاح!',
+            'تم إضافة المنتج إلى السلة بنجاح!',
           );
-        } else {
-          BuildSnackBar.buildErrorSnackBar(
+        } else if (state is CartItemRemoved) {
+          BuildSnackBar.buildSuccessSnackBar(
             context,
-            'حدث خطأ أثناء إضافة المنتج إلى السلة.',
+            'تم حذف المنتج من السلة بنجاح!',
           );
         }
       },

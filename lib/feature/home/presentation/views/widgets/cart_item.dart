@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruithub/core/common/build_snack_bar.dart';
 import 'package:fruithub/core/utils/app_colors.dart';
 import 'package:fruithub/feature/home/domain/entities/cart_item_entity.dart';
 import 'package:fruithub/feature/home/presentation/views/widgets/cart_item_action_buttons.dart';
@@ -7,6 +9,7 @@ import 'package:fruithub/feature/home/presentation/views/widgets/cart_item_actio
 import '../../../../../core/common/custom_network_image.dart';
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_text_styles.dart';
+import '../../cubits/cart_cubit/cart_cubit.dart';
 
 class CartItem extends StatelessWidget {
   final CartItemEntity cartItemEntity;
@@ -45,7 +48,15 @@ class CartItem extends StatelessWidget {
                       style: AppTextStyles.bold13,
                     ),
                     const Spacer(),
-                    GestureDetector(child: SvgPicture.asset(Assets.svgTrash)),
+                    GestureDetector(
+                      onTap: () {
+                        context.read<CartCubit>().removeCartItem(
+                          cartItemEntity,
+                        );
+                        
+                      },
+                      child: SvgPicture.asset(Assets.svgTrash),
+                    ),
                   ],
                 ),
                 Text(
