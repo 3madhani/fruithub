@@ -7,7 +7,7 @@ class CartEntity {
 
   CartEntity({required this.cartItems});
 
-  addCartItem(CartItemEntity cartItemEntity) {
+  addCartItem({ required CartItemEntity cartItemEntity}) {
     cartItems.add(cartItemEntity);
   }
 
@@ -20,6 +20,14 @@ class CartEntity {
     return false;
   }
 
+  CartItemEntity? getCartItem(ProductEntity productEntity) {
+    for (var cartItem in cartItems) {
+      if (productEntity == cartItem.productEntity) {
+        return cartItem;
+      }
+    }
+    return CartItemEntity(productEntity: productEntity, count: 1);
+  }
   increaseCount(ProductEntity productEntity) {
     for (var cartItem in cartItems) {
       if (productEntity == cartItem.productEntity) {

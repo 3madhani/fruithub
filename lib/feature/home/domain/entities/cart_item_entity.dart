@@ -11,6 +11,7 @@ class CartItemEntity {
   num get totalWeight => productEntity.unitAmount * count;
 
   increaseCount() {
+    
     count++;
   }
 

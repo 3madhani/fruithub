@@ -3,34 +3,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruithub/core/entities/product_entity.dart';
 
 import '../../../domain/entities/cart_entity.dart';
-import '../../../domain/entities/cart_item_entity.dart';
 
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartEntity cartEntity = CartEntity(cartItems: []);
 
-  CartCubit() : super(CartCubitInitial());
+  CartCubit() : super(CarttInitial());
 
   void addProduct(ProductEntity productEntity) {
     // check if the product is already in the cart
     bool isProductExist = cartEntity.isExist(productEntity);
 
+    var cartItem = cartEntity.getCartItem(productEntity);
+
     if (isProductExist) {
       // if the product is already in the cart, increase the count
-      cartEntity.increaseCount(productEntity);
+      cartItem!.increaseCount();
     } else {
-      CartItemEntity cartItemEntity = CartItemEntity(
-        productEntity: productEntity,
-        count: 1,
-      );
-      cartEntity.addCartItem(cartItemEntity);
+      cartEntity.addCartItem(cartItemEntity: cartItem!);
     }
 
-    emit(CartCubitAdd());
+    emit(CartProductAdded());
   }
 
   void removeItem() {
-    emit(CartCubitRemove());
+    emit(CartProductRemoveed());
   }
 }
