@@ -18,15 +18,11 @@ class MainViewBodyBlocConsumer extends StatelessWidget {
             context,
             'المنتج أضيف إلى السلة بنجاح!',
           );
-        } else if (state is CartProductRemoveed) {
+        } else {
           BuildSnackBar.buildErrorSnackBar(
             context,
-            'المنتج تمت إزالته من السلة بنجاح!',
+            'حدث خطأ أثناء إضافة المنتج إلى السلة.',
           );
-        } else if (state is CarttInitial) {
-          // Initial state, do nothing
-        } else {
-          BuildSnackBar.buildErrorSnackBar(context, 'An error occurred!');
         }
       },
       child: MainViewBody(currentViewIndex: currentViewIndex),

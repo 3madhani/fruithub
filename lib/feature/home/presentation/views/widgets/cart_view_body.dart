@@ -40,7 +40,9 @@ class CartViewBody extends StatelessWidget {
                       ? const SizedBox.shrink()
                       : const CustomDivider(),
             ),
-            const CartItemsList(cartItems: []),
+            CartItemsList(
+              cartItems: context.read<CartCubit>().cartEntity.cartItems,
+            ),
             SliverToBoxAdapter(
               child:
                   context.read<CartCubit>().cartEntity.cartItems.isEmpty
@@ -54,7 +56,8 @@ class CartViewBody extends StatelessWidget {
           left: 16,
           right: 16,
           child: CustomPrimaryButton(
-            title: "الدفع  120جنيه",
+            title:
+                "الدفع  ${context.watch<CartCubit>().cartEntity.totalPrice} جنيه",
             onPressed: () {
               // Add your payment logic here
             },

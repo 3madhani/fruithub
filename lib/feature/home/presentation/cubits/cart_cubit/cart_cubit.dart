@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruithub/core/entities/product_entity.dart';
 
 import '../../../domain/entities/cart_entity.dart';
+import '../../../domain/entities/cart_item_entity.dart';
 
 part 'cart_state.dart';
 
@@ -27,7 +28,11 @@ class CartCubit extends Cubit<CartState> {
     emit(CartProductAdded());
   }
 
-  void removeItem() {
-    emit(CartProductRemoveed());
+
+  void removeCartItem(
+    CartItemEntity cartItemEntity,
+  ) {
+    cartEntity.removeCartItem(cartItemEntity: cartItemEntity);();
+    emit(CartItemRemoved());
   }
 }

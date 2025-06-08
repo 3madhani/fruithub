@@ -7,17 +7,20 @@ class CartEntity {
 
   CartEntity({required this.cartItems});
 
-  addCartItem({ required CartItemEntity cartItemEntity}) {
+  double get totalPrice {
+    double total = 0.0;
+    for (var cartItem in cartItems) {
+      total += cartItem.totalPrice;
+    }
+    return total;
+  }
+
+  addCartItem({required CartItemEntity cartItemEntity}) {
     cartItems.add(cartItemEntity);
   }
 
-  bool isExist(ProductEntity productEntity) {
-    for (var cartItem in cartItems) {
-      if (productEntity == cartItem.productEntity) {
-        return true;
-      }
-    }
-    return false;
+  removeCartItem({required CartItemEntity cartItemEntity}) {
+    cartItems.remove(cartItemEntity);
   }
 
   CartItemEntity? getCartItem(ProductEntity productEntity) {
@@ -28,11 +31,13 @@ class CartEntity {
     }
     return CartItemEntity(productEntity: productEntity, count: 1);
   }
-  increaseCount(ProductEntity productEntity) {
+
+  bool isExist(ProductEntity productEntity) {
     for (var cartItem in cartItems) {
       if (productEntity == cartItem.productEntity) {
-        cartItem.count++;
+        return true;
       }
     }
+    return false;
   }
 }
