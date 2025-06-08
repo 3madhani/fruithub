@@ -18,7 +18,8 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.isPasswordField = false,
     this.onSaved,
-    this.isSignInField = false, required this.controller,
+    this.isSignInField = false,
+    required this.controller,
   });
 
   @override
@@ -35,8 +36,10 @@ class CustomTextFormField extends StatelessWidget {
             if (value.isEmpty) {
               return 'الرجاء إدخال $hintText';
             }
-          } else if (!DetectEmailAndPassword.isValidPassword(value)) {
-            return 'كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل، بما في ذلك حرف كبير ورقم ورمز خاص';
+          } else {
+            if (!DetectEmailAndPassword.isValidPassword(value)) {
+              return 'كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل، بما في ذلك حرف كبير ورقم ورمز خاص';
+            }
           }
         } else if (keyboardType == TextInputType.emailAddress) {
           if (!DetectEmailAndPassword.isValidEmail(value)) {
@@ -51,6 +54,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: isPasswordField,
       style: AppTextStyles.semiBold16.copyWith(color: const Color(0xff1F2326)),
       decoration: InputDecoration(
+        errorMaxLines: 2,
         suffixIcon: suffixIcon,
         hintText: hintText,
         hintStyle: AppTextStyles.bold13.copyWith(
