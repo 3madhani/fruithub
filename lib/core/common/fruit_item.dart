@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruithub/feature/home/presentation/cubits/cart_cubit/cart_cubit.dart';
 
 import '../entities/product_entity.dart';
 import '../utils/app_colors.dart';
@@ -59,13 +61,19 @@ class FruitItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Column(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        CircleAvatar(
-                          radius: 18,
-                          backgroundColor: AppColors.primaryColor,
-                          child: Icon(Icons.add, color: Colors.white),
+                        GestureDetector(
+                          onTap: () {
+                            // Handle add to cart action
+                            context.read<CartCubit>().addProduct(product);
+                          },
+                          child: const CircleAvatar(
+                            radius: 18,
+                            backgroundColor: AppColors.primaryColor,
+                            child: Icon(Icons.add, color: Colors.white),
+                          ),
                         ),
                       ],
                     ),

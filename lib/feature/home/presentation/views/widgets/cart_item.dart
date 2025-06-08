@@ -9,9 +9,9 @@ import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key, required this.cartItemEntity});
-
   final CartItemEntity cartItemEntity;
+
+  const CartItem({super.key, required this.cartItemEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,9 @@ class CartItem extends StatelessWidget {
             width: containerWidth,
             height: containerHeight,
             decoration: const BoxDecoration(color: Color(0xffF3F5F7)),
-            child: const CustomNetworkImage(imageUrl: ''),
+            child: CustomNetworkImage(
+              imageUrl: cartItemEntity.productEntity.imageUrl!,
+            ),
           ),
           const SizedBox(width: 17),
           Expanded(
@@ -38,13 +40,16 @@ class CartItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text("بطيخ", style: AppTextStyles.bold13),
+                    Text(
+                      cartItemEntity.productEntity.title,
+                      style: AppTextStyles.bold13,
+                    ),
                     const Spacer(),
                     GestureDetector(child: SvgPicture.asset(Assets.svgTrash)),
                   ],
                 ),
                 Text(
-                  "3 كم",
+                  "${cartItemEntity.totalWeight} كم",
                   style: AppTextStyles.regular13.copyWith(
                     color: AppColors.secondaryColor,
                   ),
@@ -54,7 +59,7 @@ class CartItem extends StatelessWidget {
                   children: [
                     const CartItemActionButtons(),
                     Text(
-                      "60 جنيه ",
+                      "${cartItemEntity.totalPrice} جنيه ",
                       style: AppTextStyles.bold16.copyWith(
                         color: AppColors.secondaryColor,
                       ),

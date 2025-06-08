@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../cubits/cart_cubit/cart_cubit.dart';
 import 'cart_view.dart';
 import 'home_view.dart';
 import 'products_view.dart';
@@ -21,13 +23,16 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: IndexedStack(index: _currentViewIndex, children: _views),
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        activeIndex: _currentViewIndex,
-        onTap: _onNavBarTap,
+    return BlocProvider(
+      create: (context) => CartCubit(),
+      child: Scaffold(
+        body: SafeArea(
+          child: IndexedStack(index: _currentViewIndex, children: _views),
+        ),
+        bottomNavigationBar: CustomBottomNavigationBar(
+          activeIndex: _currentViewIndex,
+          onTap: _onNavBarTap,
+        ),
       ),
     );
   }
