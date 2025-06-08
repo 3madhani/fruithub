@@ -19,17 +19,13 @@ class CartEntity {
     cartItems.add(cartItemEntity);
   }
 
-  removeCartItem({required CartItemEntity cartItemEntity}) {
-    cartItems.remove(cartItemEntity);
-  }
-
   CartItemEntity? getCartItem(ProductEntity productEntity) {
     for (var cartItem in cartItems) {
       if (productEntity == cartItem.productEntity) {
         return cartItem;
       }
     }
-    return CartItemEntity(productEntity: productEntity, count: 1);
+    return CartItemEntity(productEntity: productEntity, quantity: 1);
   }
 
   bool isExist(ProductEntity productEntity) {
@@ -39,5 +35,9 @@ class CartEntity {
       }
     }
     return false;
+  }
+
+  removeCartItem({required CartItemEntity cartItemEntity}) {
+    cartItems.remove(cartItemEntity);
   }
 }

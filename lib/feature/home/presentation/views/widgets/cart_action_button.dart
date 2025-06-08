@@ -14,15 +14,18 @@ class CartActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 24,
-      height: 24,
-      padding: const EdgeInsets.all(2),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(100),
+    return InkResponse(
+      onTap: onPressed,
+      child: Container(
+        width: 24,
+        height: 24,
+        padding: const EdgeInsets.all(2),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: FittedBox(child: Icon(icon, color: iconColor)),
       ),
-      child: FittedBox(child: Icon(icon, color: iconColor)),
     );
   }
 }

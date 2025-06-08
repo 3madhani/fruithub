@@ -20,7 +20,7 @@ class CartCubit extends Cubit<CartState> {
 
     if (isProductExist) {
       // if the product is already in the cart, increase the count
-      cartItem!.increaseCount();
+      cartItem!.increaseQuantity();
     } else {
       cartEntity.addCartItem(cartItemEntity: cartItem!);
     }
