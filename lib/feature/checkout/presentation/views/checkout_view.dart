@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/common/custom_app_bar.dart';
 import 'widgets/checkout_view_body.dart';
 
 class CheckoutView extends StatelessWidget {
+  static const String routeName = 'checkout_view';
+
   const CheckoutView({super.key});
 
-  static const String routeName = 'checkout_view';
-  
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: CheckoutViewBody());
+    return Scaffold(
+      appBar: buildAppBar(context: context, title: 'الشحن'),
+      body: const CheckoutViewBody(),
+    );
   }
 }

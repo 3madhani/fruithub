@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/constants/app_const.dart';
+import 'active_step_item.dart';
+
 class CheckoutViewBody extends StatelessWidget {
   const CheckoutViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppConst.horizontalPadding),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(height: AppConst.verticalPadding),
+          ActiveStepItem(),
+        ],
+      ),
+    );
   }
 }
