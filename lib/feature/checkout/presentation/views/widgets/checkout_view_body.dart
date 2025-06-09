@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fruithub/feature/checkout/presentation/views/widgets/inactive_step_item.dart';
 
 import '../../../../../core/constants/app_const.dart';
-import 'active_step_item.dart';
 
 class CheckoutViewBody extends StatelessWidget {
   const CheckoutViewBody({super.key});
@@ -14,7 +14,7 @@ class CheckoutViewBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(height: AppConst.verticalPadding),
-          ActiveStepItem(),
+          InactiveStepItem(),
         ],
       ),
     );
