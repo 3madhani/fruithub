@@ -32,9 +32,13 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             title: "التالي",
             onPressed: () {
               // Handle next button action
+              pageController.nextPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              );
             },
           ),
-          const SizedBox(height: 200),
+          const SizedBox(height: 120),
         ],
       ),
     );
@@ -52,5 +56,3 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
     super.initState();
   }
 }
-
-
