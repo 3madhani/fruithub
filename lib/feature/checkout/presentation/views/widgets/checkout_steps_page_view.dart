@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_const.dart';
 import 'address_input_section.dart';
+import 'payment_section.dart';
 import 'shipping_section.dart';
 
 class CheckoutStepsPageView extends StatelessWidget {
@@ -12,8 +13,7 @@ class CheckoutStepsPageView extends StatelessWidget {
   List<Widget> get pages => const [
     ShippingSection(),
     AddressInputSection(),
-    SizedBox(),
-    SizedBox(),
+    PaymentSection(),
   ];
 
   @override
