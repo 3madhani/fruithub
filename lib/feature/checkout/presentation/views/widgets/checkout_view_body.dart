@@ -1,23 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:fruithub/core/common/custom_button.dart';
 
 import '../../../../../core/constants/app_const.dart';
 import 'checkout_steps.dart';
+import 'checkout_steps_page_view.dart';
 
-class CheckoutViewBody extends StatelessWidget {
+class CheckoutViewBody extends StatefulWidget {
   const CheckoutViewBody({super.key});
 
   @override
+  State<CheckoutViewBody> createState() => _CheckoutViewBodyState();
+}
+
+class _CheckoutViewBodyState extends State<CheckoutViewBody> {
+  late PageController pageController;
+
+  @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppConst.horizontalPadding),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: AppConst.verticalPadding),
-          CheckoutSteps(),
-          SizedBox(height: AppConst.verticalPadding),
+          const SizedBox(height: AppConst.verticalPadding),
+          const CheckoutSteps(),
+          const SizedBox(height: AppConst.verticalPadding),
+          Expanded(
+            child: CheckoutStepsPageView(pageController: pageController),
+          ),
+          CustomPrimaryButton(
+            title: "التالي",
+            onPressed: () {
+              // Handle next button action
+            },
+          ),
+          const SizedBox(height: 200),
         ],
       ),
     );
   }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    pageController = PageController();
+    super.initState();
+  }
 }
+
+
