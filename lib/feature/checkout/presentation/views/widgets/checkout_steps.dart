@@ -4,7 +4,9 @@ import 'package:fruithub/feature/checkout/presentation/views/widgets/step_item.d
 List<String> get steps => ['الشحن', 'العنوان', 'الدفع'];
 
 class CheckoutSteps extends StatelessWidget {
-  const CheckoutSteps({super.key});
+  final int currentStep;
+
+  const CheckoutSteps({super.key, required this.currentStep});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,11 @@ class CheckoutSteps extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: List.generate(
         steps.length,
-        (index) => StepItem(stepName: steps[index], stepNumber: index + 1),
+        (index) => StepItem(
+          isActive: index <= currentStep,
+          stepName: steps[index],
+          stepNumber: index + 1,
+        ),
       ),
     );
   }

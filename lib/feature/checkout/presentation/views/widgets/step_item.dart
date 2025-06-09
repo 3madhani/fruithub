@@ -7,7 +7,14 @@ class StepItem extends StatelessWidget {
 
   final int stepNumber;
 
-  const StepItem({super.key, required this.stepName, required this.stepNumber});
+  final bool isActive;
+
+  const StepItem({
+    super.key,
+    required this.stepName,
+    required this.stepNumber,
+    required this.isActive,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +22,7 @@ class StepItem extends StatelessWidget {
       firstChild: InactiveStepItem(stepName: stepName, stepNumber: stepNumber),
       secondChild: ActiveStepItem(stepName: stepName),
       crossFadeState:
-          stepNumber == 0
-              ? CrossFadeState.showSecond
-              : CrossFadeState.showFirst,
+          isActive ? CrossFadeState.showSecond : CrossFadeState.showFirst,
       duration: const Duration(milliseconds: 300),
     );
   }

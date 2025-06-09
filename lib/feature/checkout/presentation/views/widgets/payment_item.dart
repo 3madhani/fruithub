@@ -13,6 +13,7 @@ class PaymentItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: AppTextStyles.bold13),
+        const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
           decoration: AppDecoration.greyBoxDecoration,

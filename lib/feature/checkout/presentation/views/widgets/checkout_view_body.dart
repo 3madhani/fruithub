@@ -15,6 +15,8 @@ class CheckoutViewBody extends StatefulWidget {
 class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   late PageController pageController;
 
+  int currentStep = 0;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +25,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: AppConst.verticalPadding),
-          const CheckoutSteps(),
+          CheckoutSteps(currentStep: currentStep),
           const SizedBox(height: AppConst.verticalPadding),
           Expanded(
             child: CheckoutStepsPageView(pageController: pageController),
@@ -33,7 +35,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             onPressed: () {
               // Handle next button action
               pageController.animateToPage(
-                pageController.page!.toInt() + 1,
+                2,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
               );
@@ -54,6 +56,11 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   @override
   void initState() {
     pageController = PageController();
+    pageController.addListener(() {
+      setState(() {
+        currentStep = pageController.page!.toInt();
+      });
+    });
     super.initState();
   }
 }
