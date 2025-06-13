@@ -12,7 +12,7 @@ List<ProductEntity> getDummyProducts() {
     isOrganic: true,
     numberOfCalories: 95,
     unitAmount: 6,
-    reviews: [],
+    reviews: const [],
   );
 
   // return list of products

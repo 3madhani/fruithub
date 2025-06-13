@@ -5,8 +5,13 @@ List<String> get steps => ['الشحن', 'العنوان', 'الدفع'];
 
 class CheckoutSteps extends StatelessWidget {
   final int currentStep;
+  final PageController pageController;
 
-  const CheckoutSteps({super.key, required this.currentStep});
+  const CheckoutSteps({
+    super.key,
+    required this.currentStep,
+    required this.pageController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +19,21 @@ class CheckoutSteps extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: List.generate(
         steps.length,
-        (index) => StepItem(
-          isActive: index <= currentStep,
-          stepName: steps[index],
-          stepNumber: index + 1,
+        (index) => Expanded(
+          child: GestureDetector(
+            onTap: () {
+              pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              );
+            },
+            child: StepItem(
+              isActive: index <= currentStep,
+              stepName: steps[index],
+              stepNumber: index + 1,
+            ),
+          ),
         ),
       ),
     );

@@ -27,7 +27,7 @@ class _ShippingSectionState extends State<ShippingSection> {
           shippingCost: "40",
           deliveryMethod: "التسليم من المكان",
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
         ShippingItem(
           onTap: () {
             setState(() {

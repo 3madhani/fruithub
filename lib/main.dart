@@ -20,7 +20,8 @@ void main() async {
   await Prefs.init();
   // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // Initialize GetIt
+  // Initialize GetIt*-
+  
   setupGetIt();
   runApp(const FruitHub());
 }

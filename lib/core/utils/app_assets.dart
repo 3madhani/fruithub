@@ -62,6 +62,10 @@ class Assets {
   /// assets/svg/google_Icons.svg
   static const String svgGoogleIcons = "assets/svg/google_Icons.svg";
 
+  /// Assets for svgHeart
+  /// assets/svg/heart.svg
+  static const String svgHeart = "assets/svg/heart.svg";
+
   /// Assets for svgImage1
   /// assets/svg/image_1.svg
   static const String svgImage1 = "assets/svg/image_1.svg";
@@ -97,6 +101,10 @@ class Assets {
   /// Assets for svgNotification
   /// assets/svg/notification.svg
   static const String svgNotification = "assets/svg/notification.svg";
+
+  /// Assets for svgOutlineHeart
+  /// assets/svg/outline_heart.svg
+  static const String svgOutlineHeart = "assets/svg/outline_heart.svg";
 
   /// Assets for svgPlant
   /// assets/svg/plant.svg

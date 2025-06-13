@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:fruithub/core/utils/app_assets.dart';
 import 'package:fruithub/feature/home/presentation/cubits/cart_cubit/cart_cubit.dart';
 
 import '../entities/product_entity.dart';
@@ -83,12 +85,9 @@ class FruitItem extends StatelessWidget {
             ],
           ),
           Positioned(
-            top: 4,
-            right: 6,
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.favorite_border),
-            ),
+            top: 8,
+            right: 8,
+            child: SvgPicture.asset(Assets.svgHeart),
           ),
         ],
       ),

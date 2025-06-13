@@ -25,17 +25,20 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: AppConst.verticalPadding),
-          CheckoutSteps(currentStep: currentStep),
+          CheckoutSteps(
+            pageController: pageController,
+            currentStep: currentStep,
+          ),
           const SizedBox(height: AppConst.verticalPadding),
           Expanded(
             child: CheckoutStepsPageView(pageController: pageController),
           ),
           CustomPrimaryButton(
-            title: "التالي",
+            title: getNextButtonText(currentStep),
             onPressed: () {
               // Handle next button action
               pageController.animateToPage(
-                2,
+                currentStep + 1,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
               );
@@ -51,6 +54,19 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   void dispose() {
     pageController.dispose();
     super.dispose();
+  }
+
+  String getNextButtonText(int currentStep) {
+    switch (currentStep) {
+      case 0:
+        return "التالي";
+      case 1:
+        return "التالي";
+      case 2:
+        return "الدفع بواسطة PayPal";
+      default:
+        return "التالي";
+    }
   }
 
   @override
