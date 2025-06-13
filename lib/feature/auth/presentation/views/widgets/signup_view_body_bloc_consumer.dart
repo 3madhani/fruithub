@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruithub/core/common/build_snack_bar.dart';
+import 'package:fruithub/core/common/show_snack_bar.dart';
 import 'package:fruithub/core/common/custom_progress_hud.dart';
 
 import '../../cubits/signup_cubit/signup_cubit.dart';
@@ -14,9 +14,9 @@ class SignupViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state is SignupFailure) {
-          BuildSnackBar.buildErrorSnackBar(context, state.error);
+          ShowSnackBar.showErrorSnackBar(context, state.error);
         } else if (state is SignupSuccess) {
-          BuildSnackBar.buildSuccessSnackBar(
+          ShowSnackBar.showSuccessSnackBar(
             context,
             '${state.userEntity.name} تم التسجيل بنجاح قم بتسجيل الدخول',
           );

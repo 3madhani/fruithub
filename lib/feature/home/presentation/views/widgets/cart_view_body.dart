@@ -55,14 +55,12 @@ class CartViewBody extends StatelessWidget {
             ),
           ],
         ),
-        context.read<CartCubit>().cartEntity.cartItems.isEmpty
-            ? const SizedBox.shrink()
-            : Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.07,
-              left: 16,
-              right: 16,
-              child: const CustomCartButton(),
-            ),
+        Positioned(
+          bottom: MediaQuery.of(context).size.height * 0.07,
+          left: 16,
+          right: 16,
+          child: const CustomCartButton(),
+        ),
       ],
     );
   }

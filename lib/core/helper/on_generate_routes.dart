@@ -4,6 +4,7 @@ import '../../feature/auth/presentation/views/sign_up_view.dart';
 import '../../feature/auth/presentation/views/signin_view.dart';
 import '../../feature/best_selling_fruits/presentation/views/best_selling_view.dart';
 import '../../feature/checkout/presentation/views/checkout_view.dart';
+import '../../feature/home/domain/entities/cart_item_entity.dart';
 import '../../feature/home/presentation/views/main_view.dart';
 import '../../feature/onboarding/presentation/views/onboarding_view.dart';
 import '../../feature/splash/presentation/views/splash_view.dart';
@@ -23,7 +24,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case BestSellingView.routeName:
       return MaterialPageRoute(builder: (_) => const BestSellingView());
     case CheckoutView.routeName:
-      return MaterialPageRoute(builder: (_) => const CheckoutView());
+      return MaterialPageRoute(
+        builder:
+            (_) => CheckoutView(
+              cartItems: settings.arguments as List<CartItemEntity>,
+            ),
+      );
     default:
       return MaterialPageRoute(
         builder:

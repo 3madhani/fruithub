@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-
 import 'core/helper/on_generate_routes.dart';
 import 'core/services/custom_bloc_observer.dart';
 import 'core/services/get_it_services.dart';
@@ -16,12 +15,14 @@ import 'generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = CustomBlocObserver();
+
   // Initialize shared preferences
   await Prefs.init();
+
   // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   // Initialize GetIt*-
-  
   setupGetIt();
   runApp(const FruitHub());
 }

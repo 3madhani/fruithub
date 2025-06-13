@@ -6,6 +6,7 @@ import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../../domain/entities/cart_item_entity.dart';
+import '../../cubits/cart_cubit/cart_cubit.dart';
 import 'cart_action_button.dart';
 
 class CartItemActionButtons extends StatelessWidget {
@@ -43,6 +44,9 @@ class CartItemActionButtons extends StatelessWidget {
           color: const Color(0xffF3F5F7),
           onPressed: () {
             cartItemEntity.decreaseQuantity();
+            if (cartItemEntity.quantity == 0) {
+              context.read<CartCubit>().removeCartItem(cartItemEntity);
+            }
             context.read<CartItemCubit>().updateCartItem(cartItemEntity);
           }, // Add your onPressed logic here
           iconColor: const Color(0xff979899),
