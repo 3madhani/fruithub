@@ -26,7 +26,11 @@ class CartViewBody extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppConst.horizontalPadding,
                     ),
-                    child: buildAppBar(context: context, title: 'السلة'),
+                    child: buildAppBar(
+                      context: context,
+                      title: 'السلة',
+                      isLeadingVisible: false,
+                    ),
                   ),
                   const SizedBox(height: AppConst.verticalPadding),
                   const CartHeader(),

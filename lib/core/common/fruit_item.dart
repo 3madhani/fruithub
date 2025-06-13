@@ -87,7 +87,17 @@ class FruitItem extends StatelessWidget {
           Positioned(
             top: 8,
             right: 8,
-            child: SvgPicture.asset(Assets.svgHeart),
+            child: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child: SvgPicture.asset(
+                Assets.svgOutlineHeart,
+                height: 30,
+                width: 30,
+              ),
+            ),
           ),
         ],
       ),
