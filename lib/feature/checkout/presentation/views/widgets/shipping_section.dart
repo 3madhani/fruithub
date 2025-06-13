@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruithub/feature/checkout/domain/entities/order_entity.dart';
 
 import 'shipping_item.dart';
 
@@ -13,6 +15,7 @@ class _ShippingSectionState extends State<ShippingSection> {
   int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
+    var orderEntity = context.read<OrderEntity>();
     return Column(
       children: [
         const SizedBox(height: 33),
@@ -20,11 +23,13 @@ class _ShippingSectionState extends State<ShippingSection> {
           onTap: () {
             setState(() {
               selectedIndex = 0;
+              orderEntity.payWithCash = true;
             });
           },
           isSelected: selectedIndex == 0,
           shippingMethod: "الدفع عند الاستلام",
-          shippingCost: "40",
+          shippingCost: (orderEntity.cartEntity.totalPrice + 40)
+              .toStringAsFixed(2),
           deliveryMethod: "التسليم من المكان",
         ),
         const SizedBox(height: 16),
@@ -32,11 +37,12 @@ class _ShippingSectionState extends State<ShippingSection> {
           onTap: () {
             setState(() {
               selectedIndex = 1;
+              orderEntity.payWithCash = false;
             });
           },
           isSelected: selectedIndex == 1,
           shippingMethod: "الدفع اونلاين",
-          shippingCost: "10",
+          shippingCost: orderEntity.cartEntity.totalPrice.toString(),
           deliveryMethod: "يرجي تحديد طريقه الدفع",
         ),
       ],

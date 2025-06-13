@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruithub/core/common/custom_button.dart';
+import 'package:fruithub/feature/checkout/domain/entities/order_entity.dart';
 
+import '../../../../../core/common/show_snack_bar.dart';
 import '../../../../../core/constants/app_const.dart';
 import 'checkout_steps.dart';
 import 'checkout_steps_page_view.dart';
@@ -37,11 +40,18 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             title: getNextButtonText(currentStep),
             onPressed: () {
               // Handle next button action
-              pageController.animateToPage(
-                currentStep + 1,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
+              if (context.read<OrderEntity>().payWithCash == null) {
+                ShowSnackBar.showErrorSnackBar(
+                  context,
+                  'يرجي تحديد طريقه الدفع',
+                );
+              } else {
+                pageController.animateToPage(
+                  currentStep + 1,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                );
+              }
             },
           ),
           const SizedBox(height: 120),

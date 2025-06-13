@@ -6,7 +6,9 @@ class ShowSnackBar {
   static void showErrorSnackBar(BuildContext context, String error) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: const Duration(seconds: 1, milliseconds: 500),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        duration: const Duration(seconds: 1),
         content: Text(
           error,
           style: AppTextStyles.bold14,
@@ -28,7 +30,7 @@ class ShowSnackBar {
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 10,
-        duration: const Duration(seconds: 1, milliseconds: 500),
+        duration: const Duration(seconds: 1),
       ),
     );
   }
