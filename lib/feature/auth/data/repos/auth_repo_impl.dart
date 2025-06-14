@@ -180,7 +180,7 @@ class AuthRepoImpl extends AuthRepo {
   Future<void> verifyEmail() {
     throw UnimplementedError();
   }
-  
+
   @override
   Future saveUserData({required UserEntity userEntity}) async {
     var jsonData = jsonEncode(UserModel.fromEntity(userEntity).toMap());

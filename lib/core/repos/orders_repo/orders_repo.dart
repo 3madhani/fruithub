@@ -5,5 +5,4 @@ import '../../errors/failure.dart';
 
 abstract class OrdersRepo {
   Future<Either<Failure, void>> addOrder({required OrderEntity orderEntity});
-
 }

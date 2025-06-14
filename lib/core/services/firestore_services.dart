@@ -14,7 +14,11 @@ class FireStoreServices implements DatabaseServices {
   }
 
   @override
-  Future<dynamic> getData({required String path, String? documentId, Map<String, dynamic>? queryParameters}) async {
+  Future<dynamic> getData({
+    required String path,
+    String? documentId,
+    Map<String, dynamic>? queryParameters,
+  }) async {
     if (documentId != null) {
       // If documentId is provided, fetch the specific document
       var doc = await firestore.collection(path).doc(documentId).get();
@@ -27,7 +31,10 @@ class FireStoreServices implements DatabaseServices {
         if (queryParameters["orderBy"] != null) {
           var orderBy = queryParameters["orderBy"];
           var descending = queryParameters["descending"] ?? false;
-          querySnapshot = querySnapshot.orderBy(orderBy, descending: descending);
+          querySnapshot = querySnapshot.orderBy(
+            orderBy,
+            descending: descending,
+          );
         }
 
         if (queryParameters["limit"] != null) {

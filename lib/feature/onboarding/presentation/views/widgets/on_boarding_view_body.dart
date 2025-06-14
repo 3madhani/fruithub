@@ -52,7 +52,9 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
                 // Save the onboarding view seen status
                 Prefs.setBool(AppConst.isOnboardingViewSeenKey, true);
                 // Navigate to the next screen
-                Navigator.of(context).pushReplacementNamed(SignInView.routeName);
+                Navigator.of(
+                  context,
+                ).pushReplacementNamed(SignInView.routeName);
               },
             ),
           ),

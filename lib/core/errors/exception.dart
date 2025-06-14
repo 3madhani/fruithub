@@ -3,7 +3,6 @@ class CustomException implements Exception {
 
   CustomException({required this.message});
 
-
   @override
   String toString() => message;
 }

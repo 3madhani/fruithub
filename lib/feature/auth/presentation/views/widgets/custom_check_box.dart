@@ -6,7 +6,11 @@ import '../../../../../core/utils/app_colors.dart';
 
 class CustomCheckBox extends StatelessWidget {
   final bool isChecked;
-  const CustomCheckBox({super.key, required this.isChecked, required this.onChanged});
+  const CustomCheckBox({
+    super.key,
+    required this.isChecked,
+    required this.onChanged,
+  });
   final ValueChanged<bool> onChanged;
 
   @override

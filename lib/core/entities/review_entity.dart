@@ -2,7 +2,7 @@ class ReviewEntity {
   final String name;
   final String image;
   final String date;
-  final String  comment;
+  final String comment;
   final num rating;
 
   ReviewEntity({

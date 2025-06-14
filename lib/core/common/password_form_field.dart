@@ -7,7 +7,12 @@ class PasswordFormField extends StatefulWidget {
   final bool isSignInField;
   final TextEditingController controller;
 
-  const PasswordFormField({super.key, this.onSaved, required this.isSignInField, required this.controller});
+  const PasswordFormField({
+    super.key,
+    this.onSaved,
+    required this.isSignInField,
+    required this.controller,
+  });
 
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();

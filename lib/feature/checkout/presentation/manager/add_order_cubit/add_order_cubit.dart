@@ -13,7 +13,9 @@ class AddOrderCubit extends Cubit<AddOrderState> {
   void addOrder({required OrderEntity orderEntity}) async {
     emit(AddOrderLoading());
     final result = await ordersRepo.addOrder(orderEntity: orderEntity);
-    result.fold((failure) => emit(AddOrderError(message: failure.message)), (r) {
+    result.fold((failure) => emit(AddOrderError(message: failure.message)), (
+      r,
+    ) {
       emit(AddOrderSuccess());
     });
   }

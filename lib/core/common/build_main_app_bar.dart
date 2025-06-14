@@ -5,7 +5,11 @@ import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
 import 'notification_widget.dart';
 
-AppBar buildMainAppBar({required BuildContext context, required String title, bool isLeadingVisible = true}) {
+AppBar buildMainAppBar({
+  required BuildContext context,
+  required String title,
+  bool isLeadingVisible = true,
+}) {
   return AppBar(
     elevation: 0,
     backgroundColor: Colors.transparent,
