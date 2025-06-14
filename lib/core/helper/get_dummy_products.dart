@@ -1,7 +1,7 @@
 import 'package:fruithub/core/entities/product_entity.dart';
 
 List<ProductEntity> getDummyProducts() {
-  final product = ProductEntity(
+  final product = const ProductEntity(
     title: 'Organic Apple',
     description: 'Fresh organic apples from local farms.',
     price: 12.99,
@@ -12,7 +12,7 @@ List<ProductEntity> getDummyProducts() {
     isOrganic: true,
     numberOfCalories: 95,
     unitAmount: 6,
-    reviews: const [],
+    reviews: [],
   );
 
   // return list of products
