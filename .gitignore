@@ -43,3 +43,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+lib\core\utils\app_keys.dart
+
+android\app\google-services.json
+android\app\src\main\res\values\strings.xmls
