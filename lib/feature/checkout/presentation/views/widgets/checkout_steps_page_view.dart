@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_const.dart';
@@ -7,13 +8,22 @@ import 'shipping_section.dart';
 
 class CheckoutStepsPageView extends StatelessWidget {
   final PageController pageController;
+  final GlobalKey<FormState> formKey;
+  final ValueListenable<AutovalidateMode> valueListenable;
 
-  const CheckoutStepsPageView({super.key, required this.pageController});
+  const CheckoutStepsPageView({
+    super.key,
+    required this.pageController,
+    required this.formKey,
+    required this.valueListenable,
+  });
 
-  List<Widget> get pages => const [
-    ShippingSection(),
-    AddressInputSection(),
-    PaymentSection(),
+  List<Widget> get pages => [
+    const ShippingSection(),
+    AddressInputSection(formKey: formKey,
+    valueListenable: valueListenable,
+    ),
+    const PaymentSection(),
   ];
 
   @override
