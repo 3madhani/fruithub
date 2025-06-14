@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
+import 'package:fruithub/core/helper/get_user_entity_function.dart';
 import 'package:fruithub/feature/checkout/domain/entities/order_entity.dart';
 import 'package:fruithub/feature/home/domain/entities/cart_entity.dart';
+import 'package:provider/provider.dart';
+
 import '../../../../core/common/custom_app_bar.dart';
 import '../../domain/entities/shipping_address_entity.dart';
 import 'widgets/checkout_view_body.dart';
@@ -22,15 +23,6 @@ class _CheckoutViewState extends State<CheckoutView> {
   final GlobalKey<CheckoutViewBodyState> checkoutBodyKey = GlobalKey();
 
   @override
-  void initState() {
-    super.initState();
-    _orderEntity = OrderEntity(
-      cartEntity: widget.cartEntity,
-      shippingAddress: ShippingAddressEntity(),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context: context, title: 'الشحن'),
@@ -40,5 +32,14 @@ class _CheckoutViewState extends State<CheckoutView> {
       ),
     );
   }
-}
 
+  @override
+  void initState() {
+    super.initState();
+    _orderEntity = OrderEntity(
+      uId: getUserEntity().uId,
+      cartEntity: widget.cartEntity,
+      shippingAddress: ShippingAddressEntity(),
+    );
+  }
+}
