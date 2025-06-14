@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruithub/feature/checkout/domain/entities/order_entity.dart';
+import 'package:provider/provider.dart';
 
 import 'shipping_item.dart';
 
@@ -33,7 +33,7 @@ class _ShippingSectionState extends State<ShippingSection>
           },
           isSelected: selectedIndex == 0,
           shippingMethod: "الدفع عند الاستلام",
-          shippingCost: (orderEntity.cartEntity.totalPrice + 40)
+          shippingCost: (orderEntity.cartEntity.totalPrice + 30)
               .toStringAsFixed(2),
           deliveryMethod: "التسليم من المكان",
         ),

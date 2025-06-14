@@ -14,4 +14,6 @@ class ShippingAddressEntity {
     this.address,
     this.city,
   });
+
+  String getAddress() => '$address, $floor, $city';
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../core/utils/app_text_styles.dart';
+import '../../../domain/entities/order_entity.dart';
 import 'payment_item.dart';
 
 class OrderSummaryWidget extends StatelessWidget {
@@ -36,7 +38,11 @@ class OrderSummaryWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("150 جنيه", style: AppTextStyles.semiBold16),
+                  Text(
+                    "${context.read<OrderEntity>().cartEntity.totalPrice.toStringAsFixed(2)} جنيه",
+                    style: AppTextStyles.semiBold16,
+                  ),
+                  const SizedBox(height: 8),
                   Text(
                     "30جنية",
                     style: AppTextStyles.semiBold13.copyWith(
@@ -56,12 +62,15 @@ class OrderSummaryWidget extends StatelessWidget {
           ),
           const SizedBox(height: 9),
 
-          const Row(
+          Row(
             children: [
-              Text("الكلي", style: AppTextStyles.bold16),
+              const Text("الكلي", style: AppTextStyles.bold16),
 
-              Spacer(),
-              Text("180 جنيه", style: AppTextStyles.bold16),
+              const Spacer(),
+              Text(
+                "${(context.read<OrderEntity>().cartEntity.totalPrice + 30).toStringAsFixed(2)} جنيه",
+                style: AppTextStyles.bold16,
+              ),
             ],
           ),
         ],
