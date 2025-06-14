@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../core/common/show_snack_bar.dart';
 import '../../../../../core/constants/app_const.dart';
+import '../../manager/add_order_cubit/add_order_cubit.dart';
 import 'checkout_steps.dart';
 import 'checkout_steps_page_view.dart';
 
@@ -52,6 +53,8 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
                 _handleShippingSection(order);
               } else if (currentStep == 1) {
                 _handleAddressSection();
+              } else {
+                _handlePaymentSection();
               }
             },
           ),
@@ -113,6 +116,12 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
     } else {
       valueNotifier.value = AutovalidateMode.always;
     }
+  }
+
+  void _handlePaymentSection() {
+    context.read<AddOrderCubit>().addOrder(
+      orderEntity: context.read<OrderEntity>(),
+    );
   }
 
   void _handleShippingSection(OrderEntity order) {
