@@ -14,4 +14,10 @@ class Amount {
     currency: getCurrency(),
     details: Details.fromOrderEntity(orderEntity),
   );
+
+  Map<String, dynamic> toJson() => {
+    'total': total,
+    'currency': currency,
+    'details': details?.toJson(),
+  };
 }
