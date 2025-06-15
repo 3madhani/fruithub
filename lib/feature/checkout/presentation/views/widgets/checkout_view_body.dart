@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:fruithub/core/common/custom_button.dart';
@@ -134,11 +136,14 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
               transactions: [paypalPaymentEntity.toJson()],
               note: "Contact us for any questions on your order.",
               onSuccess: (Map params) async {
-                print("onSuccess: $params");
+                log("onSuccess: $params");
+                Navigator.pop(context);
+                ShowSnackBar.showSuccessSnackBar(context, "لقد تم الدفع بنجاح");
               },
               onError: (error) {
-                print("onError: $error");
+                log("onError: $error");
                 Navigator.pop(context);
+                ShowSnackBar.showErrorSnackBar(context, "لم تتم عملية الدفع");
               },
               onCancel: () {
                 print('cancelled:');
