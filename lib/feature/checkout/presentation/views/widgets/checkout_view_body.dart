@@ -3,12 +3,14 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:fruithub/core/common/custom_button.dart';
+import 'package:fruithub/core/common/custom_snackbar_over_button.dart';
 import 'package:fruithub/core/utils/app_keys.dart';
 import 'package:fruithub/feature/checkout/domain/entities/order_entity.dart';
 import 'package:fruithub/feature/checkout/domain/entities/paypal_payment_entity/paypal_payment_entity.dart';
+import 'package:fruithub/feature/checkout/presentation/manager/add_order_cubit/add_order_cubit.dart';
+import 'package:fruithub/feature/checkout/presentation/views/widgets/add_order_cubit_bloc_consumer.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/common/show_snack_bar.dart';
 import '../../../../../core/constants/app_const.dart';
 import 'checkout_steps.dart';
 import 'checkout_steps_page_view.dart';
@@ -21,6 +23,8 @@ class CheckoutViewBody extends StatefulWidget {
 }
 
 class CheckoutViewBodyState extends State<CheckoutViewBody> {
+  final GlobalKey _buttonKey = GlobalKey();
+
   late final PageController pageController;
   final ValueNotifier<AutovalidateMode> valueNotifier = ValueNotifier(
     AutovalidateMode.disabled,
@@ -33,37 +37,67 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
   Widget build(BuildContext context) {
     final order = Provider.of<OrderEntity>(context, listen: false);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          const SizedBox(height: AppConst.verticalPadding),
-          CheckoutSteps(
-            pageController: pageController,
-            currentStep: currentStep,
-          ),
-          const SizedBox(height: AppConst.verticalPadding),
-          Expanded(
-            child: CheckoutStepsPageView(
-              valueListenable: valueNotifier,
-              formKey: _formKey,
+    return AddOrderCubitBlocConsumer(
+      buttonKey: _buttonKey,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            const SizedBox(height: AppConst.verticalPadding),
+            CheckoutSteps(
+              onStepTapped: (index) {
+                if (index == 0) {
+                  pageController.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.bounceIn,
+                  );
+                } else if (index == 1) {
+                  if (context.read<OrderEntity>().payWithCash == null) {
+                    showCustomSnackbarOverButton(
+                      context: context,
+                      buttonKey: _buttonKey,
+                      message: 'يرجي تحديد طريقه الدفع',
+                      backgroundColor: Colors.grey,
+                    );
+                  } else {
+                    pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.bounceIn,
+                    );
+                  }
+                } else {
+                  _handleAddressSection();
+                }
+              },
               pageController: pageController,
+              currentStep: currentStep,
             ),
-          ),
-          CustomPrimaryButton(
-            title: getNextButtonText(currentStep),
-            onPressed: () {
-              if (currentStep == 0) {
-                _handleShippingSection(order);
-              } else if (currentStep == 1) {
-                _handleAddressSection();
-              } else {
-                _handlePaymentSection();
-              }
-            },
-          ),
-          const SizedBox(height: 40),
-        ],
+            const SizedBox(height: AppConst.verticalPadding),
+            Expanded(
+              child: CheckoutStepsPageView(
+                valueListenable: valueNotifier,
+                formKey: _formKey,
+                pageController: pageController,
+              ),
+            ),
+            CustomPrimaryButton(
+              key: _buttonKey,
+              title: getNextButtonText(currentStep),
+              onPressed: () {
+                if (currentStep == 0) {
+                  _handleShippingSection(order);
+                } else if (currentStep == 1) {
+                  _handleAddressSection();
+                } else {
+                  _handlePaymentSection();
+                }
+              },
+            ),
+            const SizedBox(height: 40),
+          ],
+        ),
       ),
     );
   }
@@ -114,6 +148,8 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
   }
 
   void _handleAddressSection() {
+    FocusScope.of(context).unfocus(); // 👈 hide the keyboard
+
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       _goToNextPage();
@@ -126,6 +162,8 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
     var orderEntity = context.read<OrderEntity>();
     PaypalPaymentEntity paypalPaymentEntity =
         PaypalPaymentEntity.fromPayPalPaymentEntity(orderEntity);
+    var addOrderCubit = context.read<AddOrderCubit>();
+    log("onSuccess: ${paypalPaymentEntity.toJson()}");
     Navigator.of(context).push(
       MaterialPageRoute(
         builder:
@@ -138,15 +176,27 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
               onSuccess: (Map params) async {
                 log("onSuccess: $params");
                 Navigator.pop(context);
-                ShowSnackBar.showSuccessSnackBar(context, "لقد تم الدفع بنجاح");
+                addOrderCubit.addOrder(orderEntity: orderEntity);
               },
               onError: (error) {
                 log("onError: $error");
                 Navigator.pop(context);
-                ShowSnackBar.showErrorSnackBar(context, "لم تتم عملية الدفع");
+                showCustomSnackbarOverButton(
+                  context: context,
+                  buttonKey: _buttonKey,
+                  message: "فشل عملية الدفع",
+                  backgroundColor: Colors.red,
+                );
               },
               onCancel: () {
-                print('cancelled:');
+                log("onCancel");
+                Navigator.pop(context);
+                showCustomSnackbarOverButton(
+                  context: context,
+                  buttonKey: _buttonKey,
+                  message: "تم الغاء عملية الدفع",
+                  backgroundColor: Colors.grey,
+                );
               },
             ),
       ),
@@ -155,7 +205,12 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
 
   void _handleShippingSection(OrderEntity order) {
     if (order.payWithCash == null) {
-      ShowSnackBar.showErrorSnackBar(context, 'يرجي تحديد طريقه الدفع');
+      showCustomSnackbarOverButton(
+        backgroundColor: Colors.grey,
+        buttonKey: _buttonKey,
+        context: context,
+        message: 'يرجي تحديد طريقه الدفع',
+      );
     } else {
       _goToNextPage();
     }

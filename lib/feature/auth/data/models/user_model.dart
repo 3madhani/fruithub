@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
@@ -22,7 +21,7 @@ class UserModel extends UserEntity {
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       UserModel(uId: json['uId'], name: json['name'], email: json['email']);
 
-  toMap() {
+  Map<String, dynamic> toJson() {
     return {'uId': uId, 'name': name, 'email': email};
   }
 }

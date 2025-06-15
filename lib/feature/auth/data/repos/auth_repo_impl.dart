@@ -3,17 +3,19 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fruithub/core/constants/app_const.dart';
-import 'package:fruithub/core/errors/exception.dart';
-import 'package:fruithub/core/errors/failure.dart';
-import 'package:fruithub/core/services/database_services.dart';
-import 'package:fruithub/core/services/shared_preferences_singleton.dart';
-import 'package:fruithub/core/utils/backend_endpoints.dart';
-import 'package:fruithub/feature/auth/data/models/user_model.dart';
-import 'package:fruithub/feature/auth/domain/entities/user_entity.dart';
 
+import '../../../../core/constants/app_const.dart';
+import '../../../../core/errors/exception.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../core/services/database_services.dart';
 import '../../../../core/services/firebase_auth_service.dart';
+import '../../../../core/services/shared_preferences_singleton.dart';
+import '../../../../core/utils/backend_endpoints.dart';
+import '../../domain/entities/user_entity.dart';
 import '../../domain/repos/auth_repo.dart';
+import '../models/user_model.dart';
+
+// imports as before...
 
 class AuthRepoImpl extends AuthRepo {
   final FirebaseAuthService firebaseAuthService;
@@ -23,11 +25,12 @@ class AuthRepoImpl extends AuthRepo {
     required this.firebaseAuthService,
     required this.databaseServices,
   });
+
   @override
   Future addUserData({required UserEntity userEntity}) async {
     await databaseServices.setData(
       path: BackendEndpoints.addUserData,
-      data: UserModel.fromEntity(userEntity).toMap(),
+      data: UserModel.fromEntity(userEntity).toJson(),
       documentId: userEntity.uId,
     );
   }
@@ -73,6 +76,12 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
+  Future saveUserData({required UserEntity userEntity}) async {
+    var jsonData = jsonEncode(UserModel.fromEntity(userEntity).toJson());
+    await Prefs.setString(AppConst.userData, jsonData);
+  }
+
+  @override
   Future<void> sendPasswordResetEmail({required String email}) {
     throw UnimplementedError();
   }
@@ -82,18 +91,22 @@ class AuthRepoImpl extends AuthRepo {
     User? user;
     try {
       user = await firebaseAuthService.signInWithApple();
-      var userEntity = UserModel.fromFirebaseUser(user);
+
       var isUserExist = await databaseServices.checkIfDocumentExists(
         path: BackendEndpoints.getUserData,
         documentId: user.uid,
       );
+
+      UserEntity userEntity;
       if (isUserExist) {
-        var userEntity = await getUserData(uId: user.uid);
-        await saveUserData(userEntity: userEntity);
+        userEntity = await getUserData(uId: user.uid);
       } else {
+        userEntity = UserModel.fromFirebaseUser(user);
         await addUserData(userEntity: userEntity);
       }
-      return Right(UserModel.fromFirebaseUser(user));
+
+      await saveUserData(userEntity: userEntity);
+      return Right(userEntity);
     } catch (e) {
       await deleteUser(user);
       log("Error in signInWithApple: ${e.toString()}");
@@ -128,17 +141,21 @@ class AuthRepoImpl extends AuthRepo {
     User? user;
     try {
       user = await firebaseAuthService.signInWithFacebook();
-      var userEntity = UserModel.fromFirebaseUser(user);
+
       var isUserExist = await databaseServices.checkIfDocumentExists(
         path: BackendEndpoints.getUserData,
         documentId: user.uid,
       );
+
+      UserEntity userEntity;
       if (isUserExist) {
-        var userEntity = await getUserData(uId: user.uid);
-        await saveUserData(userEntity: userEntity);
+        userEntity = await getUserData(uId: user.uid);
       } else {
+        userEntity = UserModel.fromFirebaseUser(user);
         await addUserData(userEntity: userEntity);
       }
+
+      await saveUserData(userEntity: userEntity);
       return Right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -152,17 +169,21 @@ class AuthRepoImpl extends AuthRepo {
     User? user;
     try {
       user = await firebaseAuthService.signInWithGoogle();
-      var userEntity = UserModel.fromFirebaseUser(user);
+
       var isUserExist = await databaseServices.checkIfDocumentExists(
         path: BackendEndpoints.getUserData,
         documentId: user.uid,
       );
+
+      UserEntity userEntity;
       if (isUserExist) {
-        var userEntity = await getUserData(uId: user.uid);
-        await saveUserData(userEntity: userEntity);
+        userEntity = await getUserData(uId: user.uid);
       } else {
+        userEntity = UserModel.fromFirebaseUser(user);
         await addUserData(userEntity: userEntity);
       }
+
+      await saveUserData(userEntity: userEntity);
       return Right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -179,11 +200,5 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<void> verifyEmail() {
     throw UnimplementedError();
-  }
-
-  @override
-  Future saveUserData({required UserEntity userEntity}) async {
-    var jsonData = jsonEncode(UserModel.fromEntity(userEntity).toMap());
-    await Prefs.setString(AppConst.userData, jsonData);
   }
 }

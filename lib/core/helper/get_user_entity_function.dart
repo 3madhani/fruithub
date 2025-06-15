@@ -6,6 +6,16 @@ import '../constants/app_const.dart';
 import '../services/shared_preferences_singleton.dart';
 
 UserEntity getUserEntity() {
-  var jsonString = Prefs.getString(AppConst.userData);
-  return UserModel.fromJson(jsonDecode(jsonString));
+  try {
+    final jsonString = Prefs.getString(AppConst.userData);
+
+    if (jsonString.trim().isEmpty) {
+      return UserModel(uId: '', email: '', name: '');
+    }
+
+    final jsonMap = jsonDecode(jsonString);
+    return UserModel.fromJson(jsonMap);
+  } catch (e) {
+    return UserModel(uId: '', email: '', name: '');
+  }
 }
