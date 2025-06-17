@@ -1,4 +1,4 @@
-import '../order_entity.dart';
+import '../order_input_entity.dart';
 import 'amount.dart';
 import 'item_list.dart';
 
@@ -9,12 +9,13 @@ class PaypalPaymentEntity {
 
   PaypalPaymentEntity({this.amount, this.description, this.itemList});
 
-  factory PaypalPaymentEntity.fromPayPalPaymentEntity(OrderEntity entity) =>
-      PaypalPaymentEntity(
-        amount: Amount.fromOrderEntity(entity),
-        itemList: ItemList.fromCartItems(entity.cartEntity.cartItems),
-        description: "PayPal Payment",
-      );
+  factory PaypalPaymentEntity.fromPayPalPaymentEntity(
+    OrderInputEntity entity,
+  ) => PaypalPaymentEntity(
+    amount: Amount.fromOrderEntity(entity),
+    itemList: ItemList.fromCartItems(entity.cartEntity.cartItems),
+    description: "PayPal Payment",
+  );
 
   Map<String, dynamic> toJson() => {
     'amount': amount?.toJson(),

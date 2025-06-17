@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_text_styles.dart';
-import '../../../domain/entities/order_entity.dart';
+import '../../../domain/entities/order_input_entity.dart';
 import 'checkout_view_body.dart';
 import 'payment_item.dart';
 
@@ -20,7 +20,7 @@ class AddressSummary extends StatelessWidget {
           SvgPicture.asset(Assets.svgLocation, height: 22, width: 22),
           const SizedBox(width: 8),
           Text(
-            context.read<OrderEntity>().shippingAddress.getAddress(),
+            context.read<OrderInputEntity>().shippingAddress.getAddress(),
             style: AppTextStyles.regular14.copyWith(
               color: const Color(0xff4E5556),
             ),

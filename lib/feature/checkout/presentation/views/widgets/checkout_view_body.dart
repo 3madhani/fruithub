@@ -5,7 +5,7 @@ import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:fruithub/core/common/custom_button.dart';
 import 'package:fruithub/core/common/custom_snackbar_over_button.dart';
 import 'package:fruithub/core/utils/app_keys.dart';
-import 'package:fruithub/feature/checkout/domain/entities/order_entity.dart';
+import 'package:fruithub/feature/checkout/domain/entities/order_input_entity.dart';
 import 'package:fruithub/feature/checkout/domain/entities/paypal_payment_entity/paypal_payment_entity.dart';
 import 'package:fruithub/feature/checkout/presentation/manager/add_order_cubit/add_order_cubit.dart';
 import 'package:fruithub/feature/checkout/presentation/views/widgets/add_order_cubit_bloc_consumer.dart';
@@ -35,7 +35,7 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    final order = Provider.of<OrderEntity>(context, listen: false);
+    final order = Provider.of<OrderInputEntity>(context, listen: false);
 
     return AddOrderCubitBlocConsumer(
       buttonKey: _buttonKey,
@@ -53,7 +53,7 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
                     curve: Curves.bounceIn,
                   );
                 } else if (index == 1) {
-                  if (context.read<OrderEntity>().payWithCash == null) {
+                  if (context.read<OrderInputEntity>().payWithCash == null) {
                     showCustomSnackbarOverButton(
                       context: context,
                       buttonKey: _buttonKey,
@@ -159,7 +159,7 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
   }
 
   void _handlePaymentSection() {
-    var orderEntity = context.read<OrderEntity>();
+    var orderEntity = context.read<OrderInputEntity>();
     PaypalPaymentEntity paypalPaymentEntity =
         PaypalPaymentEntity.fromPayPalPaymentEntity(orderEntity);
     var addOrderCubit = context.read<AddOrderCubit>();
@@ -175,8 +175,8 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
               note: "Contact us for any questions on your order.",
               onSuccess: (Map params) async {
                 log("onSuccess: $params");
-                Navigator.pop(context);
                 addOrderCubit.addOrder(orderEntity: orderEntity);
+                Navigator.pop(context);
               },
               onError: (error) {
                 log("onError: $error");
@@ -203,7 +203,7 @@ class CheckoutViewBodyState extends State<CheckoutViewBody> {
     );
   }
 
-  void _handleShippingSection(OrderEntity order) {
+  void _handleShippingSection(OrderInputEntity order) {
     if (order.payWithCash == null) {
       showCustomSnackbarOverButton(
         backgroundColor: Colors.grey,

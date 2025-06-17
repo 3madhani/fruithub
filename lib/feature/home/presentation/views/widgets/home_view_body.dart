@@ -46,6 +46,7 @@ class HomeViewBody extends StatelessWidget {
           ),
         ),
         ProductsGridViewBlocBuilder(),
+        SliverToBoxAdapter(child: SizedBox(height: 10)),
       ],
     );
   }

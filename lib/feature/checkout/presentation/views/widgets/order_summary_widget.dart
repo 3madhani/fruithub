@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/utils/app_text_styles.dart';
-import '../../../domain/entities/order_entity.dart';
+import '../../../domain/entities/order_input_entity.dart';
 import 'payment_item.dart';
 
 class OrderSummaryWidget extends StatelessWidget {
@@ -39,7 +39,7 @@ class OrderSummaryWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${context.read<OrderEntity>().cartEntity.totalPrice.toStringAsFixed(2)} جنيه",
+                    "${context.read<OrderInputEntity>().cartEntity.totalPrice.toStringAsFixed(2)} جنيه",
                     style: AppTextStyles.semiBold16,
                   ),
                   const SizedBox(height: 8),
@@ -68,7 +68,7 @@ class OrderSummaryWidget extends StatelessWidget {
 
               const Spacer(),
               Text(
-                "${(context.read<OrderEntity>().cartEntity.totalPrice + 30).toStringAsFixed(2)} جنيه",
+                "${(context.read<OrderInputEntity>().cartEntity.totalPrice + 30).toStringAsFixed(2)} جنيه",
                 style: AppTextStyles.bold16,
               ),
             ],

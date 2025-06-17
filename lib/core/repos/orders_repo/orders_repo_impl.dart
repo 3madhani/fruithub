@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../feature/checkout/data/model/order_model.dart';
-import '../../../feature/checkout/domain/entities/order_entity.dart';
+import '../../../feature/checkout/domain/entities/order_input_entity.dart';
 import '../../errors/failure.dart';
 import '../../services/database_services.dart';
 import '../../utils/backend_endpoints.dart';
@@ -13,12 +13,14 @@ class OrdersRepoImpl implements OrdersRepo {
   OrdersRepoImpl({required this.databaseServices});
   @override
   Future<Either<Failure, void>> addOrder({
-    required OrderEntity orderEntity,
+    required OrderInputEntity orderEntity,
   }) async {
     try {
+      var order = OrderModel.fromEntity(orderEntity);
       await databaseServices.setData(
         path: BackendEndpoints.addOrders,
-        data: OrderModel.fromEntity(orderEntity).toJson(),
+        documentId: order.orderId,
+        data: order.toJson(),
       );
       return const Right(null);
     } catch (e) {

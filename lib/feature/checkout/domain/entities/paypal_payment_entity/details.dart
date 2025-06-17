@@ -1,4 +1,4 @@
-import '../order_entity.dart';
+import '../order_input_entity.dart';
 
 class Details {
   String? subtotal;
@@ -7,7 +7,7 @@ class Details {
 
   Details({this.subtotal, this.shipping, this.shippingDiscount});
 
-  factory Details.fromOrderEntity(OrderEntity order) => Details(
+  factory Details.fromOrderEntity(OrderInputEntity order) => Details(
     subtotal: order.cartEntity.totalPrice.toString(),
     shipping: order.calculateShippingCost().toString(),
     shippingDiscount: order.calculateShippingDiscount(),

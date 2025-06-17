@@ -1,5 +1,5 @@
 import '../../../../../core/helper/get_currency_funcion.dart';
-import '../order_entity.dart';
+import '../order_input_entity.dart';
 import 'details.dart';
 
 class Amount {
@@ -9,7 +9,7 @@ class Amount {
 
   Amount({this.total, this.currency, this.details});
 
-  factory Amount.fromOrderEntity(OrderEntity orderEntity) => Amount(
+  factory Amount.fromOrderEntity(OrderInputEntity orderEntity) => Amount(
     total: orderEntity.calculateTotalPrice().toString(),
     currency: getCurrency(),
     details: Details.fromOrderEntity(orderEntity),

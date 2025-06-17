@@ -1,4 +1,6 @@
-import '../../domain/entities/order_entity.dart';
+import 'package:uuid/uuid.dart';
+
+import '../../domain/entities/order_input_entity.dart';
 import 'order_product_model.dart';
 import 'shipping_address_model.dart';
 
@@ -8,8 +10,10 @@ class OrderModel {
   final String uid;
   final List<OrderProductModel> orderProducts;
   final String paymentMethod;
+  final String orderId;
 
   OrderModel({
+    required this.orderId,
     required this.totalPrice,
     required this.shippingAddressModel,
     required this.uid,
@@ -17,7 +21,8 @@ class OrderModel {
     required this.paymentMethod,
   });
 
-  factory OrderModel.fromEntity(OrderEntity orderEntity) => OrderModel(
+  factory OrderModel.fromEntity(OrderInputEntity orderEntity) => OrderModel(
+    orderId: const Uuid().v4(),
     totalPrice: orderEntity.cartEntity.totalPrice,
     shippingAddressModel: ShippingAddressModel.fromEntity(
       orderEntity.shippingAddress,
@@ -31,6 +36,7 @@ class OrderModel {
   );
 
   toJson() => {
+    'orderId': orderId,
     'totalPrice': totalPrice,
     'status': 'pending',
     'date': DateTime.now().toString(),

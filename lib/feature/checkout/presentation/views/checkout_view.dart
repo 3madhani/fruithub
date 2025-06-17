@@ -7,7 +7,7 @@ import '../../../../core/helper/get_user_entity_function.dart';
 import '../../../../core/repos/orders_repo/orders_repo.dart';
 import '../../../../core/services/get_it_services.dart';
 import '../../../home/domain/entities/cart_entity.dart';
-import '../../domain/entities/order_entity.dart';
+import '../../domain/entities/order_input_entity.dart';
 import '../../domain/entities/shipping_address_entity.dart';
 import '../manager/add_order_cubit/add_order_cubit.dart';
 import 'widgets/checkout_view_body.dart';
@@ -23,7 +23,7 @@ class CheckoutView extends StatefulWidget {
 }
 
 class _CheckoutViewState extends State<CheckoutView> {
-  late final OrderEntity _orderEntity;
+  late final OrderInputEntity _orderEntity;
   final GlobalKey<CheckoutViewBodyState> checkoutBodyKey = GlobalKey();
 
   @override
@@ -32,7 +32,7 @@ class _CheckoutViewState extends State<CheckoutView> {
       create: (context) => AddOrderCubit(ordersRepo: getIt.get<OrdersRepo>()),
       child: Scaffold(
         appBar: buildAppBar(context: context, title: 'الشحن'),
-        body: Provider<OrderEntity>.value(
+        body: Provider<OrderInputEntity>.value(
           value: _orderEntity,
           child: CheckoutViewBody(key: checkoutBodyKey),
         ),
@@ -43,7 +43,7 @@ class _CheckoutViewState extends State<CheckoutView> {
   @override
   void initState() {
     super.initState();
-    _orderEntity = OrderEntity(
+    _orderEntity = OrderInputEntity(
       uId: getUserEntity().uId,
       cartEntity: widget.cartEntity,
       shippingAddress: ShippingAddressEntity(),

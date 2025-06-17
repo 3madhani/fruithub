@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/common/custom_text_form_field.dart';
-import '../../../domain/entities/order_entity.dart';
+import '../../../domain/entities/order_input_entity.dart';
 
 class AddressInputSection extends StatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -29,7 +29,7 @@ class _AddressInputSectionState extends State<AddressInputSection> {
 
   @override
   Widget build(BuildContext context) {
-    final order = Provider.of<OrderEntity>(context, listen: false);
+    final order = Provider.of<OrderInputEntity>(context, listen: false);
     final shipping = order.shippingAddress;
 
     return SingleChildScrollView(
@@ -104,7 +104,7 @@ class _AddressInputSectionState extends State<AddressInputSection> {
   @override
   void initState() {
     super.initState();
-    final order = Provider.of<OrderEntity>(context, listen: false);
+    final order = Provider.of<OrderInputEntity>(context, listen: false);
     final shipping = order.shippingAddress;
 
     nameController = TextEditingController(text: shipping.name);

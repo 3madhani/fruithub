@@ -1,13 +1,13 @@
 import 'package:fruithub/feature/checkout/domain/entities/shipping_address_entity.dart';
 import 'package:fruithub/feature/home/domain/entities/cart_entity.dart';
 
-class OrderEntity {
+class OrderInputEntity {
   final String uId;
   final CartEntity cartEntity;
   bool? payWithCash;
   ShippingAddressEntity shippingAddress;
 
-  OrderEntity({
+  OrderInputEntity({
     required this.uId,
     required this.cartEntity,
     required this.shippingAddress,
@@ -27,7 +27,8 @@ class OrderEntity {
   }
 
   double calculateTotalPrice() {
-    return cartEntity.totalPrice + calculateShippingCost() - calculateShippingDiscount();
+    return cartEntity.totalPrice +
+        calculateShippingCost() -
+        calculateShippingDiscount();
   }
-
 }
