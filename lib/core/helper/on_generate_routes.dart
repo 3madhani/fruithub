@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../feature/account/presentation/views/account_view.dart';
 import '../../feature/auth/presentation/views/sign_up_view.dart';
 import '../../feature/auth/presentation/views/signin_view.dart';
 import '../../feature/best_selling_fruits/presentation/views/best_selling_view.dart';
@@ -13,6 +14,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
     case SplashView.routeName:
       return MaterialPageRoute(builder: (_) => const SplashView());
+    case AccountView.routeName:
+      return MaterialPageRoute(builder: (_) => const AccountView());
     case OnBoardingView.routeName:
       return MaterialPageRoute(builder: (_) => const OnBoardingView());
     case SignInView.routeName:

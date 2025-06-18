@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruithub/feature/account/presentation/views/widgets/profile_row_tile.dart';
+
+import '../../../../../core/constants/app_const.dart';
+import '../../../../../core/utils/app_assets.dart';
+import '../../../../../core/utils/app_text_styles.dart';
+import 'custom_switcher_button.dart';
+import 'profile_info.dart';
+import 'signout_button.dart';
+
+class AccountViewBody extends StatelessWidget {
+  const AccountViewBody({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppConst.horizontalPadding,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ProfileInfo(),
+              const SizedBox(height: 16),
+              const Text("عام", style: AppTextStyles.semiBold13),
+              const SizedBox(height: 24),
+              ProfileRowTile(
+                text: " الملف الشخصي",
+                onTap: () {},
+                iconAsset: Assets.svgUser,
+              ),
+              Divider(height: 24, color: Colors.grey[300], thickness: 1),
+
+              ProfileRowTile(
+                text: " طلباتي",
+                onTap: () {},
+                iconAsset: Assets.svgBox,
+              ),
+              Divider(height: 24, color: Colors.grey[300], thickness: 1),
+              ProfileRowTile(
+                text: " المفضلة",
+                onTap: () {},
+                iconAsset: Assets.svgOutlineHeart,
+              ),
+              Divider(height: 24, color: Colors.grey[300], thickness: 1),
+              ProfileRowTile(
+                text: " الاشعارات",
+                onTap: () {},
+                iconAsset: Assets.svgNotification,
+                trailing: const CustomSwitcherButton(),
+              ),
+              Divider(height: 24, color: Colors.grey[300], thickness: 1),
+              ProfileRowTile(
+                text: " اللغة",
+                onTap: () {},
+                iconAsset: Assets.svgGlobal,
+                trailing: Row(
+                  children: [
+                    const Text("العربية", style: AppTextStyles.regular13),
+                    const SizedBox(width: 8),
+                    SvgPicture.asset(Assets.svgArrowBack),
+                  ],
+                ),
+              ),
+              Divider(height: 24, color: Colors.grey[300], thickness: 1),
+              ProfileRowTile(
+                text: " الوضع",
+                onTap: () {},
+                iconAsset: Assets.svgMagicpen,
+                trailing: const CustomSwitcherButton(),
+              ),
+              Divider(height: 24, color: Colors.grey[300], thickness: 1),
+
+              const SizedBox(height: 24),
+
+              const Text("المساعدة", style: AppTextStyles.semiBold13),
+              const SizedBox(height: 24),
+              ProfileRowTile(
+                text: " من نحن",
+                onTap: () {},
+                iconAsset: Assets.svgInfoCircle,
+              ),
+              Divider(height: 24, color: Colors.grey[300], thickness: 1),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 80),
+        const SignoutButton(),
+      ],
+    );
+  }
+}
