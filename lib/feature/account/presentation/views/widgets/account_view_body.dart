@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruithub/feature/account/presentation/views/widgets/profile_row_tile.dart';
 
 import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_text_styles.dart';
+import '../../manager/theme/theme_cubit.dart';
 import 'custom_switcher_button.dart';
 import 'profile_info.dart';
 import 'signout_button.dart';
@@ -50,7 +52,7 @@ class AccountViewBody extends StatelessWidget {
                 text: " الاشعارات",
                 onTap: () {},
                 iconAsset: Assets.svgNotification,
-                trailing: const CustomSwitcherButton(),
+                trailing: const CustomSwitcherButton(value: true),
               ),
               Divider(height: 24, color: Colors.grey[300], thickness: 1),
               ProfileRowTile(
@@ -70,7 +72,12 @@ class AccountViewBody extends StatelessWidget {
                 text: " الوضع",
                 onTap: () {},
                 iconAsset: Assets.svgMagicpen,
-                trailing: const CustomSwitcherButton(),
+                trailing: CustomSwitcherButton(
+                  value: context.watch<ThemeCubit>().state == ThemeMode.dark,
+                  onTap: () {
+                    context.read<ThemeCubit>().toggleTheme();
+                  },
+                ),
               ),
               Divider(height: 24, color: Colors.grey[300], thickness: 1),
 

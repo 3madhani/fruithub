@@ -47,7 +47,7 @@ class AuthRepoImpl extends AuthRepo {
         email: email,
         password: password,
       );
-      var userEntity = UserEntity(uId: user.uid, name: name, email: email);
+      var userEntity = UserEntity(uId: user.uid, name: name, email: email, imageUrl: user.photoURL);
       await addUserData(userEntity: userEntity);
       return Right(userEntity);
     } on CustomException catch (e) {
@@ -190,11 +190,6 @@ class AuthRepoImpl extends AuthRepo {
       log("Error in signInWithGoogle: ${e.toString()}");
       return left(const ServerFailure('حدث خطا غير متوقع يرجى المحاولة لاحقا'));
     }
-  }
-
-  @override
-  Future<void> signOut() {
-    throw UnimplementedError();
   }
 
   @override

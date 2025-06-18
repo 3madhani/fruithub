@@ -26,7 +26,7 @@ class CustomNetworkImage extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+              image: DecorationImage(image: imageProvider, fit: BoxFit.contain),
             ),
           ),
       errorWidget: (context, url, error) => const Icon(Icons.error),

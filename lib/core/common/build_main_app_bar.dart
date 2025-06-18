@@ -40,7 +40,7 @@ AppBar buildMainAppBar({
     title: Text(
       title,
       textAlign: TextAlign.center,
-      style: AppTextStyles.bold19,
+      style: AppTextStyles.bold19.copyWith(color: AppColors.primaryColor),
     ),
     actions: const [
       Padding(

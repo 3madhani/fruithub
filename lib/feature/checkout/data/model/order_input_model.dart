@@ -4,7 +4,7 @@ import '../../domain/entities/order_input_entity.dart';
 import 'order_product_model.dart';
 import 'shipping_address_model.dart';
 
-class OrderModel {
+class OrderInputModel {
   final double totalPrice;
   final ShippingAddressModel shippingAddressModel;
   final String uid;
@@ -12,7 +12,7 @@ class OrderModel {
   final String paymentMethod;
   final String orderId;
 
-  OrderModel({
+  OrderInputModel({
     required this.orderId,
     required this.totalPrice,
     required this.shippingAddressModel,
@@ -21,19 +21,20 @@ class OrderModel {
     required this.paymentMethod,
   });
 
-  factory OrderModel.fromEntity(OrderInputEntity orderEntity) => OrderModel(
-    orderId: const Uuid().v4(),
-    totalPrice: orderEntity.cartEntity.totalPrice,
-    shippingAddressModel: ShippingAddressModel.fromEntity(
-      orderEntity.shippingAddress,
-    ),
-    uid: orderEntity.uId,
-    orderProducts:
-        orderEntity.cartEntity.cartItems
-            .map((e) => OrderProductModel.fromCartItemEntity(e))
-            .toList(),
-    paymentMethod: orderEntity.payWithCash! ? 'Cash' : 'PayPal',
-  );
+  factory OrderInputModel.fromEntity(OrderInputEntity orderEntity) =>
+      OrderInputModel(
+        orderId: const Uuid().v4(),
+        totalPrice: orderEntity.cartEntity.totalPrice,
+        shippingAddressModel: ShippingAddressModel.fromEntity(
+          orderEntity.shippingAddress,
+        ),
+        uid: orderEntity.uId,
+        orderProducts:
+            orderEntity.cartEntity.cartItems
+                .map((e) => OrderProductModel.fromCartItemEntity(e))
+                .toList(),
+        paymentMethod: orderEntity.payWithCash! ? 'Cash' : 'PayPal',
+      );
 
   toJson() => {
     'orderId': orderId,

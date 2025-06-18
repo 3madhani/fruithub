@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
 
 AppBar buildAppBar({
@@ -20,7 +21,7 @@ AppBar buildAppBar({
     title: Text(
       title,
       textAlign: TextAlign.center,
-      style: AppTextStyles.bold19,
+      style: AppTextStyles.bold19.copyWith(color: AppColors.primaryColor),
     ),
   );
 }
