@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruithub/core/utils/app_assets.dart';
 
-import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
 
 AppBar buildAppBar({
@@ -14,14 +15,20 @@ AppBar buildAppBar({
         isLeadingVisible
             ? GestureDetector(
               onTap: () => Navigator.pop(context),
-              child: const Icon(Icons.arrow_back_ios_new),
+              child: Center(
+                child: SvgPicture.asset(
+                  Assets.svgArrowLeft,
+                  height: 34,
+                  width: 34,
+                ),
+              ),
             )
             : const SizedBox.shrink(),
     centerTitle: true,
     title: Text(
       title,
       textAlign: TextAlign.center,
-      style: AppTextStyles.bold19.copyWith(color: AppColors.primaryColor),
+      style: AppTextStyles.bold19,
     ),
   );
 }

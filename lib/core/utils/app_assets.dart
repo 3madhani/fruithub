@@ -34,6 +34,14 @@ class Assets {
   /// assets/svg/arrow_back.svg
   static const String svgArrowBack = "assets/svg/arrow_back.svg";
 
+  /// Assets for svgArrowDown
+  /// assets/svg/arrow-down.svg
+  static const String svgArrowDown = "assets/svg/arrow-down.svg";
+
+  /// Assets for svgArrowLeft
+  /// assets/svg/arrow_left.svg
+  static const String svgArrowLeft = "assets/svg/arrow_left.svg";
+
   /// Assets for svgArrowSwapHorizontal
   /// assets/svg/arrow-swap-horizontal.svg
   static const String svgArrowSwapHorizontal = "assets/svg/arrow-swap-horizontal.svg";
@@ -49,6 +57,10 @@ class Assets {
   /// Assets for svgBox
   /// assets/svg/box.svg
   static const String svgBox = "assets/svg/box.svg";
+
+  /// Assets for svgBoxOrder
+  /// assets/svg/box_order.svg
+  static const String svgBoxOrder = "assets/svg/box_order.svg";
 
   /// Assets for svgCamera
   /// assets/svg/Camera.svg

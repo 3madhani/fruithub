@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fruithub/feature/account/presentation/views/widgets/profile_row_tile.dart';
 
 import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../manager/theme/theme_cubit.dart';
+import '../orders_view.dart';
 import 'custom_switcher_button.dart';
 import 'profile_info_builder.dart';
+import 'profile_row_tile.dart';
 import 'signout_button.dart';
 
 class AccountViewBody extends StatelessWidget {
@@ -38,7 +39,9 @@ class AccountViewBody extends StatelessWidget {
 
               ProfileRowTile(
                 text: " طلباتي",
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, OrdersView.routeName);
+                },
                 iconAsset: Assets.svgBox,
               ),
               Divider(height: 24, color: Colors.grey[300], thickness: 1),
