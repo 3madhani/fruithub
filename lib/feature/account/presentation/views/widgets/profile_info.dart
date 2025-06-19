@@ -14,6 +14,9 @@ class ProfileInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageUrl = userInfoEntity.imageUrl;
+    final bool isValidUrl = imageUrl != null && imageUrl.isNotEmpty;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -22,28 +25,25 @@ class ProfileInfo extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height * 0.098),
             CircleAvatar(
               radius: 38.5,
+              backgroundColor: Colors.grey[200],
               child: ClipOval(
-                child: CachedNetworkImage(
-                  imageUrl: userInfoEntity.imageUrl!,
-                  fit: BoxFit.contain,
-                  width: 75,
-                  height: 75,
-                  placeholder:
-                      (context, url) =>
-                          const CircularProgressIndicator(strokeWidth: 2),
-                  errorWidget:
-                      (context, url, error) => Center(
-                        child: Text(
-                          userInfoEntity.name[0],
-                          style: AppTextStyles.bold28.copyWith(
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                      ),
-                ),
+                child:
+                    isValidUrl
+                        ? CachedNetworkImage(
+                          imageUrl: imageUrl,
+                          fit: BoxFit.cover,
+                          width: 75,
+                          height: 75,
+                          placeholder:
+                              (context, url) => const CircularProgressIndicator(
+                                strokeWidth: 2,
+                              ),
+                          errorWidget:
+                              (context, url, error) => _buildFallbackText(),
+                        )
+                        : _buildFallbackText(),
               ),
             ),
-
             Positioned(
               bottom: 0,
               right: 21,
@@ -63,7 +63,6 @@ class ProfileInfo extends StatelessWidget {
           ],
         ),
         const SizedBox(width: 24),
-
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -83,6 +82,15 @@ class ProfileInfo extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+
+  Widget _buildFallbackText() {
+    return Center(
+      child: Text(
+        userInfoEntity.name.isNotEmpty ? userInfoEntity.name[0] : "?",
+        style: AppTextStyles.bold28.copyWith(color: AppColors.primaryColor),
+      ),
     );
   }
 }
