@@ -1,11 +1,14 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fruithub/feature/account/domain/entities/user_info_entity.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../../../core/services/database_services.dart';
 import '../../../../core/utils/backend_endpoints.dart';
 import '../../domain/entities/order_entity.dart';
+import '../../domain/entities/user_info_entity.dart';
 import '../../domain/repos/user_info_repo.dart';
 import '../model/order_model.dart';
 import '../model/user_info_model.dart';
@@ -15,20 +18,38 @@ class UserInfoRepoImpl implements UserInfoRepo {
 
   UserInfoRepoImpl({required this.databaseServices});
   @override
-  Future<Either<Failure, List<OrderEntity>>> getOrdersOfUser(
+  Stream<Either<Failure, List<OrderEntity>>> getOrdersOfUser(
     UserInfoEntity user,
-  ) async {
-    try {
-      final orderFutures = user.orders.map((orderId) {
-        return databaseServices
-            .getData(path: BackendEndpoints.getOrders, documentId: orderId)
-            .then((data) => OrderModel.fromJson(data).toEntity());
-      });
+  ) {
+    if (user.orders.isEmpty) {
+      return Stream.value(const Right([]));
+    }
 
-      final orders = await Future.wait(orderFutures);
-      return Right(orders);
+    try {
+      // Create a list of order document streams
+      final orderStreams =
+          user.orders.map((orderId) {
+            return databaseServices
+                .streamData(
+                  path: BackendEndpoints.getOrders,
+                  documentId: orderId,
+                )
+                .map((docSnapshot) {
+                  final data = docSnapshot.data();
+                  if (data != null && data is Map<String, dynamic>) {
+                    return OrderModel.fromJson(data).toEntity();
+                  } else {
+                    throw Exception("Invalid data for order $orderId");
+                  }
+                });
+          }).toList();
+
+      // Combine them into one stream of List<OrderEntity>
+      return Rx.combineLatestList(
+        orderStreams,
+      ).map((orders) => Right<Failure, List<OrderEntity>>(orders));
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Stream.value(Left(ServerFailure(e.toString())));
     }
   }
 

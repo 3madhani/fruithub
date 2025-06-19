@@ -13,5 +13,5 @@ abstract class UserInfoRepo {
     required String email,
   });
 
-  Future<Either<Failure, List<OrderEntity>>> getOrdersOfUser(UserInfoEntity user);
+  Stream<Either<Failure, List<OrderEntity>>> getOrdersOfUser(UserInfoEntity user);
 }
