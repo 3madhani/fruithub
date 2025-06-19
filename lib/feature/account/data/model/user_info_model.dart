@@ -16,8 +16,8 @@ class UserInfoModel {
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => UserInfoModel(
     name: json['name'] as String,
     email: json['email'] as String,
-    imageUrl: json['imageUrl'] as String,
-    orders: json['orders'] as List<String>,
+    imageUrl: json['imageUrl'] ?? '',
+    orders: List<String>.from(json['orders'] ?? []),
   );
 
   toEntity() => UserInfoEntity(

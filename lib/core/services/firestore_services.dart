@@ -62,6 +62,40 @@ class FireStoreServices implements DatabaseServices {
   }
 
   @override
+  Stream streamData({
+    required String path,
+    Map<String, dynamic>? queryParameters,
+    String? documentId,
+  }) {
+    if (documentId != null) {
+      // Return a stream for a single document
+      return firestore.collection(path).doc(documentId).snapshots();
+    } else {
+      // Return a stream for the whole collection
+      Query<Map<String, dynamic>> querySnapshot = firestore.collection(path);
+      if (queryParameters != null) {
+        if (queryParameters["orderBy"] != null) {
+          var orderBy = queryParameters["orderBy"];
+          var descending = queryParameters["descending"] ?? false;
+          querySnapshot = querySnapshot.orderBy(
+            orderBy,
+            descending: descending,
+          );
+        }
+
+        if (queryParameters["limit"] != null) {
+          var limit = queryParameters["limit"];
+          querySnapshot = querySnapshot.limit(limit);
+        }
+      }
+
+      return querySnapshot.snapshots().map(
+        (snapshot) => snapshot.docs.map((doc) => doc.data()).toList(),
+      );
+    }
+  }
+
+  @override
   Future<void> updateData({
     required String path,
     required Map<String, dynamic> data,

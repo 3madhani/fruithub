@@ -1,14 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruithub/feature/account/domain/entities/user_info_entity.dart';
 
-import '../../../../../core/helper/get_user_entity_function.dart';
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
 class ProfileInfo extends StatelessWidget {
-  const ProfileInfo({super.key});
+  final UserInfoEntity userInfoEntity;
+
+  const ProfileInfo({super.key, required this.userInfoEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class ProfileInfo extends StatelessWidget {
               radius: 38.5,
               child: ClipOval(
                 child: CachedNetworkImage(
-                  imageUrl: "",
+                  imageUrl: userInfoEntity.imageUrl!,
                   fit: BoxFit.contain,
                   width: 75,
                   height: 75,
@@ -32,7 +34,7 @@ class ProfileInfo extends StatelessWidget {
                   errorWidget:
                       (context, url, error) => Center(
                         child: Text(
-                          getUserEntity().name[0],
+                          userInfoEntity.name[0],
                           style: AppTextStyles.bold28.copyWith(
                             color: AppColors.primaryColor,
                           ),
@@ -66,14 +68,14 @@ class ProfileInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              getUserEntity().name,
+              userInfoEntity.name,
               style: AppTextStyles.bold13.copyWith(
                 color: const Color(0xff131F46),
               ),
             ),
             const SizedBox(height: 2),
             Text(
-              getUserEntity().email,
+              userInfoEntity.email,
               style: AppTextStyles.regular13.copyWith(
                 color: const Color(0xff888FA0),
               ),

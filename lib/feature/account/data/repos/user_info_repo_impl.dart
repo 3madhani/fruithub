@@ -15,29 +15,13 @@ class UserInfoRepoImpl implements UserInfoRepo {
 
   UserInfoRepoImpl({required this.databaseServices});
   @override
-  Stream<Either<Failure, UserInfoEntity>> getUserInfo() async* {
-    try {
-      var data = await databaseServices.getData(
-        path: BackendEndpoints.getUserData,
-        documentId: FirebaseAuth.instance.currentUser!.uid,
-      );
-
-      yield Right(UserInfoModel.fromJson(data).toEntity());
-    } catch (e) {
-      yield Left(ServerFailure(e.toString()));
-    }
-  }
-
   Future<Either<Failure, List<OrderEntity>>> getOrdersOfUser(
     UserInfoEntity user,
   ) async {
     try {
       final orderFutures = user.orders.map((orderId) {
         return databaseServices
-            .getData(
-              path: BackendEndpoints.getOrders,
-              documentId: orderId,
-            )
+            .getData(path: BackendEndpoints.getOrders, documentId: orderId)
             .then((data) => OrderModel.fromJson(data).toEntity());
       });
 
@@ -48,6 +32,26 @@ class UserInfoRepoImpl implements UserInfoRepo {
     }
   }
 
+  @override
+  Stream<Either<Failure, UserInfoEntity>> getUserInfo() async* {
+    try {
+      yield* databaseServices
+          .streamData(
+            path: BackendEndpoints.getUserData,
+            documentId: FirebaseAuth.instance.currentUser!.uid,
+          )
+          .map((doc) {
+            final data = doc.data();
+            if (data != null && data is Map<String, dynamic>) {
+              return Right(UserInfoModel.fromJson(data).toEntity());
+            } else {
+              return const Left(ServerFailure("Invalid or missing user data"));
+            }
+          });
+    } catch (e) {
+      yield Left(ServerFailure(e.toString()));
+    }
+  }
 
   @override
   Future<void> updateUserInfo({
