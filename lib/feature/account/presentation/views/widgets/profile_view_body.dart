@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruithub/core/common/custom_button.dart';
 import 'package:fruithub/core/utils/app_assets.dart';
+import 'package:fruithub/core/utils/app_colors.dart';
+
 import '../../../../../core/utils/app_text_styles.dart';
 import 'read_only_edit_field.dart';
 
@@ -27,8 +29,8 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
   final newPasswordFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
 
-  bool isEditableName = false;
-  bool isEditableEmail = false;
+  bool isEditableName = true;
+  bool isEditableEmail = true;
   bool isVisibleCurrentPassword = false;
   bool isVisibleNewPassword = false;
   bool isVisibleConfirmPassword = false;
@@ -52,9 +54,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
               controller: nameController,
               focusNode: nameFocusNode,
               suffixIcon: SvgPicture.asset(
-                Assets.svgEditProfile,
-                height: 20,
-                width: 20,
+                isEditableName ? Assets.svgEditProfile : Assets.svgCheck,
+                height: 25,
+                width: 25,
+                color: isEditableName ? null : AppColors.primaryColor,
               ),
               onEditTap: () => setState(() => isEditableName = !isEditableName),
             ),
@@ -66,9 +69,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
               controller: emailController,
               focusNode: emailFocusNode,
               suffixIcon: SvgPicture.asset(
-                Assets.svgEditProfile,
-                height: 20,
-                width: 20,
+                isEditableEmail ? Assets.svgEditProfile : Assets.svgCheck,
+                height: 25,
+                width: 25,
+                color: isEditableEmail ? null : AppColors.primaryColor,
               ),
               onEditTap:
                   () => setState(() => isEditableEmail = !isEditableEmail),
@@ -80,7 +84,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
 
             ReadOnlyEditableField(
               label: "كلمة المرور الحالية",
-              isEditable: true,
+              isEditable: false,
               obscureText: !isVisibleCurrentPassword,
               controller: currentPasswordController,
               focusNode: currentPasswordFocusNode,
@@ -99,7 +103,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
 
             ReadOnlyEditableField(
               label: "كلمة المرور الجديدة",
-              isEditable: true,
+              isEditable: false,
               obscureText: !isVisibleNewPassword,
               controller: newPasswordController,
               focusNode: newPasswordFocusNode,
@@ -116,7 +120,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
 
             ReadOnlyEditableField(
               label: "تأكيد كلمة المرور الجديدة",
-              isEditable: true,
+              isEditable: false,
               obscureText: !isVisibleConfirmPassword,
               controller: confirmPasswordController,
               focusNode: confirmPasswordFocusNode,

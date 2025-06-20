@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_text_styles.dart';
 
-class ReadOnlyEditableField extends StatefulWidget {
+class ReadOnlyEditableField extends StatelessWidget {
   final String label;
   final bool isEditable;
   final VoidCallback onEditTap;
@@ -23,17 +23,13 @@ class ReadOnlyEditableField extends StatefulWidget {
   });
 
   @override
-  State<ReadOnlyEditableField> createState() => _ReadOnlyEditableFieldState();
-}
-
-class _ReadOnlyEditableFieldState extends State<ReadOnlyEditableField> {
-  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: widget.controller,
-      focusNode: widget.focusNode,
-      enabled: widget.isEditable,
-      obscureText: widget.obscureText,
+      key: ValueKey(isEditable), // force rebuild when isEditable toggles
+      controller: controller,
+      focusNode: focusNode,
+      readOnly: isEditable,
+      obscureText: obscureText,
       cursorColor: Colors.black,
       style: AppTextStyles.bold13.copyWith(color: const Color(0xff949d9e)),
       decoration: InputDecoration(
@@ -43,7 +39,7 @@ class _ReadOnlyEditableFieldState extends State<ReadOnlyEditableField> {
         ),
         filled: true,
         fillColor: const Color(0xfff9fafa),
-        labelText: widget.label,
+        labelText: label,
         labelStyle: AppTextStyles.semiBold13.copyWith(
           color: const Color(0xff949d9e),
         ),
@@ -61,14 +57,13 @@ class _ReadOnlyEditableFieldState extends State<ReadOnlyEditableField> {
         ),
         suffixIcon: GestureDetector(
           onTap: () {
-            widget.onEditTap();
-            widget.focusNode.requestFocus();
+            onEditTap();
+            if (!isEditable) return;
+            Future.delayed(const Duration(milliseconds: 100), () {
+              focusNode.requestFocus();
+            });
           },
-          child: Align(
-            widthFactor: 1.0,
-            heightFactor: 1.0,
-            child: widget.suffixIcon,
-          ),
+          child: Align(widthFactor: 1.0, heightFactor: 1.0, child: suffixIcon),
         ),
       ),
     );
