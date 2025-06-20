@@ -2,6 +2,7 @@ import '../../feature/account/domain/entities/user_info_entity.dart';
 
 UserInfoEntity getDummyUser() {
   final user = UserInfoEntity(
+    favourites: [],
     name: "John Doe",
     email: "john.doe@example.com",
     imageUrl: "",

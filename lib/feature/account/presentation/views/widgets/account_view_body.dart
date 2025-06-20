@@ -6,7 +6,8 @@ import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../manager/theme/theme_cubit.dart';
-import '../favorite_view.dart';
+import '../about_us_view.dart';
+import '../favourite_view.dart';
 import '../profile_view.dart';
 import 'custom_switcher_button.dart';
 import 'orders_button_bloc_builder.dart';
@@ -91,7 +92,9 @@ class AccountViewBody extends StatelessWidget {
                 const SizedBox(height: 24),
                 ProfileRowTile(
                   text: " من نحن",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AboutUsView.routeName);
+                  },
                   iconAsset: Assets.svgInfoCircle,
                 ),
                 Divider(height: 24, color: Colors.grey[300], thickness: 1),

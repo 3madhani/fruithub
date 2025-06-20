@@ -9,6 +9,7 @@ class UserModel extends UserEntity {
     required super.email,
     super.imageUrl,
     super.orders,
+    super.favourites,
   });
 
   factory UserModel.fromEntity(UserEntity userEntity) => UserModel(
@@ -35,6 +36,7 @@ class UserModel extends UserEntity {
       'email': email,
       'imageUrl': null,
       'orders': [],
+      'favourites': [],
     };
   }
 }

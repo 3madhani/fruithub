@@ -12,55 +12,38 @@ class CustomHomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserInfoCubit, UserInfoState>(
-      builder: (context, state) {
-        if (state is UserInfoLoaded) {
-          return Row(
+    return Row(
+      children: [
+        Image.asset(Assets.imagesProfileImage, width: 44, height: 44),
+        const SizedBox(width: 11),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(Assets.imagesProfileImage, width: 44, height: 44),
-              const SizedBox(width: 11),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "اهلا !..",
-                    textAlign: TextAlign.right,
-                    style: AppTextStyles.regular16.copyWith(
-                      color: const Color(0xff949D9E),
-                    ),
-                  ),
-                  Text(state.user.name, style: AppTextStyles.bold16),
-                ],
+              Text(
+                "اهلا !..",
+                textAlign: TextAlign.right,
+                style: AppTextStyles.regular16.copyWith(
+                  color: const Color(0xff949D9E),
+                ),
               ),
-              const Spacer(),
-              const NotificationWidget(),
-            ],
-          );
-        } else {
-          // While loading or on error
-          return Row(
-            children: [
-              Image.asset(Assets.imagesProfileImage, width: 44, height: 44),
-              const SizedBox(width: 11),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "اهلا !..",
-                    textAlign: TextAlign.right,
-                    style: AppTextStyles.regular16.copyWith(
-                      color: const Color(0xff949D9E),
-                    ),
-                  ),
-                  const Text("جاري التحميل", style: AppTextStyles.bold16),
-                ],
+              BlocBuilder<UserInfoCubit, UserInfoState>(
+                builder: (context, state) {
+                  if (state is UserInfoLoaded) {
+                    return Text(state.user.name, style: AppTextStyles.bold16);
+                  } else {
+                    return const Text(
+                      "جاري التحميل",
+                      style: AppTextStyles.bold16,
+                    );
+                  }
+                },
               ),
-              const Spacer(),
-              const NotificationWidget(),
             ],
-          );
-        }
-      },
+          ),
+        ),
+        const NotificationWidget(),
+      ],
     );
   }
 }

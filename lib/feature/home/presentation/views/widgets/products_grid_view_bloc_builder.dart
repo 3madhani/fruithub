@@ -4,8 +4,8 @@ import 'package:fruithub/core/common/custom_error_widget.dart';
 import 'package:fruithub/core/helper/get_dummy_products.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../../core/cubits/products_cubit/products_cubit.dart';
 import '../../../../../core/common/products_grid_view.dart';
+import '../../../../../core/cubits/products_cubit/products_cubit.dart';
 
 class ProductsGridViewBlocBuilder extends StatelessWidget {
   const ProductsGridViewBlocBuilder({super.key});
@@ -23,9 +23,7 @@ class ProductsGridViewBlocBuilder extends StatelessWidget {
         } else {
           return Skeletonizer.sliver(
             enabled: true,
-            child: ProductsGridView(
-              products: getDummyProducts(), // Empty list for skeleton view
-            ),
+            child: ProductsGridView(products: getDummyProducts()),
           );
         }
       },

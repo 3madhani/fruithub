@@ -4,6 +4,8 @@ import 'package:fruithub/core/cubits/products_cubit/products_cubit.dart';
 import 'package:fruithub/core/repos/product_repo/product_repo.dart';
 import 'package:fruithub/core/services/get_it_services.dart';
 
+import '../../../../core/cubits/cubit/favorite_cubit.dart';
+import '../../../../core/repos/favourite_repo/favorite_repo.dart';
 import '../../../account/domain/repos/user_info_repo.dart';
 import '../../../account/presentation/manager/user_info/user_info_cubit.dart';
 import 'widgets/home_view_body.dart';
@@ -30,6 +32,9 @@ class _HomeViewState extends State<HomeView> {
           create:
               (context) =>
                   UserInfoCubit(getIt.get<UserInfoRepo>())..fetchUserInfo(),
+        ),
+        BlocProvider(
+          create: (context) => FavoriteCubit(getIt<FavouritesRepo>()),
         ),
       ],
       child: const HomeViewBody(),

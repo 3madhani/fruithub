@@ -12,7 +12,6 @@ class ProductModel {
   String? imageUrl;
   final int expirationMonth;
   final bool isOrganic;
-  final num sellingCount;
   final int numberOfCalories;
   final int unitAmount;
   final num averageRating;
@@ -20,7 +19,6 @@ class ProductModel {
 
   ProductModel({
     required this.averageRating,
-    required this.sellingCount,
     required this.reviews,
     this.isOrganic = false,
     required this.title,
@@ -33,6 +31,22 @@ class ProductModel {
     required this.numberOfCalories,
     required this.unitAmount,
   });
+
+  factory ProductModel.fromEntity(ProductEntity entity) => ProductModel(
+    averageRating: entity.averageRating,
+    title: entity.title,
+    description: entity.description,
+    price: entity.price,
+    code: entity.code,
+    isFeatured: entity.isFeatured,
+    imageUrl: entity.imageUrl,
+    expirationMonth: entity.expirationMonth,
+    numberOfCalories: entity.numberOfCalories,
+    unitAmount: entity.unitAmount,
+    isOrganic: entity.isOrganic,
+    reviews:
+        entity.reviews.map((review) => ReviewModel.fromEntity(review)).toList(),
+  );
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     averageRating: getAverageRating(
@@ -52,7 +66,6 @@ class ProductModel {
     numberOfCalories: json['numberOfCalories'] as int,
     unitAmount: json['unitAmount'] as int,
     isOrganic: json['isOrganic'] as bool,
-    sellingCount: json['sellingCount'] as num,
     reviews:
         json['reviews'] != null
             ? (json['reviews'] as List)

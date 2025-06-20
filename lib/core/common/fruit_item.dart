@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:fruithub/core/utils/app_assets.dart';
 import 'package:fruithub/feature/home/presentation/cubits/cart_cubit/cart_cubit.dart';
 
 import '../entities/product_entity.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
 import 'custom_network_image.dart';
+import 'favorite_button.dart';
 
 class FruitItem extends StatelessWidget {
   final ProductEntity product;
@@ -68,7 +67,6 @@ class FruitItem extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Handle add to cart action
                             context.read<CartCubit>().addProduct(product);
                           },
                           child: const CircleAvatar(
@@ -87,11 +85,7 @@ class FruitItem extends StatelessWidget {
           Positioned(
             top: 10,
             right: 10,
-            child: SvgPicture.asset(
-              Assets.svgOutlineHeart,
-              height: 30,
-              width: 30,
-            ),
+            child: FavoriteButton(product: product),
           ),
         ],
       ),

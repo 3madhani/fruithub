@@ -4,6 +4,14 @@ class UserEntity {
   final String email;
   final String? imageUrl;
   final List? orders;
+  final List? favourites;
 
-  UserEntity({this.imageUrl, this.orders, required this.uId, required this.name, required this.email});
+  UserEntity({
+    this.favourites,
+    this.imageUrl,
+    this.orders,
+    required this.uId,
+    required this.name,
+    required this.email,
+  });
 }
