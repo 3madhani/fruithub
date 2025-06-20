@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fruithub/core/common/fruit_item.dart';
 import 'package:fruithub/core/entities/product_entity.dart';
 
-import '../../../../../core/constants/app_const.dart';
+import '../constants/app_const.dart';
 
 class ProductsGridView extends StatelessWidget {
   final List<ProductEntity> products;

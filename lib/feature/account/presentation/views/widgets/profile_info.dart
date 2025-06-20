@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruithub/feature/account/domain/entities/user_info_entity.dart';
 
 import '../../../../../core/utils/app_assets.dart';
-import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
 class ProfileInfo extends StatelessWidget {
@@ -86,11 +85,6 @@ class ProfileInfo extends StatelessWidget {
   }
 
   Widget _buildFallbackText() {
-    return Center(
-      child: Text(
-        userInfoEntity.name.isNotEmpty ? userInfoEntity.name[0] : "?",
-        style: AppTextStyles.bold28.copyWith(color: AppColors.primaryColor),
-      ),
-    );
+    return Center(child: Image.asset(Assets.imagesProfileImage));
   }
 }

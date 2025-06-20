@@ -5,7 +5,7 @@ import 'package:fruithub/core/helper/get_dummy_products.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/cubits/products_cubit/products_cubit.dart';
-import 'products_grid_view.dart';
+import '../../../../../core/common/products_grid_view.dart';
 
 class ProductsGridViewBlocBuilder extends StatelessWidget {
   const ProductsGridViewBlocBuilder({super.key});
