@@ -102,7 +102,7 @@ class _OrderWidgetState extends State<OrderWidget> {
       final date =
           index == 0
               ? order.getFormattedDate()
-              : (isActive ? 'نفس اليوم' : 'لم يبدأ بعد');
+              : (isActive ? order.getFormattedDate() : 'لم يبدأ بعد');
       return {'label': step['label'], 'date': date, 'isActive': isActive};
     }).toList();
   }

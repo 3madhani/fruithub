@@ -1,34 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:fruithub/core/helper/get_user_entity_function.dart';
-import 'package:fruithub/core/utils/app_text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/common/notification_widget.dart';
 import '../../../../../core/utils/app_assets.dart';
+import '../../../../../core/utils/app_text_styles.dart';
+import '../../../../account/presentation/manager/user_info/user_info_cubit.dart';
+import '../../../../account/presentation/manager/user_info/user_info_state.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
   const CustomHomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(Assets.imagesProfileImage, width: 44, height: 44),
-        const SizedBox(width: 11),
-        Column(
+    return BlocBuilder<UserInfoCubit, UserInfoState>(
+      builder: (context, state) {
+        return Row(
           children: [
-            Text(
-              "صباح الخير !..",
-              textAlign: TextAlign.right,
-              style: AppTextStyles.regular16.copyWith(
-                color: const Color(0xff949D9E),
-              ),
+            Image.asset(Assets.imagesProfileImage, width: 44, height: 44),
+            const SizedBox(width: 11),
+            Column(
+              children: [
+                Text(
+                  "اهلا !..",
+                  textAlign: TextAlign.right,
+                  style: AppTextStyles.regular16.copyWith(
+                    color: const Color(0xff949D9E),
+                  ),
+                ),
+                Text(
+                  context.read<UserInfoCubit>().userInfo.name,
+                  style: AppTextStyles.bold16,
+                ),
+              ],
             ),
-            Text(getUserEntity().name, style: AppTextStyles.bold16),
+            const Spacer(),
+            const NotificationWidget(),
           ],
-        ),
-        const Spacer(),
-        const NotificationWidget(),
-      ],
+        );
+      },
     );
   }
 }

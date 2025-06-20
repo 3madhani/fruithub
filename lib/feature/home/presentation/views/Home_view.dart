@@ -4,6 +4,8 @@ import 'package:fruithub/core/cubits/products_cubit/products_cubit.dart';
 import 'package:fruithub/core/repos/product_repo/product_repo.dart';
 import 'package:fruithub/core/services/get_it_services.dart';
 
+import '../../../account/domain/repos/user_info_repo.dart';
+import '../../../account/presentation/manager/user_info/user_info_cubit.dart';
 import 'widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -11,11 +13,18 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create:
-          (context) =>
-              ProductsCubit(productRepo: getIt.get<ProductRepo>())
-                ..getBestSellProducts(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create:
+              (context) =>
+                  ProductsCubit(productRepo: getIt.get<ProductRepo>())
+                    ..getBestSellProducts(),
+        ),
+        BlocProvider(
+          create: (context) => UserInfoCubit(getIt.get<UserInfoRepo>()),
+        ),
+      ],
       child: const HomeViewBody(),
     );
   }

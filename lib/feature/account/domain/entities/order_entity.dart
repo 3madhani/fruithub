@@ -17,7 +17,27 @@ class OrderEntity {
   });
 
   String getFormattedDate() {
-    return '${date.day}/${date.month}/${date.year} - ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
+    const List<String> arabicMonths = [
+      'يناير',
+      'فبراير',
+      'مارس',
+      'أبريل',
+      'مايو',
+      'يونيو',
+      'يوليو',
+      'أغسطس',
+      'سبتمبر',
+      'أكتوبر',
+      'نوفمبر',
+      'ديسمبر',
+    ];
+
+    final day = date.day;
+    final monthName = arabicMonths[date.month - 1];
+    final year = date.year;
+
+    return '$day $monthName , $year';
   }
+
 
 }
