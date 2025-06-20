@@ -8,9 +8,14 @@ import '../../../account/domain/repos/user_info_repo.dart';
 import '../../../account/presentation/manager/user_info/user_info_cubit.dart';
 import 'widgets/home_view_body.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -22,7 +27,9 @@ class HomeView extends StatelessWidget {
                     ..getBestSellProducts(),
         ),
         BlocProvider(
-          create: (context) => UserInfoCubit(getIt.get<UserInfoRepo>()),
+          create:
+              (context) =>
+                  UserInfoCubit(getIt.get<UserInfoRepo>())..fetchUserInfo(),
         ),
       ],
       child: const HomeViewBody(),

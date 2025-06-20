@@ -48,8 +48,7 @@ class _OrderWidgetState extends State<OrderWidget> {
             onTap: () => setState(() => isTapped = !isTapped),
             order: widget.order,
           ),
-          if (isTapped) const Divider(color: Color(0xffefefef), thickness: 2),
-          const SizedBox(height: 12),
+
           AnimatedSize(
             duration: const Duration(milliseconds: 400),
             curve: Curves.easeInOut,
@@ -57,25 +56,32 @@ class _OrderWidgetState extends State<OrderWidget> {
               child: Align(
                 heightFactor: isTapped ? 1 : 0,
                 child: Column(
-                  children: List.generate(trackingSteps.length, (index) {
-                    final step = trackingSteps[index];
-                    final nextStep =
-                        index < trackingSteps.length - 1
-                            ? trackingSteps[index + 1]
-                            : null;
+                  children: [
+                    if (isTapped)
+                      const Divider(color: Color(0xffefefef), thickness: 2),
+                    const SizedBox(height: 12),
+                    Column(
+                      children: List.generate(trackingSteps.length, (index) {
+                        final step = trackingSteps[index];
+                        final nextStep =
+                            index < trackingSteps.length - 1
+                                ? trackingSteps[index + 1]
+                                : null;
 
-                    final showConnector =
-                        step['isActive'] == true &&
-                        nextStep != null &&
-                        nextStep['isActive'] == true;
+                        final showConnector =
+                            step['isActive'] == true &&
+                            nextStep != null &&
+                            nextStep['isActive'] == true;
 
-                    return TrackingStepWidget(
-                      isActive: step['isActive'],
-                      showConnector: showConnector,
-                      label: step['label'],
-                      date: step['date'],
-                    );
-                  }),
+                        return TrackingStepWidget(
+                          isActive: step['isActive'],
+                          showConnector: showConnector,
+                          label: step['label'],
+                          date: step['date'],
+                        );
+                      }),
+                    ),
+                  ],
                 ),
               ),
             ),

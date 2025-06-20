@@ -27,33 +27,36 @@ class TrackingStepWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-
         children: [
-          // Dot and vertical line
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircleAvatar(radius: 5, backgroundColor: pointColor),
-              showConnector
-                  ? Container(
-                    width: 2,
-                    height: 40,
-                    color: AppColors.primaryColor,
-                  )
-                  : const SizedBox(height: 40),
+              // Dot aligned vertically with text
+              Container(
+                width: 17,
+                height: 17,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: pointColor,
+                ),
+              ),
+              if (showConnector)
+                Container(width: 2, height: 30, color: AppColors.primaryColor)
+              else
+                const SizedBox(height: 30),
             ],
           ),
-          const SizedBox(width: 8),
-          // Text details
+          const SizedBox(width: 12),
           Expanded(
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   label,
+
                   style: AppTextStyles.semiBold13.copyWith(color: textColor),
                 ),
-                const Spacer(),
                 Text(
                   date,
                   style: AppTextStyles.semiBold13.copyWith(

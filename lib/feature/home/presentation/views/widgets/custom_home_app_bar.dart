@@ -14,29 +14,52 @@ class CustomHomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserInfoCubit, UserInfoState>(
       builder: (context, state) {
-        return Row(
-          children: [
-            Image.asset(Assets.imagesProfileImage, width: 44, height: 44),
-            const SizedBox(width: 11),
-            Column(
-              children: [
-                Text(
-                  "اهلا !..",
-                  textAlign: TextAlign.right,
-                  style: AppTextStyles.regular16.copyWith(
-                    color: const Color(0xff949D9E),
+        if (state is UserInfoLoaded) {
+          return Row(
+            children: [
+              Image.asset(Assets.imagesProfileImage, width: 44, height: 44),
+              const SizedBox(width: 11),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "اهلا !..",
+                    textAlign: TextAlign.right,
+                    style: AppTextStyles.regular16.copyWith(
+                      color: const Color(0xff949D9E),
+                    ),
                   ),
-                ),
-                Text(
-                  context.read<UserInfoCubit>().userInfo.name,
-                  style: AppTextStyles.bold16,
-                ),
-              ],
-            ),
-            const Spacer(),
-            const NotificationWidget(),
-          ],
-        );
+                  Text(state.user.name, style: AppTextStyles.bold16),
+                ],
+              ),
+              const Spacer(),
+              const NotificationWidget(),
+            ],
+          );
+        } else {
+          // While loading or on error
+          return Row(
+            children: [
+              Image.asset(Assets.imagesProfileImage, width: 44, height: 44),
+              const SizedBox(width: 11),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "اهلا !..",
+                    textAlign: TextAlign.right,
+                    style: AppTextStyles.regular16.copyWith(
+                      color: const Color(0xff949D9E),
+                    ),
+                  ),
+                  const Text("جاري التحميل", style: AppTextStyles.bold16),
+                ],
+              ),
+              const Spacer(),
+              const NotificationWidget(),
+            ],
+          );
+        }
       },
     );
   }
