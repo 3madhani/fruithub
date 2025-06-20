@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../feature/account/domain/entities/user_info_entity.dart';
 import '../../feature/account/presentation/views/account_view.dart';
 import '../../feature/account/presentation/views/orders_view.dart';
 import '../../feature/auth/presentation/views/sign_up_view.dart';
@@ -33,7 +34,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
             (_) => CheckoutView(cartEntity: settings.arguments as CartEntity),
       );
     case OrdersView.routeName:
-      return MaterialPageRoute(builder: (_) => const OrdersView());
+      return MaterialPageRoute(
+        builder: (_) => OrdersView(user: settings.arguments as UserInfoEntity),
+      );
     default:
       return MaterialPageRoute(
         builder:

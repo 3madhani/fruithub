@@ -6,8 +6,8 @@ import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../manager/theme/theme_cubit.dart';
-import '../orders_view.dart';
 import 'custom_switcher_button.dart';
+import 'orders_button_bloc_builder.dart';
 import 'profile_info_builder.dart';
 import 'profile_row_tile.dart';
 import 'signout_button.dart';
@@ -37,13 +37,7 @@ class AccountViewBody extends StatelessWidget {
               ),
               Divider(height: 24, color: Colors.grey[300], thickness: 1),
 
-              ProfileRowTile(
-                text: " طلباتي",
-                onTap: () {
-                  Navigator.pushNamed(context, OrdersView.routeName);
-                },
-                iconAsset: Assets.svgBox,
-              ),
+              const OrdersButtonBlocBuilder(),
               Divider(height: 24, color: Colors.grey[300], thickness: 1),
               ProfileRowTile(
                 text: " المفضلة",

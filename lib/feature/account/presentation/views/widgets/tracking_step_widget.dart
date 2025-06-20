@@ -30,7 +30,9 @@ class TrackingStepWidget extends StatelessWidget {
         children: [
           // Dot and vertical line
           Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
+              const SizedBox(height: 4),
               CircleAvatar(radius: 5, backgroundColor: pointColor),
               showConnector
                   ? Container(
@@ -38,7 +40,7 @@ class TrackingStepWidget extends StatelessWidget {
                     height: 40,
                     color: AppColors.primaryColor,
                   )
-                  :  const SizedBox(height: 40),
+                  : const SizedBox(height: 40),
             ],
           ),
           const SizedBox(width: 8),
@@ -46,6 +48,7 @@ class TrackingStepWidget extends StatelessWidget {
           Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+
               children: [
                 Text(
                   label,

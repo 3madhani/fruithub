@@ -6,11 +6,11 @@ import '../../../domain/entities/user_info_entity.dart';
 import '../../../domain/repos/user_info_repo.dart';
 import 'fetch_orders_state.dart';
 
-class OrdersCubit extends Cubit<FetchOrdersState> {
+class FetchOrdersCubit extends Cubit<FetchOrdersState> {
   final UserInfoRepo userInfoRepo;
   StreamSubscription? _ordersSubscription;
 
-  OrdersCubit(this.userInfoRepo) : super(OrdersInitial());
+  FetchOrdersCubit(this.userInfoRepo) : super(OrdersInitial());
 
   @override
   Future<void> close() {
