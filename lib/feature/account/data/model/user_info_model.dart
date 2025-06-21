@@ -1,12 +1,11 @@
 import '../../domain/entities/user_info_entity.dart';
-import 'favourite_model.dart';
 
 class UserInfoModel {
   final String name;
   final String email;
   final String? imageUrl;
   final List<String> orders;
-  final List<FavouriteModel> favourites;
+  final List<String> favourites;
 
   UserInfoModel({
     required this.favourites,
@@ -17,11 +16,9 @@ class UserInfoModel {
   });
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => UserInfoModel(
-    favourites:
-        (json['favourites'] as List?)
-            ?.map((e) => FavouriteModel.fromJson(e))
-            .toList() ??
-        [],
+    favourites: List<String>.from(
+      json['favourites']?.map((e) => e as String) ?? [],
+    ),
     name: json['name'] as String,
     email: json['email'] as String,
     imageUrl: json['imageUrl'],
@@ -29,7 +26,7 @@ class UserInfoModel {
   );
 
   UserInfoEntity toEntity() => UserInfoEntity(
-    favourites: favourites.map((e) => e.toEntity()).toList(),
+    favourites: favourites.map((e) => e).toList(),
     name: name,
     email: email,
     imageUrl: imageUrl,
@@ -41,6 +38,6 @@ class UserInfoModel {
     'email': email,
     'imageUrl': imageUrl,
     'orders': orders,
-    'favourites': favourites.map((e) => e.toJson()).toList(),
+    'favourites': favourites,
   };
 }

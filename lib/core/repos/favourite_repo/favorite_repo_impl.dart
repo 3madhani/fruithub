@@ -15,9 +15,7 @@ class FavouritesRepoImpl implements FavouritesRepo {
   FavouritesRepoImpl({required this.databaseServices});
 
   @override
-  Future<Either<Failure, void>> addFavorite({
-    required ProductEntity productEntity,
-  }) async {
+  Future<Either<Failure, void>> addFavorite({required String code}) async {
     try {
       final userId = FirebaseAuth.instance.currentUser?.uid;
       if (userId == null) {
@@ -29,33 +27,60 @@ class FavouritesRepoImpl implements FavouritesRepo {
           .doc(userId);
 
       final snapshot = await userDoc.get();
-      final data = snapshot.data();
-      final List<dynamic> favList = data?['favourites'] ?? [];
 
-      final code = productEntity.code;
-      final List<Map<String, dynamic>> favorites =
-          favList
-              .whereType<Map<String, dynamic>>()
-              .map((e) => Map<String, dynamic>.from(e))
-              .toList();
-
-      final int existingIndex = favorites.indexWhere(
-        (e) => e.containsKey(code),
-      );
-
-      if (existingIndex != -1) {
-        // Remove from favorites
-        favorites.removeAt(existingIndex);
-      } else {
-        // Add to favorites
-        favorites.add({code: ProductModel.fromEntity(productEntity).toJson()});
+      if (!snapshot.exists) {
+        return const Left(ServerFailure("User document not found"));
       }
 
-      await userDoc.update({'favourites': favorites});
+      final data = snapshot.data();
+      final List<dynamic> favListRaw = data?['favourites'] ?? [];
 
+      // Ensure the list is treated as List<String>
+      final List<String> favList = List<String>.from(favListRaw);
+
+      if (favList.contains(code)) {
+        favList.remove(code);
+      } else {
+        favList.add(code);
+      }
+
+      await userDoc.update({'favourites': favList});
       return const Right(null);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(ServerFailure("Failed to update favorites: ${e.toString()}"));
+    }
+  }
+
+  @override
+  Stream<Either<Failure, List<ProductEntity>>> fetchFavorites({
+    required List<String> codes,
+  }) async* {
+    try {
+      final stream = databaseServices.streamData(
+        path: BackendEndpoints.getProducts,
+      );
+
+      yield* stream.map((dataList) {
+        try {
+          final productEntities =
+              (dataList as List)
+                  .map(
+                    (item) =>
+                        ProductModel.fromJson(item as Map<String, dynamic>),
+                  )
+                  .where(
+                    (product) => codes.contains(product.code),
+                  ) // 🔥 filter by codes
+                  .map((product) => product.toEntity())
+                  .toList();
+
+          return Right(productEntities);
+        } catch (e) {
+          return Left(ServerFailure("Mapping error: ${e.toString()}"));
+        }
+      });
+    } catch (e) {
+      yield Left(ServerFailure("Failed to fetch favorites: ${e.toString()}"));
     }
   }
 }

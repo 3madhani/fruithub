@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fruithub/feature/home/presentation/cubits/cart_cubit/cart_cubit.dart';
 
-import 'core/cubits/cubit/favorite_cubit.dart';
+import 'core/cubits/cubit/add_favorite_cubit.dart';
 import 'core/helper/on_generate_routes.dart';
 import 'core/services/custom_bloc_observer.dart';
 import 'core/services/get_it_services.dart';
@@ -31,10 +32,13 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
-        BlocProvider<FavoriteCubit>(create: (_) => getIt<FavoriteCubit>()),
+        BlocProvider<AddFavoriteCubit>(
+          create: (_) => getIt<AddFavoriteCubit>(),
+        ),
         BlocProvider<UserInfoCubit>(
           create: (_) => getIt<UserInfoCubit>()..fetchUserInfo(),
         ),
+        BlocProvider<CartCubit>(create: (_) => getIt<CartCubit>()),
       ],
       child: const FruitHub(),
     ),

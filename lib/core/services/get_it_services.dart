@@ -7,7 +7,7 @@ import '../../feature/account/presentation/manager/user_info/user_info_cubit.dar
 import '../../feature/auth/data/repos/auth_repo_impl.dart';
 import '../../feature/auth/domain/repos/auth_repo.dart';
 import '../../feature/home/presentation/cubits/cart_item_cubit/cart_item_cubit.dart';
-import '../cubits/cubit/favorite_cubit.dart';
+import '../cubits/cubit/add_favorite_cubit.dart';
 import '../repos/favourite_repo/favorite_repo.dart';
 import '../repos/favourite_repo/favorite_repo_impl.dart';
 import '../repos/orders_repo/orders_repo.dart';
@@ -48,8 +48,8 @@ void setupGetIt() {
   );
 
   // Register Cubits as singletons
-  getIt.registerLazySingleton<FavoriteCubit>(
-    () => FavoriteCubit(getIt<FavouritesRepo>()),
+  getIt.registerLazySingleton<AddFavoriteCubit>(
+    () => AddFavoriteCubit(getIt<FavouritesRepo>()),
   );
   getIt.registerLazySingleton<UserInfoCubit>(
     () => UserInfoCubit(getIt<UserInfoRepo>()),
