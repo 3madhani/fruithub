@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'core/cubits/cubit/favorite_cubit.dart';
 import 'core/helper/on_generate_routes.dart';
 import 'core/services/custom_bloc_observer.dart';
 import 'core/services/get_it_services.dart';
 import 'core/services/shared_preferences_singleton.dart';
 import 'core/utils/app_colors.dart';
 import 'feature/account/presentation/manager/theme/theme_cubit.dart';
+import 'feature/account/presentation/manager/user_info/user_info_cubit.dart';
 import 'feature/splash/presentation/views/splash_view.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
@@ -25,7 +27,18 @@ void main() async {
 
   // Initialize GetIt*-
   setupGetIt();
-  runApp(BlocProvider(create: (_) => ThemeCubit(), child: const FruitHub()));
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ThemeCubit()),
+        BlocProvider<FavoriteCubit>(create: (_) => getIt<FavoriteCubit>()),
+        BlocProvider<UserInfoCubit>(
+          create: (_) => getIt<UserInfoCubit>()..fetchUserInfo(),
+        ),
+      ],
+      child: const FruitHub(),
+    ),
+  );
 }
 
 class FruitHub extends StatelessWidget {

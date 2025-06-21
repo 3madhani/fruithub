@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruithub/core/common/custom_app_bar.dart';
 
 import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/utils/app_assets.dart';
@@ -23,6 +24,16 @@ class AccountViewBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppConst.horizontalPadding,
+            ),
+            child: buildAppBar(
+              context: context,
+              title: 'حسابي',
+              isLeadingVisible: false,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: AppConst.horizontalPadding,

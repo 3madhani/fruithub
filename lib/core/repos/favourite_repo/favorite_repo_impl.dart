@@ -20,8 +20,9 @@ class FavouritesRepoImpl implements FavouritesRepo {
   }) async {
     try {
       final userId = FirebaseAuth.instance.currentUser?.uid;
-      if (userId == null)
+      if (userId == null) {
         return const Left(ServerFailure("User not authenticated"));
+      }
 
       final userDoc = FirebaseFirestore.instance
           .collection(BackendEndpoints.getUserData)
@@ -57,5 +58,4 @@ class FavouritesRepoImpl implements FavouritesRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
-
-  }
+}

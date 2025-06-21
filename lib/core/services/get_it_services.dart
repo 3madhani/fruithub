@@ -1,9 +1,13 @@
+import 'package:fruithub/feature/home/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../feature/account/data/repos/user_info_repo_impl.dart';
 import '../../feature/account/domain/repos/user_info_repo.dart';
+import '../../feature/account/presentation/manager/user_info/user_info_cubit.dart';
 import '../../feature/auth/data/repos/auth_repo_impl.dart';
 import '../../feature/auth/domain/repos/auth_repo.dart';
+import '../../feature/home/presentation/cubits/cart_item_cubit/cart_item_cubit.dart';
+import '../cubits/cubit/favorite_cubit.dart';
 import '../repos/favourite_repo/favorite_repo.dart';
 import '../repos/favourite_repo/favorite_repo_impl.dart';
 import '../repos/orders_repo/orders_repo.dart';
@@ -42,4 +46,17 @@ void setupGetIt() {
   getIt.registerSingleton<FavouritesRepo>(
     FavouritesRepoImpl(databaseServices: getIt<DatabaseServices>()),
   );
+
+  // Register Cubits as singletons
+  getIt.registerLazySingleton<FavoriteCubit>(
+    () => FavoriteCubit(getIt<FavouritesRepo>()),
+  );
+  getIt.registerLazySingleton<UserInfoCubit>(
+    () => UserInfoCubit(getIt<UserInfoRepo>()),
+  );
+
+  // Register Cubits as singletons
+  getIt.registerLazySingleton<CartCubit>(() => CartCubit());
+
+  getIt.registerLazySingleton<CartItemCubit>(() => CartItemCubit());
 }

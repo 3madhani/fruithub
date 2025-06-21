@@ -15,10 +15,10 @@ class FavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isFav = false;
+
     return BlocBuilder<UserInfoCubit, UserInfoState>(
       builder: (context, state) {
-        bool isFav = false;
-
         if (state is UserInfoLoaded) {
           isFav = state.user.favourites.any((fav) => fav.code == product.code);
         }

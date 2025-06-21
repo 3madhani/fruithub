@@ -19,8 +19,8 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CartCubit(),
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (context) => CartCubit())],
       child: Scaffold(
         body: SafeArea(
           child: MainViewBodyBlocConsumer(currentViewIndex: _currentViewIndex),
