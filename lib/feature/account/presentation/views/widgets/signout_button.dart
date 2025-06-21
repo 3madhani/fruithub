@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fruithub/feature/auth/presentation/views/signin_view.dart';
 
-import '../../../../../core/helper/signout.dart';
 import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
+import 'signout_dialog.dart';
 
 class SignoutButton extends StatelessWidget {
   const SignoutButton({super.key});
@@ -14,8 +13,7 @@ class SignoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        signout();
-        Navigator.pushReplacementNamed(context, SignInView.routeName);
+        signoutDialog(context);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),

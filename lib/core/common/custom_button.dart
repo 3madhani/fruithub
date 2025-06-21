@@ -19,6 +19,9 @@ class CustomPrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
           elevation: const WidgetStatePropertyAll(1),
+          side: WidgetStateProperty.all(
+            const BorderSide(color: AppColors.primaryColor),
+          ),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
           ),
