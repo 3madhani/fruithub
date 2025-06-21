@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruithub/feature/account/domain/entities/user_info_entity.dart';
+import 'package:fruithub/feature/account/presentation/views/widgets/profile_cached_image.dart';
 
-import '../../../../../core/utils/app_assets.dart';
 import '../../../../../core/utils/app_text_styles.dart';
+import 'pick_image_widget.dart';
 
 class ProfileInfo extends StatelessWidget {
   final UserInfoEntity userInfoEntity;
@@ -14,54 +13,18 @@ class ProfileInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imageUrl = userInfoEntity.imageUrl;
-    final bool isValidUrl = imageUrl != null && imageUrl.isNotEmpty;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Stack(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.098),
-            CircleAvatar(
-              radius: 38.5,
-              backgroundColor: Colors.grey[200],
-              child: ClipOval(
-                child:
-                    isValidUrl
-                        ? CachedNetworkImage(
-                          imageUrl: imageUrl,
-                          fit: BoxFit.cover,
-                          width: 75,
-                          height: 75,
-                          placeholder:
-                              (context, url) => const CircularProgressIndicator(
-                                strokeWidth: 2,
-                              ),
-                          errorWidget:
-                              (context, url, error) => _buildFallbackText(),
-                        )
-                        : _buildFallbackText(),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 21,
-              child: Container(
-                height: 32,
-                width: 32,
-                padding: const EdgeInsets.all(4),
-                decoration: ShapeDecoration(
-                  shape: const CircleBorder(
-                    side: BorderSide(color: Colors.white, width: 2),
-                  ),
-                  color: Colors.grey[200],
-                ),
-                child: SvgPicture.asset(Assets.svgCamera, fit: BoxFit.contain),
-              ),
-            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.115),
+            ProfileCachedImage(imageUrl: imageUrl!),
+            const Positioned(bottom: 0, right: 21, child: PickImageWidget()),
           ],
         ),
-        const SizedBox(width: 24),
+        const SizedBox(width: 16),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -82,9 +45,5 @@ class ProfileInfo extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Widget _buildFallbackText() {
-    return Center(child: Image.asset(Assets.imagesProfileImage));
   }
 }

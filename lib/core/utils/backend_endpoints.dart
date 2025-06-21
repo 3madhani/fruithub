@@ -4,4 +4,5 @@ class BackendEndpoints {
   static const String getProducts = 'addProducts';
   static const String addOrders = 'orders';
   static const String getOrders = 'orders';
+  static const String imagePath = 'images';
 }

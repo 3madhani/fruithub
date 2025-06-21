@@ -75,12 +75,65 @@ class UserInfoRepoImpl implements UserInfoRepo {
   }
 
   @override
-  Future<void> updateUserInfo({
-    required String name,
-    required String imageUrl,
-    required String email,
-  }) {
-    // TODO: implement updateUserInfo
-    throw UnimplementedError();
+  Future<Either<Failure, void>> updateUserInfo({
+    required Map<String, dynamic> query,
+  }) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser!;
+      final uid = user.uid;
+
+      // Name and Email
+      if (query.containsKey("name") && query.containsKey("email")) {
+        await user.updateDisplayName(query["name"]);
+        await user.verifyBeforeUpdateEmail(query["email"]); // ✅ Changed here
+
+        await databaseServices.updateData(
+          path: BackendEndpoints.getUserData,
+          documentId: uid,
+          data: {
+            "name": query["name"],
+            "email": query["email"],
+          }, // only update name locally
+        );
+      }
+      // Name only
+      else if (query.containsKey("name")) {
+        await user.updateDisplayName(query["name"]);
+
+        await databaseServices.updateData(
+          path: BackendEndpoints.getUserData,
+          documentId: uid,
+          data: query,
+        );
+      }
+      // Email only
+      else if (query.containsKey("email")) {
+        await user.verifyBeforeUpdateEmail(query["email"]); // ✅ Changed here
+
+        await databaseServices.updateData(
+          path: BackendEndpoints.getUserData,
+          documentId: uid,
+          data: query,
+        );
+      }
+      // Password
+      else if (query.containsKey("password")) {
+        await user.updatePassword(query["password"]);
+      }
+      // Other data only
+      else {
+        await databaseServices.updateData(
+          path: BackendEndpoints.getUserData,
+          documentId: uid,
+          data: query,
+        );
+      }
+
+      return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(ServerFailure(e.message ?? e.code));
+    } on Exception catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
   }
 }

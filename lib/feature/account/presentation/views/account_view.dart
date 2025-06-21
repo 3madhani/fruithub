@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruithub/core/services/get_it_services.dart';
+import 'package:fruithub/feature/account/presentation/manager/update_info/update_info_cubit.dart';
 
-import '../../../../core/services/get_it_services.dart';
+import '../../../../core/repos/images_repo/images_repo.dart';
 import '../../domain/repos/user_info_repo.dart';
-import '../manager/user_info/user_info_cubit.dart';
 import 'widgets/account_view_body.dart';
 
 class AccountView extends StatelessWidget {
@@ -14,9 +15,9 @@ class AccountView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) {
-        return UserInfoCubit(getIt.get<UserInfoRepo>());
-      },
+      create:
+          (context) =>
+              UpdateInfoCubit(getIt<ImagesRepo>(), getIt<UserInfoRepo>()),
       child: const AccountViewBody(),
     );
   }

@@ -29,3 +29,4 @@ abstract class UserInfoState extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
