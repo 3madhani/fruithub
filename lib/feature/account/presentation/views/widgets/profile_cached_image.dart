@@ -14,7 +14,7 @@ class ProfileCachedImage extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       shape: const CircleBorder(),
-      elevation: 3,
+      elevation: 6,
       child: Container(
         width: 85,
         height: 85,

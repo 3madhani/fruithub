@@ -5,7 +5,7 @@ import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
 import 'notification_widget.dart';
 
-AppBar buildMainAppBar({
+AppBar showMainAppBar({
   required BuildContext context,
   required String title,
   bool isLeadingVisible = true,
@@ -40,7 +40,7 @@ AppBar buildMainAppBar({
     title: Text(
       title,
       textAlign: TextAlign.center,
-      style: AppTextStyles.bold19.copyWith(color: AppColors.primaryColor),
+      style: AppTextStyles.bold19,
     ),
     actions: const [
       Padding(

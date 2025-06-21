@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/common/build_main_app_bar.dart';
 import '../../../../../core/common/search_text_field.dart';
+import '../../../../../core/common/show_main_app_bar.dart';
 import '../../../../../core/constants/app_const.dart';
 import '../../../../../core/cubits/products_cubit/products_cubit.dart';
 import 'products_grid_view_bloc_builder.dart';
@@ -23,7 +23,7 @@ class ProductViewBody extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppConst.horizontalPadding,
                 ),
-                child: buildMainAppBar(
+                child: showMainAppBar(
                   context: context,
                   title: 'المنتجات',
                   isLeadingVisible: false,

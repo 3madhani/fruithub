@@ -8,17 +8,11 @@ import 'user_info_state.dart';
 
 class UserInfoCubit extends Cubit<UserInfoState> {
   final UserInfoRepo userInfoRepo;
-
   StreamSubscription? subscription;
 
   UserInfoCubit(this.userInfoRepo) : super(UserInfoInitial());
-  UserInfoEntity get userInfo => (state as UserInfoLoaded).user;
 
-  @override
-  Future<void> close() {
-    subscription?.cancel();
-    return super.close();
-  }
+  UserInfoEntity get userInfo => (state as UserInfoLoaded).user;
 
   void fetchUserInfo() {
     emit(UserInfoLoading());
@@ -29,4 +23,16 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       );
     });
   }
+
+  void cancelSubscription() {
+    subscription?.cancel();
+    subscription = null;
+  }
+
+  @override
+  Future<void> close() {
+    cancelSubscription();
+    return super.close();
+  }
 }
+

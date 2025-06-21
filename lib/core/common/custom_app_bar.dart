@@ -10,7 +10,7 @@ AppBar buildAppBar({
   bool isLeadingVisible = true,
 }) {
   return AppBar(
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.transparent,
     elevation: 0,
     leading:
         isLeadingVisible

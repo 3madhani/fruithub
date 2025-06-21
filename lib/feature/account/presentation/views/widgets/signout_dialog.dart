@@ -60,7 +60,8 @@ Future<dynamic> signoutDialog(BuildContext context) {
                           title: "تأكيد",
                           onPressed: () {
                             signout();
-                            context.read<UserInfoCubit>().close();
+                            context.read<UserInfoCubit>().cancelSubscription();
+
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               SignInView.routeName,
