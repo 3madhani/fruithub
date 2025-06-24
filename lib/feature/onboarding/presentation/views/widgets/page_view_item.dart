@@ -39,20 +39,20 @@ class PageViewItem extends StatelessWidget {
               ),
               Visibility(
                 visible: isLastPage,
-                child: GestureDetector(
-                  onTap: () {
-                    // Save the onboarding view seen status
-                    Prefs.setBool(AppConst.isOnboardingViewSeenKey, true);
-                    Navigator.of(
-                      context,
-                    ).pushReplacementNamed(SignInView.routeName);
-                  },
-                  child: Positioned(
-                    top: 50,
-                    right: 50,
+                child: Positioned(
+                  top: 50,
+                  right: 50,
+                  child: GestureDetector(
+                    onTap: () {
+                      // Save the onboarding view seen status
+                      Prefs.setBool(AppConst.isOnboardingViewSeenKey, true);
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(SignInView.routeName);
+                    },
                     child: Text(
                       'تخط',
-                      style: AppTextStyles.regular13.copyWith(
+                      style: AppTextStyles.semiBold13.copyWith(
                         color: const Color(0xff949D9E),
                       ),
                     ),
