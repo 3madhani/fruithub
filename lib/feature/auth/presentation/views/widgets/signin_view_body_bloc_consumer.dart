@@ -14,15 +14,23 @@ class SigninViewBodyBlocConsumer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SigninCubit, SiginState>(
       listener: (context, state) {
-        if (state is SigninFailure) {
-          ShowSnackBar.showErrorSnackBar(context, state.error);
-        } else if (state is SigninSuccess) {
+        if (state.hasError) {
+          final error =
+              state.emailError ??
+              state.facebookError ??
+              state.googleError ??
+              state.appleError;
+          if (error != null) {
+            ShowSnackBar.showErrorSnackBar(context, error);
+          }
+        }
+        if (state.userEntity != null) {
           Navigator.pushNamed(context, MainView.routeName);
         }
       },
       builder: (context, state) {
         return CustomProgressHUD(
-          isLoading: state is SigninLoading ? true : false,
+          isLoading: state.isLoading,
           child: const SigninViewBody(),
         );
       },
